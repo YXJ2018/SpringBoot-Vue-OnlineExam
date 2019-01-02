@@ -57,13 +57,13 @@ export default {
   line-height: 80px;
   color: #fff;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
 }
 #topbar .topbar-left {
   height: 80px;
   display: flex;
   justify-content: center;
   background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 .topbar-left .icon-kaoshi {
   font-size: 60px;

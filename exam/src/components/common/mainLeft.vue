@@ -38,7 +38,7 @@
         <el-menu-item-group>
           <span slot="title">查询学生成绩</span>
           <el-menu-item index="3-1">根据班级查看成绩</el-menu-item>
-          <el-menu-item index="3-2">成绩统计</el-menu-item>
+          <el-menu-item index="3-2" @click="routerToGrade()">成绩统计</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="4">
@@ -113,6 +113,9 @@
       },
       handleClose(key, keyPath) {
         // console.log(key, keyPath);
+      },
+      routerToGrade() {
+        this.$router.push({path: '/grade'})
       }
     }
   }

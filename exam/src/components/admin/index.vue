@@ -8,6 +8,7 @@
       </el-col>
       <el-col :span="20" class="main_wrapper">
         <navigator class="nav"></navigator>
+        <router-view></router-view>
       </el-col>
     </el-row>
   </div>

@@ -5,6 +5,8 @@ import demo from '@/vuex/Demo'
 import header from '@/components/common/header'
 import mainLeft from '@/components/common/mainLeft'
 import index from '@/components/admin/index'
+import grade from '@/components/common/grade'
+
 Vue.use(Router)
 
 export default new Router({
@@ -16,6 +18,6 @@ export default new Router({
     },
     {path: '/test',component: demo},
     {path: '/header',component:header,children:[{path:'/',component:mainLeft}]},
-    {path: '/index',component:index}
+    {path: '/index',component:index,children:[{path:'/grade',component:grade}]}
   ]
 })
