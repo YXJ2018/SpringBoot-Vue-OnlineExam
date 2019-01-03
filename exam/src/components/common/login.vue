@@ -56,6 +56,7 @@ export default {
   methods: {
     login() {
       console.log("登录操作执行-------")
+      this.$router.push({path:'index'})
     }
   }
 }

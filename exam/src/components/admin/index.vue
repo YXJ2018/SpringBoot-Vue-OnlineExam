@@ -23,6 +23,9 @@ export default {
     header1: header,
     mainLeft: mainLeft,
     navigator:navigator
+  },
+  methods: {
+    
   }
 }
 </script>

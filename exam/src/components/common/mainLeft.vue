@@ -1,11 +1,7 @@
 <!--左边下拉导航栏-->
 <template>
   <div id="left">
-    <el-radio-group v-model="isCollapse">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
-    </el-radio-group>
-    <el-menu default-active="" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <el-menu default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="flag" ref="item">
       <el-submenu index="1">
         <template slot="title">
           <i class="iconfont icon-kechengbiao"></i>
@@ -100,23 +96,27 @@
 </style>
 
 <script>
-  export default {
-    name: "mainLeft",
-    data() {
-      return {
-        isCollapse: false
-      };
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        // console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        // console.log(key, keyPath);
-      },
-      routerToGrade() {
-        this.$router.push({path: '/grade'})
-      }
+import store from '@/vuex/store'
+import {mapState} from 'vuex'
+export default {
+  name: "mainLeft",
+  data() {
+    return {
+      // isCollapse: false
     }
-  }
+  },
+  computed: mapState(["flag"]),
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    routerToGrade() {
+      this.$router.push({path: 'grade'})
+    }
+  },
+  store
+}
 </script>

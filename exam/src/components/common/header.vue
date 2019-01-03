@@ -7,7 +7,7 @@
         <span class="title">EXAM-SYSTEM</span>
       </el-col>
       <el-col :span="20" class="topbar-right">
-        <i class="el-icon-menu"></i>
+        <i class="el-icon-menu" @click="toggle()"></i>
         <div class="user">
           <span>欢迎Snoopy</span>
           <img src="@/assets/img/userimg.png" class="user-img" ref="img" @click="showSetting()" />
@@ -27,18 +27,24 @@
 </template>
 
 <script>
+import store from '@/vuex/store'
+import {mapState,mapMutations} from 'vuex'
 export default {
   data() {
     return {
       login_flag: false
     }
   },
+  computed: mapState(["flag"]),
   methods: {
     //显示、隐藏退出按钮
     showSetting() {
       this.login_flag = !this.login_flag
-    }
-  }
+    },
+    //左侧栏放大缩小
+    ...mapMutations(["toggle"]),
+  },
+  store
 }
 </script>
 

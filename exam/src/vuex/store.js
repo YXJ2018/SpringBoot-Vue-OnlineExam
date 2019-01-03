@@ -5,7 +5,8 @@ VUE.use(VUEX)
 
 const state = {
     count: 1,
-    msg: "hello world"
+    msg: "hello world",
+    flag: false
 }
 const mutations = {
     add(state,n) {
@@ -13,6 +14,9 @@ const mutations = {
     },
     reduce(state) {
         state.count--
+    },
+    toggle(state) {
+        state.flag = !state.flag
     }
 }
 const getters = {
