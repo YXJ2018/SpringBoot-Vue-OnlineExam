@@ -1,77 +1,16 @@
 <!--左边下拉导航栏-->
 <template>
   <div id="left">
-    <el-menu default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="flag" ref="item">
-      <el-submenu index="1">
+    <el-menu default-active="$route.path" class="el-menu-vertical-demo"  @close="handleClose" :collapse="flag" ref="item">
+      <el-submenu v-for="(item,index) in menu" :index='item.index' :key="index">
         <template slot="title">
           <i class="iconfont icon-kechengbiao"></i>
-          <span slot="title" class="title">课程管理</span>
+          <span slot="title" class="title">{{item.title}}</span>
         </template>
         <el-menu-item-group>
-          <span slot="title">管理你的课程</span>
-          <el-menu-item index="1-1">增加课程</el-menu-item>
-          <el-menu-item index="1-2">修改课程</el-menu-item>
-          <el-menu-item index="1-3">查看课程</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="iconfont icon-tiku"></i>
-          <span slot="title" class="title">题库管理</span>
-        </template>
-        <el-menu-item-group>
-          <span slot="title">管理你的题库</span>
-          <el-menu-item index="2-1">增加题库</el-menu-item>
-          <el-menu-item index="2-2">修改题库</el-menu-item>
-          <el-menu-item index="2-3">查看题库</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title">
-          <i class="iconfont icon-performance"></i>
-          <span slot="title" class="title">成绩查询</span>
-        </template>
-        <el-menu-item-group>
-          <span slot="title">查询学生成绩</span>
-          <el-menu-item index="3-1">根据班级查看成绩</el-menu-item>
-          <el-menu-item index="3-2" @click="routerToGrade()">成绩统计</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="4">
-        <template slot="title">
-          <i class="iconfont icon-pingfen"></i>
-          <span slot="title" class="title">评分阅卷</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="4-1">开始阅卷</el-menu-item>
-          <el-menu-item index="4-2">阅卷管理</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="5">
-        <template slot="title">
-          <i class="iconfont icon-role"></i>
-          <span slot="title" class="title">角色管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="5-1">权限设置</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="6">
-        <template slot="title">
-          <i class="iconfont icon-LC_icon_user_group_add"></i>
-          <span slot="title" class="title">用户管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="6-1">用户操作</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="7">
-        <template slot="title">
-          <i class="iconfont icon-module4mokuai"></i>
-          <span slot="title" class="title">模块管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="7-1">模块操作</el-menu-item>
+          <el-menu-item :index="item.index+ '-' + item.index" v-show="item.item1 != null">{{item.item1}}</el-menu-item>
+          <el-menu-item :index="item.index+ '-' + item.index+1" v-show="item.item2 != null">{{item.item2}}</el-menu-item>
+          <el-menu-item :index="item.index+ '-' + item.index+2" v-show="item.item3 != null">{{item.item3}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -102,7 +41,15 @@ export default {
   name: "mainLeft",
   data() {
     return {
-      // isCollapse: false
+      menu:[
+        {index:'1',title:'课程管理',item1:'修改课程',item2:"增加课程",item3:'删除课程'},
+        {index:'2',title:'题库管理',item1:'修改题库',item2:"增加题库",item3:'删除题库'},
+        {index:'3',title:'成绩查询',item1:'根据班级查询成绩',item2:"成绩统计"},
+        {index:'4',title:'评分阅卷',item1:'开始阅卷',item2:"阅卷管理"},
+        {index:'5',title:'角色管理',item1:'权限设置'},
+        {index:'6',title:'用户管理',item1:'用户操作'},
+        {index:'7',title:'模块管理',item1:'模块操作'}
+      ]
     }
   },
   computed: mapState(["flag"]),
