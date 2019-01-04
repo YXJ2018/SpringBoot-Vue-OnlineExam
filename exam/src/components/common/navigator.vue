@@ -1,13 +1,40 @@
 <template>
   <div id="nav">
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item class="title">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+      <el-breadcrumb-item class="title">{{active.title}}</el-breadcrumb-item>
+      <el-breadcrumb-item v-show="active.item1 != null">{{active.item1}}</el-breadcrumb-item>
+      <el-breadcrumb-item v-show="active.item2 != null">{{active.item2}}</el-breadcrumb-item>
+      <el-breadcrumb-item v-show="active.item3 != null">{{active.item3}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
+
+<script>
+import store from '@/vuex/store'
+import {mapState} from 'vuex'
+export default {
+  data() {
+    return {
+      active: [],
+      index1: null,
+    }
+  },
+  computed: mapState(["menu"]),
+  methods: {
+    getIndex() {
+      this.bus.$on('sendIndex',(data)=>{
+        this.index1 = data
+        this.active = this.menu[data-1]
+        console.log(JSON.stringify(this.active)+'----')
+      })
+    }
+  },
+  created() {
+    this.getIndex()
+  },
+  store
+}
+</script>
 
 <style scoped>
 #nav .el-breadcrumb {
