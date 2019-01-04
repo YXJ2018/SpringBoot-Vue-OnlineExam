@@ -9,10 +9,10 @@
             <span slot="title" class="title">{{item.title}}</span>
           </div>
         </template>
-        <el-menu-item-group>
-          <el-menu-item :index="item.index+ '-' + item.index" v-show="item.item1 != null">{{item.item1}}</el-menu-item>
-          <el-menu-item :index="item.index+ '-' + item.index+1" v-show="item.item2 != null">{{item.item2}}</el-menu-item>
-          <el-menu-item :index="item.index+ '-' + item.index+2" v-show="item.item3 != null">{{item.item3}}</el-menu-item>
+        <el-menu-item-group v-for="(list,index1) in item.content" :key="index1">
+          <el-menu-item :index="item.index+ '-' + item.index" v-show="list.item1 != null"><router-link :to="list.path">{{list.item1}}</router-link></el-menu-item>
+          <el-menu-item :index="item.index+ '-' + item.index+1" v-show="list.item2 != null"><router-link :to="list.path" class="menu">{{list.item2}}</router-link></el-menu-item>
+          <el-menu-item :index="item.index+ '-' + item.index+2" v-show="list.item3 != null"><router-link :to="list.path" class="menu">{{list.item3}}</router-link></el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -20,6 +20,15 @@
 </template>
 
 <style>
+#left .menu {
+  color: black;
+}
+#left .menu {
+  color: yellow;
+}
+a {
+  text-decoration: none;
+}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   min-height: 600px;
 }
@@ -49,10 +58,10 @@ export default {
   computed: mapState(["flag","menu"]),
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     //点击标题传递参数给navigator组件
     handleTitle(index) {
