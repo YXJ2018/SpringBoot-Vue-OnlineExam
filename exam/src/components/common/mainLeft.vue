@@ -20,12 +20,6 @@
 </template>
 
 <style>
-#left .menu {
-  color: black;
-}
-#left .menu {
-  color: yellow;
-}
 a {
   text-decoration: none;
 }

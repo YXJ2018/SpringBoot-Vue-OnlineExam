@@ -6,7 +6,8 @@ import header from '@/components/common/header'
 import mainLeft from '@/components/common/mainLeft'
 import index from '@/components/admin/index'
 import grade from '@/components/common/grade'
-
+import student from '@/components/student/index'
+import myExam from '@/components/student/myExam'
 Vue.use(Router)
 
 export default new Router({
@@ -18,6 +19,7 @@ export default new Router({
     },
     {path: '/test',component: demo},
     {path: '/header',component:header,children:[{path:'/',component:mainLeft}]},
-    {path: '/index',component:index,children:[{path:'/grade',component:grade}]}
+    {path: '/index',component:index,children:[{path:'/grade',component:grade}]},
+    {path: '/student',component:student,children:[{path:"/",component:myExam}]}
   ]
 })
