@@ -106,7 +106,7 @@ li {
 .right .msg p {
   height: 40px;
   line-height: 40px;
-  width: 100px;
+  width: 105px;
 }
 .right .msg p:hover {
   background-color: #0195ff;

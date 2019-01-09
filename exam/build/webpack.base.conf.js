@@ -64,7 +64,20 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      // {
+      //   test: /node_modules[\\\/]vis[\\\/].*\.js$/,
+      //   loader: 'babel-loader',
+      //   query: {
+      //     cacheDirectory: true,
+      //     presets: [ "babel-preset-es2015" ].map(require.resolve),
+      //     plugins: [
+      //       "transform-es3-property-literals", // #2452
+      //       "transform-es3-member-expression-literals", // #2566
+      //       "transform-runtime" // #2566
+      //     ]
+      //   }
+      // }
     ]
   },
   node: {
