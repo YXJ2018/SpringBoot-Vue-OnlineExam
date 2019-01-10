@@ -1,11 +1,29 @@
-// 我的试卷页面
+// 我的考试页面
 <template>
   <div id="myExam">
-    <div class="title">我的试卷</div>
+    <div class="title">我的考试</div>
     <div class="wrapper">
       <ul class="top">
-        <li class="order">从新到旧</li>
-        <li class="order">从旧到新</li>
+        <li class="order">
+          <el-badge :value="12" class="item" type="primary">
+            <span>全部</span>
+          </el-badge>
+        </li>
+        <li class="order">
+          <el-badge :value="1" class="item" type="primary">
+            <span>未开始</span>
+          </el-badge>
+        </li>
+        <li class="order">
+          <el-badge :value="2" class="item" type="primary">
+            <span>已开始</span>
+          </el-badge>
+        </li>
+        <li class="order">
+          <el-badge :value="1" class="item">
+            <span>已过期</span>
+          </el-badge>
+        </li>
         <li class="search-li"><div class="icon"><input type="text" placeholder="试卷名称" class="search"><i class="el-icon-search"></i></div></li>
         <li><el-button type="primary">新建试卷</el-button></li>
       </ul>
@@ -53,7 +71,7 @@
 
 <script>
 export default {
-  // name: 'myExam'
+//   name: 'startExam'
 }
 </script>
 

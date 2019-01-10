@@ -9,6 +9,8 @@ import grade from '@/components/common/grade'
 import student from '@/components/student/index'
 import myExam from '@/components/student/myExam'
 import topology from '@/components/charts/topology'
+import startExam from '@/components/student/startExam'
+import manager from '@/components/student/manager'
 Vue.use(Router)
 
 export default new Router({
@@ -19,9 +21,12 @@ export default new Router({
       component: login
     },
     {path: '/test',component: demo},
-    {path: '/header',component:header,children:[{path:'/',component:mainLeft}]},
     {path: '/index',component:index,children:[{path:'/grade',component:grade}]},
-    {path: '/student',component:student,children:[{path:"/",component:myExam}]},
+    {path: '/student',component:student,children:[
+      {path:"/",component:myExam},
+      {path:'/startExam',component:startExam},
+      {path: '/manager',component: manager}
+    ]},
     {path: '/topology',component: topology}
   ]
 })

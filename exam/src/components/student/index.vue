@@ -6,15 +6,15 @@
         <ul class="list">
           <li class="logo"><i class="iconfont icon-kaoshi"></i><span>Exam-Online</span></li>
           <li><a href="javascript:;">控制台</a></li>
-          <li><a href="javascript:;">试卷</a></li>
-          <li><a href="javascript:;">考试</a></li>
+          <li><router-link to="student">试卷</router-link></li>
+          <li><router-link to="startExam">考试</router-link></li>
           <li><a href="javascript:;">报名</a></li>
           <li><a href="javascript:;">题库</a></li>
           <li><a href="javascript:;">组卷</a></li>
           <li class="right" @click="toggle()">
             <a href="javascript:;"><i class="iconfont icon-Userselect"></i>Snoopy</a>
             <div class="msg" v-show="flag">
-              <p>管理中心</p>
+              <p><router-link to="manager">管理中心</router-link></p>
               <p class="exit">退出</p>
             </div>
           </li>
