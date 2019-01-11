@@ -11,7 +11,7 @@
       </ul>
       <ul class="paper">
         <li class="item">
-          <h3>试卷示例</h3>
+          <h4><router-link to="examMsg">试卷示例</router-link></h4>
           <p class="name">考试样卷-公务员考试行测样题</p>
           <div class="info">
             <i class="el-icon-loading"></i><span>更新于2019-01-04</span>
@@ -58,6 +58,9 @@ export default {
 </script>
 
 <style scoped>
+.paper .item a {
+  color: #000;
+}
 .wrapper .top .order {
   cursor: pointer;
 }
