@@ -36,6 +36,7 @@
             <div class="title">
               <span>公务员考试行测</span><i class="header-icon el-icon-info"></i>
               <span class="time">100分 / 60分钟</span>
+              <el-button type="primary" size="small">点击查看试题详情</el-button>
             </div>
           </template>
           <el-collapse class="inner">
@@ -149,6 +150,7 @@ export default {
   margin-left: 20px;
   font-size: 16px;
   color: #88949b;
+  font-weight: bold;
 }
 .content .title .time {
   font-size: 16px;
@@ -164,6 +166,8 @@ export default {
 #msg .content .title {
   font-size: 20px;
   margin: 0px;
+  display: flex;
+  align-items: center;
 }
 .content {
   margin-top: 20px;
