@@ -11,6 +11,11 @@
           <div class="container">
             <p class="title">账号登录</p>
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
+              <el-radio-group v-model="radio2" @change="clickTag">
+                <el-radio :label="2">学生</el-radio>
+                <el-radio :label="1">教师</el-radio>
+                <el-radio :label="0">管理员</el-radio>
+              </el-radio-group>
               <el-form-item label="用户名">
                 <el-input v-model="formLabelAlign.name" placeholder=""></el-input>
               </el-form-item>
@@ -46,6 +51,7 @@ export default {
   name: "login",
   data() {
     return {
+      radio2: 2,
       labelPosition: 'left',
       formLabelAlign: {
         name: '',
@@ -57,12 +63,18 @@ export default {
     login() {
       console.log("登录操作执行-------")
       this.$router.push({path:'index'})
+    },
+    clickTag(key) {
+      console.log(key)
     }
   }
 }
 </script>
 
 <style scoped>
+.container .el-radio-group {
+  margin: 30px 0px;
+}
 a:link{color:#ff962a;text-decoration:none;}
 #login {
   font-size: 14px;

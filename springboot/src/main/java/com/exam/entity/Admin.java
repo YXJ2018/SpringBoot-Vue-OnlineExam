@@ -1,5 +1,8 @@
 package com.exam.entity;
 
+/**
+ * 管理员实体类
+ */
 public class Admin {
     private Integer adminId;    //id
     private String adminName;   //姓名

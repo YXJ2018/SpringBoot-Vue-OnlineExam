@@ -2,6 +2,7 @@ package com.exam.controller;
 
 import com.exam.entity.Admin;
 import com.exam.service.AdminService;
+import com.exam.serviceimpl.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class AdminController {
-    private AdminService adminService;
+
+    private AdminServiceImpl adminService;
     @Autowired
-    public AdminController(AdminService adminService){
+    public AdminController(AdminServiceImpl adminService){
         this.adminService = adminService;
     }
 

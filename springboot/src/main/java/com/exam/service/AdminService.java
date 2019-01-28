@@ -2,42 +2,21 @@ package com.exam.service;
 
 import com.exam.entity.Admin;
 import com.exam.mapper.AdminMapper;
+import org.apache.ibatis.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class AdminService implements AdminMapper {
+public interface AdminService{
 
-    private AdminMapper adminMapper;
+    public List<Admin> findAll();
 
-    @Autowired
-    public AdminService(AdminMapper adminMapper){
-        this.adminMapper = adminMapper;
-    }
-    @Override
-    public List<Admin> findAll() {
-        return adminMapper.findAll();
-    }
+    public Admin findById(Integer adminId);
 
-    @Override
-    public Admin findById(Integer adminId) {
-        return adminMapper.findById(adminId);
-    }
+    public int deleteById(int adminId);
 
-    @Override
-    public int deleteById(int adminId) {
-        return adminMapper.deleteById(adminId);
-    }
+    public int update(Admin admin);
 
-    @Override
-    public int update(Admin admin) {
-        return adminMapper.update(admin);
-    }
-
-    @Override
-    public int add(Admin admin) {
-        return adminMapper.add(admin);
-    }
+    public int add(Admin admin);
 }
