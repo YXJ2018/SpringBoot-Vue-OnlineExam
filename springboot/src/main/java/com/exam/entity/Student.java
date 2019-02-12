@@ -1,36 +1,29 @@
 package com.exam.entity;
 
-/**
- * 学生实体类
- */
 public class Student {
-    private Integer studentId;  //学号
-    private String studentName; //姓名
-    private String  grade;  //年级
-    private String major; //专业
-    private String clazz;   //专业
-    private String institute;   //学院
-    private String tel;     //电话号码
-    private String email;   //邮箱
-    private String pwd;     //密码
-    private String cardId;  //身份证号码
-    private String role;    //角色
-    private String sex;     //性别
+    private Integer studentId;
 
-    public Student(Integer studentId, String studentName, String grade, String major, String clazz, String institute, String tel, String email, String pwd, String cardId, String role, String sex) {
-        this.studentId = studentId;
-        this.studentName = studentName;
-        this.grade = grade;
-        this.major = major;
-        this.clazz = clazz;
-        this.institute = institute;
-        this.tel = tel;
-        this.email = email;
-        this.pwd = pwd;
-        this.cardId = cardId;
-        this.role = role;
-        this.sex = sex;
-    }
+    private String studentName;
+
+    private String grade;
+
+    private String major;
+
+    private String clazz;
+
+    private String institute;
+
+    private String tel;
+
+    private String email;
+
+    private String pwd;
+
+    private String cardId;
+
+    private String sex;
+
+    private Integer role;
 
     public Integer getStudentId() {
         return studentId;
@@ -45,7 +38,7 @@ public class Student {
     }
 
     public void setStudentName(String studentName) {
-        this.studentName = studentName;
+        this.studentName = studentName == null ? null : studentName.trim();
     }
 
     public String getGrade() {
@@ -53,7 +46,7 @@ public class Student {
     }
 
     public void setGrade(String grade) {
-        this.grade = grade;
+        this.grade = grade == null ? null : grade.trim();
     }
 
     public String getMajor() {
@@ -61,7 +54,7 @@ public class Student {
     }
 
     public void setMajor(String major) {
-        this.major = major;
+        this.major = major == null ? null : major.trim();
     }
 
     public String getClazz() {
@@ -69,7 +62,7 @@ public class Student {
     }
 
     public void setClazz(String clazz) {
-        this.clazz = clazz;
+        this.clazz = clazz == null ? null : clazz.trim();
     }
 
     public String getInstitute() {
@@ -77,7 +70,7 @@ public class Student {
     }
 
     public void setInstitute(String institute) {
-        this.institute = institute;
+        this.institute = institute == null ? null : institute.trim();
     }
 
     public String getTel() {
@@ -85,7 +78,7 @@ public class Student {
     }
 
     public void setTel(String tel) {
-        this.tel = tel;
+        this.tel = tel == null ? null : tel.trim();
     }
 
     public String getEmail() {
@@ -93,7 +86,7 @@ public class Student {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
     public String getPwd() {
@@ -101,7 +94,7 @@ public class Student {
     }
 
     public void setPwd(String pwd) {
-        this.pwd = pwd;
+        this.pwd = pwd == null ? null : pwd.trim();
     }
 
     public String getCardId() {
@@ -109,15 +102,7 @@ public class Student {
     }
 
     public void setCardId(String cardId) {
-        this.cardId = cardId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+        this.cardId = cardId == null ? null : cardId.trim();
     }
 
     public String getSex() {
@@ -125,24 +110,14 @@ public class Student {
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        this.sex = sex == null ? null : sex.trim();
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "studentId=" + studentId +
-                ", studentName='" + studentName + '\'' +
-                ", grade='" + grade + '\'' +
-                ", major='" + major + '\'' +
-                ", clazz='" + clazz + '\'' +
-                ", institute='" + institute + '\'' +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", cardId='" + cardId + '\'' +
-                ", role='" + role + '\'' +
-                ", sex='" + sex + '\'' +
-                '}';
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

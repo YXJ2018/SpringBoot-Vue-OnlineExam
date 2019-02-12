@@ -1,31 +1,21 @@
 package com.exam.entity;
 
-/**
- * 管理员实体类
- */
 public class Admin {
-    private Integer adminId;    //id
-    private String adminName;   //姓名
-    private String sex;     //性别
-    private String tel;     //手机号码
-    private String email;   //电子邮箱
-    private String pwd;     //密码
-    private String cardId;  //身份证号码
-    private int role;   //角色标志0管理员 1老师 2学生
+    private Integer adminId;
 
-    public Admin(Integer adminId, String adminName, String sex, String tel, String email, String pwd, String cardId, int role) {
-        this.adminId = adminId;
-        this.adminName = adminName;
-        this.sex = sex;
-        this.tel = tel;
-        this.email = email;
-        this.pwd = pwd;
-        this.cardId = cardId;
-        this.role = role;
-    }
+    private String adminName;
 
-    public Admin() {
-    }
+    private String sex;
+
+    private String tel;
+
+    private String email;
+
+    private String pwd;
+
+    private String cardId;
+
+    private Integer role;
 
     public Integer getAdminId() {
         return adminId;
@@ -40,7 +30,7 @@ public class Admin {
     }
 
     public void setAdminName(String adminName) {
-        this.adminName = adminName;
+        this.adminName = adminName == null ? null : adminName.trim();
     }
 
     public String getSex() {
@@ -48,7 +38,7 @@ public class Admin {
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        this.sex = sex == null ? null : sex.trim();
     }
 
     public String getTel() {
@@ -56,7 +46,7 @@ public class Admin {
     }
 
     public void setTel(String tel) {
-        this.tel = tel;
+        this.tel = tel == null ? null : tel.trim();
     }
 
     public String getEmail() {
@@ -64,7 +54,7 @@ public class Admin {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
     public String getPwd() {
@@ -72,7 +62,7 @@ public class Admin {
     }
 
     public void setPwd(String pwd) {
-        this.pwd = pwd;
+        this.pwd = pwd == null ? null : pwd.trim();
     }
 
     public String getCardId() {
@@ -80,28 +70,14 @@ public class Admin {
     }
 
     public void setCardId(String cardId) {
-        this.cardId = cardId;
+        this.cardId = cardId == null ? null : cardId.trim();
     }
 
-    public int getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(Integer role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "adminId=" + adminId +
-                ", adminName='" + adminName + '\'' +
-                ", sex='" + sex + '\'' +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", cardId='" + cardId + '\'' +
-                ", role=" + role +
-                '}';
     }
 }

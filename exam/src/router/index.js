@@ -12,6 +12,7 @@ import manager from '@/components/student/manager'
 import examMsg from '@/components/student/examMsg'
 import relation from '@/components/charts/relation'
 import audio from '@/components/demo/audio'
+import answer from '@/components/student/answer'
 Vue.use(Router)
 
 export default new Router({
@@ -31,6 +32,7 @@ export default new Router({
     ]},
     {path: '/topology',component: topology},
     {path: '/relation',component: relation},
-    {path: '/audio',component: audio}
+    {path: '/audio',component: audio},
+    {path: '/answer',component: answer}
   ]
 })

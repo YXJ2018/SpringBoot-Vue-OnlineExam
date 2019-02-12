@@ -1,7 +1,6 @@
 package com.exam.controller;
 
 import com.exam.entity.Admin;
-import com.exam.service.AdminService;
 import com.exam.serviceimpl.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

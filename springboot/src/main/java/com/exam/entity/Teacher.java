@@ -1,35 +1,25 @@
 package com.exam.entity;
 
-/**
- * 教师实体类
- */
 public class Teacher {
-    private Integer teacherId;      //编号
-    private String  teacherName;     //姓名
-    private String  institute;       //学院
-    private String  sex;     //性别
-    private String  tel;     //电话号码
-    private String  email;      //邮箱
-    private String  pwd;     //密码
-    private String  cardId;     //身份证号码
-    private String  type;   //职称
-    private Integer  role;   //角色
+    private Integer teacherId;
 
-    public Teacher() {
-    }
+    private String teacherName;
 
-    public Teacher(Integer teacherId, String teacherName, String institute, String sex, String tel, String email, String pwd, String cardId, String type, Integer role) {
-        this.teacherId = teacherId;
-        this.teacherName = teacherName;
-        this.institute = institute;
-        this.sex = sex;
-        this.tel = tel;
-        this.email = email;
-        this.pwd = pwd;
-        this.cardId = cardId;
-        this.type = type;
-        this.role = role;
-    }
+    private String institute;
+
+    private String sex;
+
+    private String tel;
+
+    private String email;
+
+    private String pwd;
+
+    private String cardId;
+
+    private String type;
+
+    private Integer role;
 
     public Integer getTeacherId() {
         return teacherId;
@@ -44,7 +34,7 @@ public class Teacher {
     }
 
     public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
     public String getInstitute() {
@@ -52,7 +42,7 @@ public class Teacher {
     }
 
     public void setInstitute(String institute) {
-        this.institute = institute;
+        this.institute = institute == null ? null : institute.trim();
     }
 
     public String getSex() {
@@ -60,7 +50,7 @@ public class Teacher {
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        this.sex = sex == null ? null : sex.trim();
     }
 
     public String getTel() {
@@ -68,7 +58,7 @@ public class Teacher {
     }
 
     public void setTel(String tel) {
-        this.tel = tel;
+        this.tel = tel == null ? null : tel.trim();
     }
 
     public String getEmail() {
@@ -76,7 +66,7 @@ public class Teacher {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
     public String getPwd() {
@@ -84,7 +74,7 @@ public class Teacher {
     }
 
     public void setPwd(String pwd) {
-        this.pwd = pwd;
+        this.pwd = pwd == null ? null : pwd.trim();
     }
 
     public String getCardId() {
@@ -92,7 +82,7 @@ public class Teacher {
     }
 
     public void setCardId(String cardId) {
-        this.cardId = cardId;
+        this.cardId = cardId == null ? null : cardId.trim();
     }
 
     public String getType() {
@@ -100,7 +90,7 @@ public class Teacher {
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.type = type == null ? null : type.trim();
     }
 
     public Integer getRole() {
@@ -109,21 +99,5 @@ public class Teacher {
 
     public void setRole(Integer role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "teacherId=" + teacherId +
-                ", teacherName='" + teacherName + '\'' +
-                ", institute='" + institute + '\'' +
-                ", sex='" + sex + '\'' +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", cardId='" + cardId + '\'' +
-                ", type='" + type + '\'' +
-                ", role=" + role +
-                '}';
     }
 }

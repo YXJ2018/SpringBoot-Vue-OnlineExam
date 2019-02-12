@@ -24,15 +24,16 @@
         <li>来自 ATA研发中心的分享</li>
         <li class="btn">试卷描述</li>
         <li class="btn">应用考试</li>
+        <li class="right"><router-link to="/answer"><el-button>开始答题</el-button></router-link></li>
       </ul>
       <ul class="info">
         <li @click="dialogVisible = true"><a href="javascript:;"><i class="iconfont icon-info"></i>考生须知</a></li>
       </ul>
     </div>
     <div class="content">
-      <el-collapse>
-        <el-collapse-item class="header">
-          <template slot="title" class="stitle">
+      <el-collapse v-model="activeName" >
+        <el-collapse-item class="header" name="0">
+          <template slot="title" class="stitle" >
             <div class="title">
               <span>公务员考试行测</span><i class="header-icon el-icon-info"></i>
               <span class="time">100分 / 60分钟</span>
@@ -135,12 +136,16 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      activeName: '0'
     }
   },
 }
 </script>
 
 <style scoped>
+.right {
+  margin-left: auto;
+}
 .inner .contenti .question {
   margin-left: 40px;
   color: #9a9a9a;
