@@ -23,7 +23,7 @@ public class Student {
 
     private String sex;
 
-    private Integer role;
+    private String role;
 
     public Integer getStudentId() {
         return studentId;
@@ -113,11 +113,11 @@ public class Student {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public Integer getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setRole(String role) {
+        this.role = role == null ? null : role.trim();
     }
 }

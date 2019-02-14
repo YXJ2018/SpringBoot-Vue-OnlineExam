@@ -3,7 +3,7 @@ package com.exam.entity;
 import java.util.Date;
 
 public class Replay {
-    private String replayId;
+    private Integer replayId;
 
     private String title;
 
@@ -11,14 +11,12 @@ public class Replay {
 
     private Date time;
 
-    private String studentId;
-
-    public String getReplayId() {
+    public Integer getReplayId() {
         return replayId;
     }
 
-    public void setReplayId(String replayId) {
-        this.replayId = replayId == null ? null : replayId.trim();
+    public void setReplayId(Integer replayId) {
+        this.replayId = replayId;
     }
 
     public String getTitle() {
@@ -43,13 +41,5 @@ public class Replay {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId == null ? null : studentId.trim();
     }
 }

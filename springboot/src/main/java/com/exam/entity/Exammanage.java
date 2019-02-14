@@ -3,17 +3,17 @@ package com.exam.entity;
 import java.util.Date;
 
 public class Exammanage {
-    private String examCode;
+    private Integer examCode;
 
     private String type;
 
-    private String sourceId;
+    private String source;
 
-    private Integer paperId;
+    private Integer pageId;
 
-    private Date examDate;
+    private Date eamDate;
 
-    private Date examTime;
+    private String examTime;
 
     private Integer totalTime;
 
@@ -25,12 +25,12 @@ public class Exammanage {
 
     private String institute;
 
-    public String getExamCode() {
+    public Integer getExamCode() {
         return examCode;
     }
 
-    public void setExamCode(String examCode) {
-        this.examCode = examCode == null ? null : examCode.trim();
+    public void setExamCode(Integer examCode) {
+        this.examCode = examCode;
     }
 
     public String getType() {
@@ -41,36 +41,36 @@ public class Exammanage {
         this.type = type == null ? null : type.trim();
     }
 
-    public String getSourceId() {
-        return sourceId;
+    public String getSource() {
+        return source;
     }
 
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId == null ? null : sourceId.trim();
+    public void setSource(String source) {
+        this.source = source == null ? null : source.trim();
     }
 
-    public Integer getPaperId() {
-        return paperId;
+    public Integer getPageId() {
+        return pageId;
     }
 
-    public void setPaperId(Integer paperId) {
-        this.paperId = paperId;
+    public void setPageId(Integer pageId) {
+        this.pageId = pageId;
     }
 
-    public Date getExamDate() {
-        return examDate;
+    public Date getEamDate() {
+        return eamDate;
     }
 
-    public void setExamDate(Date examDate) {
-        this.examDate = examDate;
+    public void setEamDate(Date eamDate) {
+        this.eamDate = eamDate;
     }
 
-    public Date getExamTime() {
+    public String getExamTime() {
         return examTime;
     }
 
-    public void setExamTime(Date examTime) {
-        this.examTime = examTime;
+    public void setExamTime(String examTime) {
+        this.examTime = examTime == null ? null : examTime.trim();
     }
 
     public Integer getTotalTime() {

@@ -15,7 +15,7 @@ public class Admin {
 
     private String cardId;
 
-    private Integer role;
+    private String role;
 
     public Integer getAdminId() {
         return adminId;
@@ -73,11 +73,11 @@ public class Admin {
         this.cardId = cardId == null ? null : cardId.trim();
     }
 
-    public Integer getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setRole(String role) {
+        this.role = role == null ? null : role.trim();
     }
 }

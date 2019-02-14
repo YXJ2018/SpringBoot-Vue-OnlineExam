@@ -1,7 +1,7 @@
 package com.exam.entity;
 
 public class Judgequestions {
-    private String questionId;
+    private Integer questionId;
 
     private String subject;
 
@@ -13,12 +13,12 @@ public class Judgequestions {
 
     private String section;
 
-    public String getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId == null ? null : questionId.trim();
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 
     public String getSubject() {

@@ -1,32 +1,22 @@
 package com.exam.entity;
 
 public class Subjectinfo {
-    private String sourceId;
-
-    private String subjectId;
+    private Integer subjectId;
 
     private String subjectName;
 
     private String institute;
 
-    private String teacherId;
+    private Integer instituteId;
 
-    private String instituteId;
+    private Integer teacherId;
 
-    public String getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId == null ? null : sourceId.trim();
-    }
-
-    public String getSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(String subjectId) {
-        this.subjectId = subjectId == null ? null : subjectId.trim();
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 
     public String getSubjectName() {
@@ -45,19 +35,19 @@ public class Subjectinfo {
         this.institute = institute == null ? null : institute.trim();
     }
 
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId == null ? null : teacherId.trim();
-    }
-
-    public String getInstituteId() {
+    public Integer getInstituteId() {
         return instituteId;
     }
 
-    public void setInstituteId(String instituteId) {
-        this.instituteId = instituteId == null ? null : instituteId.trim();
+    public void setInstituteId(Integer instituteId) {
+        this.instituteId = instituteId;
+    }
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 }

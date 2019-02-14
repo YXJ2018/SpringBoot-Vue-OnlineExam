@@ -1,9 +1,9 @@
 package com.exam.entity;
 
 public class Scoremanage {
-    private String examCode;
+    private Integer examCode;
 
-    private String studentId;
+    private Integer studentId;
 
     private String subject;
 
@@ -13,20 +13,20 @@ public class Scoremanage {
 
     private Integer score;
 
-    public String getExamCode() {
+    public Integer getExamCode() {
         return examCode;
     }
 
-    public void setExamCode(String examCode) {
-        this.examCode = examCode == null ? null : examCode.trim();
+    public void setExamCode(Integer examCode) {
+        this.examCode = examCode;
     }
 
-    public String getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId == null ? null : studentId.trim();
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
     public String getSubject() {

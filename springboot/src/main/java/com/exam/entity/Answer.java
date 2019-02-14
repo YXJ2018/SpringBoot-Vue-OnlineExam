@@ -1,30 +1,30 @@
 package com.exam.entity;
 
 public class Answer {
-    private String examCode;
+    private Integer examCode;
 
-    private String studentId;
+    private Integer studentId;
 
     private String subject;
 
-    private String questionId;
+    private Integer questionId;
 
     private String answer;
 
-    public String getExamCode() {
+    public Integer getExamCode() {
         return examCode;
     }
 
-    public void setExamCode(String examCode) {
-        this.examCode = examCode == null ? null : examCode.trim();
+    public void setExamCode(Integer examCode) {
+        this.examCode = examCode;
     }
 
-    public String getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId == null ? null : studentId.trim();
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
     public String getSubject() {
@@ -35,12 +35,12 @@ public class Answer {
         this.subject = subject == null ? null : subject.trim();
     }
 
-    public String getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId == null ? null : questionId.trim();
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 
     public String getAnswer() {

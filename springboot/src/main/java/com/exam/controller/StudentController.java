@@ -2,7 +2,6 @@ package com.exam.controller;
 
 import com.exam.entity.Student;
 import com.exam.serviceimpl.StudentServiceImpl;
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -3,7 +3,7 @@ package com.exam.entity;
 import java.util.Date;
 
 public class Notice {
-    private String noticeId;
+    private Integer noticeId;
 
     private String title;
 
@@ -13,12 +13,12 @@ public class Notice {
 
     private String author;
 
-    public String getNoticeId() {
+    public Integer getNoticeId() {
         return noticeId;
     }
 
-    public void setNoticeId(String noticeId) {
-        this.noticeId = noticeId == null ? null : noticeId.trim();
+    public void setNoticeId(Integer noticeId) {
+        this.noticeId = noticeId;
     }
 
     public String getTitle() {

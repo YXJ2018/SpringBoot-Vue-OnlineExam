@@ -1,7 +1,7 @@
 package com.exam.entity;
 
 public class Multiquestions {
-    private String questionId;
+    private Integer questionId;
 
     private String subject;
 
@@ -19,12 +19,12 @@ public class Multiquestions {
 
     private String level;
 
-    public String getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId == null ? null : questionId.trim();
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 
     public String getSubject() {

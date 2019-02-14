@@ -3,7 +3,7 @@ package com.exam.entity;
 public class Papermanage {
     private Integer paperId;
 
-    private String sourceId;
+    private String source;
 
     private String questionType;
 
@@ -19,12 +19,12 @@ public class Papermanage {
         this.paperId = paperId;
     }
 
-    public String getSourceId() {
-        return sourceId;
+    public String getSource() {
+        return source;
     }
 
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId == null ? null : sourceId.trim();
+    public void setSource(String source) {
+        this.source = source == null ? null : source.trim();
     }
 
     public String getQuestionType() {

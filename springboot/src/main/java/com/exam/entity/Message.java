@@ -3,7 +3,7 @@ package com.exam.entity;
 import java.util.Date;
 
 public class Message {
-    private String messageId;
+    private Integer messageId;
 
     private String title;
 
@@ -11,14 +11,12 @@ public class Message {
 
     private Date time;
 
-    private String studentId;
-
-    public String getMessageId() {
+    public Integer getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(String messageId) {
-        this.messageId = messageId == null ? null : messageId.trim();
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
     }
 
     public String getTitle() {
@@ -43,13 +41,5 @@ public class Message {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId == null ? null : studentId.trim();
     }
 }
