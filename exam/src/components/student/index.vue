@@ -11,10 +11,10 @@
           <li><a href="javascript:;">报名</a></li>
           <li><a href="javascript:;">题库</a></li>
           <li><a href="javascript:;">组卷</a></li>
-          <li class="right" @click="toggle()">
+          <li class="right" @click="flag = !flag">
             <a href="javascript:;"><i class="iconfont icon-Userselect"></i>Snoopy</a>
-            <div class="msg" v-show="flag">
-              <p><router-link to="manager">管理中心</router-link></p>
+            <div class="msg" v-if="flag" @click="manage">
+              <p>管理中心</p>
               <p class="exit">退出</p>
             </div>
           </li>
@@ -44,7 +44,10 @@ export default {
     //退出区域
     toggle() {
       console.log("退出区域")
-      this.flag = !this.flag
+      // this.flag = !this.flag
+    },
+    manage() {
+      this.$router.push({path: '/manager'})
     }
   },
 }
@@ -77,12 +80,15 @@ li {
   background-color: #0195ff;
   transition: all 2s ease;
 }
-#student .list li:hover a{
+#student .list li:hover a {
   color: #fff;
 }
 #student .list .right {
   margin-left: auto;
   position: relative;
+}
+#student .list li.right :hover a {
+  color: #000;
 }
 #student .list .logo {
   display: flex;

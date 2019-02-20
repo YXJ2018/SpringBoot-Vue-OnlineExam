@@ -11,16 +11,16 @@
           <div class="container">
             <p class="title">账号登录</p>
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-              <el-radio-group v-model="radio2" @change="clickTag">
+              <el-radio-group v-model="role" @change="clickTag">
                 <el-radio :label="2">学生</el-radio>
                 <el-radio :label="1">教师</el-radio>
                 <el-radio :label="0">管理员</el-radio>
               </el-radio-group>
               <el-form-item label="用户名">
-                <el-input v-model="formLabelAlign.name" placeholder=""></el-input>
+                <el-input v-model="formLabelAlign.name" placeholder="请输入用户名"></el-input>
               </el-form-item>
               <el-form-item label="密码">
-                <el-input v-model="formLabelAlign.password" placeholder=""></el-input>
+                <el-input v-model="formLabelAlign.password" placeholder="请输入密码" type='password'></el-input>
               </el-form-item>
               <div class="submit">
                 <el-button type="primary" class="row-login" @click="login()">登录</el-button>
@@ -51,7 +51,7 @@ export default {
   name: "login",
   data() {
     return {
-      radio2: 2,
+      role: 2,
       labelPosition: 'left',
       formLabelAlign: {
         name: '',
@@ -60,13 +60,36 @@ export default {
     }
   },
   methods: {
+    //登录操作
     login() {
       console.log("登录操作执行-------")
-      this.$router.push({path:'index'})
+      switch(this.role) {
+        case 0: //管理员登录
+          this.$axios('/api/admins').then((res)=>{
+            let adminAllData = res.data
+            for(let i = 0; i<adminAllData.length; i++) {
+              if(this.formLabelAlign.name == adminAllData[i].adminId && this.formLabelAlign.password == adminAllData[i].pwd) {
+                this.$router.push({path:'index'})
+                break
+              }else {
+                console.log('用户名或者密码错误')
+              }
+            }
+          })
+          break
+        case 1: //教师用户登录
+          this.$router.push({path:'index'})
+          break
+        case 2: //学生用户登录
+          this.$router.push({path:'student'})
+      }
     },
     clickTag(key) {
-      console.log(key)
+      this.role = key
     }
+  },
+  mounted() {
+
   }
 }
 </script>
