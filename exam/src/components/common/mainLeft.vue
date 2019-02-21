@@ -4,7 +4,7 @@
     <el-menu default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="flag">
       <el-submenu v-for="(item,index) in menu" :index='item.index' :key="index">
         <template slot="title">
-          <div @click="handleTitle(item.index)">
+          <div @click="handleTitle(item.index)" class="left-width">
             <i class="iconfont icon-kechengbiao"></i>
             <span slot="title" class="title">{{item.title}}</span>
           </div>
@@ -20,6 +20,9 @@
 </template>
 
 <style>
+.left-width {
+  width: 213px;
+}
 a {
   text-decoration: none;
 }

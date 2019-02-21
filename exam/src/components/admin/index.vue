@@ -2,15 +2,15 @@
 <template>
   <div id="index">
     <header1 class="topbar"></header1>
-    <el-row>
-      <el-col :span="4" class="left_side">
+    <section class="container">
+      <div class="left_side">
         <mainLeft></mainLeft>
-      </el-col>
-      <el-col :span="20" class="main_wrapper">
+      </div>
+      <div class="main_wrapper">
         <navigator class="nav"></navigator>
         <router-view></router-view>
-      </el-col>
-    </el-row>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -34,6 +34,14 @@ export default {
 #index .nav {
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+}
+.container {
+  display: flex;
+  background-color: #fff;
+}
+.main_wrapper {
+  flex: 1;
+  background-color: #fff;
 }
 </style>
 
