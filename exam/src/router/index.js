@@ -1,17 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/common/login'
-import demo from '@/vuex/Demo'
 import index from '@/components/admin/index'
 import grade from '@/components/common/grade'
 import student from '@/components/student/index'
 import myExam from '@/components/student/myExam'
-import topology from '@/components/charts/topology'
 import startExam from '@/components/student/startExam'
 import manager from '@/components/student/manager'
 import examMsg from '@/components/student/examMsg'
-import relation from '@/components/charts/relation'
-import audio from '@/components/demo/audio'
 import answer from '@/components/student/answer'
 Vue.use(Router)
 
@@ -22,7 +18,6 @@ export default new Router({
       name: 'login',
       component: login
     },
-    {path: '/test',component: demo},
     {path: '/index',component:index,children:[{path:'/grade',component:grade}]},
     {path: '/student',component:student,children:[
       {path:"/",component:myExam},
@@ -30,9 +25,6 @@ export default new Router({
       {path: '/manager',component: manager},
       {path: '/examMsg',component: examMsg}
     ]},
-    {path: '/topology',component: topology},
-    {path: '/relation',component: relation},
-    {path: '/audio',component: audio},
     {path: '/answer',component: answer}
   ]
 })

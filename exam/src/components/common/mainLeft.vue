@@ -1,7 +1,15 @@
 <!--左边下拉导航栏-->
 <template>
   <div id="left">
-    <el-menu default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="flag">
+    <el-menu
+      active-text-color="#dd5862" 
+      text-color="#000" 
+      default-active="this.$route.path"
+      class="el-menu-vertical-demo" 
+      @open="handleOpen" 
+      @close="handleClose" 
+      :collapse="flag" router 
+      menu-trigger="click">
       <el-submenu v-for="(item,index) in menu" :index='item.index' :key="index">
         <template slot="title">
           <div @click="handleTitle(item.index)" class="left-width">
@@ -10,9 +18,9 @@
           </div>
         </template>
         <el-menu-item-group v-for="(list,index1) in item.content" :key="index1">
-          <el-menu-item :index="item.index+ '-' + item.index" v-show="list.item1 != null"><router-link :to="list.path">{{list.item1}}</router-link></el-menu-item>
-          <el-menu-item :index="item.index+ '-' + item.index+1" v-show="list.item2 != null"><router-link :to="list.path" class="menu">{{list.item2}}</router-link></el-menu-item>
-          <el-menu-item :index="item.index+ '-' + item.index+2" v-show="list.item3 != null"><router-link :to="list.path" class="menu">{{list.item3}}</router-link></el-menu-item>
+          <el-menu-item :index="list.path" v-if="list.item1 != null">{{list.item1}}</el-menu-item>
+          <el-menu-item :index="list.path" v-if="list.item2 != null">{{list.item2}}</el-menu-item>
+          <el-menu-item :index="list.path" v-if="list.item3 != null">{{list.item3}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -20,11 +28,11 @@
 </template>
 
 <style>
+.el-menu-vertical-demo .el-submenu__title {
+  overflow: hidden;
+}
 .left-width {
   width: 213px;
-}
-a {
-  text-decoration: none;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   min-height: 600px;
@@ -49,7 +57,7 @@ export default {
   name: "mainLeft",
   data() {
     return {
-
+      
     }
   },
   computed: mapState(["flag","menu"]),

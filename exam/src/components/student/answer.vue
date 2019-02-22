@@ -104,6 +104,7 @@
           </div>
         </transition>  
         <!--右边选择答题区-->
+        <transition name="slider-fade">
         <div class="right">
           <div class="title">
             <p>常识判断</p>
@@ -127,6 +128,7 @@
             </ul>
           </div>
         </div>
+        </transition>
      </div> 
   </div>
 </template>
