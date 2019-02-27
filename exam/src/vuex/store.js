@@ -4,9 +4,8 @@ import VUEX from 'vuex'
 VUE.use(VUEX)
 
 const state = {
-  count: 1,
-  msg: "hello world",
   flag: false,
+  userInfo: 111,
   menu: [{
       index: '1',
       title: '课程管理',
@@ -49,23 +48,15 @@ const state = {
       icon: 'icon-module4mokuai',
       content:[{item1:'模块操作',path:'/module'}],
     }
-  ]
+  ],
 }
 const mutations = {
-  add(state, n) {
-    state.count += n
-  },
-  reduce(state) {
-    state.count--
-  },
   toggle(state) {
     state.flag = !state.flag
   }
 }
 const getters = {
-  count() {
-    return state.count += 100
-  }
+ 
 }
 export default new VUEX.Store({
   state,

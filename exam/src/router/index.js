@@ -7,12 +7,12 @@ export default new Router({
     {
       path: '/',
       name: 'login',
-      component: () => import ('@/components/common/login')
+      component: () => import('@/components/common/login')
     },
     {
       path: '/index',
       component: () => import('@/components/admin/index'),
-      children:[
+      children: [
         {
           path:'/grade',
           component: () => import('@/components/common/grade')
@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/student',
       component: ()=> import('@/components/student/index'),
-      children:[
+      children: [
         {path:"/",component: ()=> import('@/components/student/myExam')},
         {path:'/startExam',component: ()=> import('@/components/student/startExam')},
         {path: '/manager',component: ()=> import('@/components/student/manager')},

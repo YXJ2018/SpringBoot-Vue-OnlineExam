@@ -10,6 +10,7 @@
         <div class="bottom">
           <div class="container">
             <p class="title">账号登录</p>
+            <p>{{userInfo}}</p>
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
               <el-radio-group v-model="role" @change="clickTag">
                 <el-radio :label="2">学生</el-radio>
@@ -47,7 +48,10 @@
 </template>
 
 <script>
+import store from '@/vuex/store'
+import {mapState} from 'vuex'
 export default {
+  store,
   name: "login",
   data() {
     return {
@@ -65,29 +69,59 @@ export default {
       console.log("登录操作执行-------")
       switch(this.role) {
         case 0: //管理员登录
-          this.$axios('/api/admins').then((res)=>{
-            let adminAllData = res.data
-            for(let i = 0; i<adminAllData.length; i++) {
-              if(this.formLabelAlign.name == adminAllData[i].adminId && this.formLabelAlign.password == adminAllData[i].pwd) {
-                this.$router.push({path:'index'})
-                break
-              }else {
-                console.log('用户名或者密码错误')
-              }
-            }
-          })
-          break
+          {
+            let url = '/api/admins'
+            let path = '/index'
+            this.getData(url, path) 
+            break
+          } 
         case 1: //教师用户登录
-          this.$router.push({path:'index'})
-          break
+          {
+            let url = '/api/teachers'
+            let path = '/index'
+            this.getData(url, path)
+            break
+          } 
         case 2: //学生用户登录
-          this.$router.push({path:'student'})
+          {
+            let url = '/api/students'
+            let path = '/student'
+            this.getData(url, path) 
+          } 
       }
     },
     clickTag(key) {
       this.role = key
+    },
+    //获取后台api,跳转路由的公共方法
+    getData(url,path) {
+      this.$axios(url).then(res => {
+        let resData = res.data
+        let isFind = null
+        for(let i = 0; i<resData.length; i++) {
+          let id = resData[i].adminId || resData[i].studentId || resData[i].teacherId
+          if(this.formLabelAlign.name == id && this.formLabelAlign.password == resData[i].pwd) {
+            isFind = true
+            // userInfo = resData[i].pwd
+            break
+          }else {
+            isFind = false
+          }
+        }
+        if(isFind) {
+          this.$router.push({path: path}) //找到则跳转页面
+        }else {
+          //登录失败提示功能
+          this.$message({
+            showClose: true,
+            message: '用户名或者密码错误！',
+            type: 'error'
+          })
+        }
+      })
     }
   },
+  computed: mapState(["userInfo"]),
   mounted() {
 
   }
@@ -98,7 +132,10 @@ export default {
 .container .el-radio-group {
   margin: 30px 0px;
 }
-a:link{color:#ff962a;text-decoration:none;}
+a:link {
+  color:#ff962a;
+  text-decoration:none;
+}
 #login {
   font-size: 14px;
   color: #000;
