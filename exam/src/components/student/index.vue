@@ -12,7 +12,7 @@
           <li><a href="javascript:;">题库</a></li>
           <li><a href="javascript:;">组卷</a></li>
           <li class="right" @click="flag = !flag">
-            <a href="javascript:;"><i class="iconfont icon-Userselect"></i>Snoopy</a>
+            <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{userInfo.studentName}}</a>
             <div class="msg" v-if="flag" @click="manage">
               <p>管理中心</p>
               <p class="exit">退出</p>
@@ -31,7 +31,10 @@
 
 <script>
 import myFooter from "@/components/student/myFooter"
+import store from '@/vuex/store'
+import {mapState} from 'vuex'
 export default {
+  store,
   components: {
     "v-footer": myFooter
   },
@@ -50,10 +53,14 @@ export default {
       this.$router.push({path: '/manager'})
     }
   },
+  computed:mapState(["userInfo"])
 }
 </script>
 
 <style scoped>
+.right .icon {
+  margin-right: 6px;
+}
 #student .padding-50 {
   margin: 0 auto;
   padding: 0 50px;

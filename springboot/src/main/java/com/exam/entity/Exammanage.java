@@ -5,15 +5,13 @@ import java.util.Date;
 public class Exammanage {
     private Integer examCode;
 
-    private String type;
+    private String description;
 
     private String source;
 
-    private Integer pageId;
+    private Integer paperId;
 
-    private Date eamDate;
-
-    private String examTime;
+    private Date examDate;
 
     private Integer totalTime;
 
@@ -25,6 +23,8 @@ public class Exammanage {
 
     private String institute;
 
+    private Integer totalScore;
+
     public Integer getExamCode() {
         return examCode;
     }
@@ -33,12 +33,12 @@ public class Exammanage {
         this.examCode = examCode;
     }
 
-    public String getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public String getSource() {
@@ -49,28 +49,20 @@ public class Exammanage {
         this.source = source == null ? null : source.trim();
     }
 
-    public Integer getPageId() {
-        return pageId;
+    public Integer getPaperId() {
+        return paperId;
     }
 
-    public void setPageId(Integer pageId) {
-        this.pageId = pageId;
+    public void setPaperId(Integer paperId) {
+        this.paperId = paperId;
     }
 
-    public Date getEamDate() {
-        return eamDate;
+    public Date getExamDate() {
+        return examDate;
     }
 
-    public void setEamDate(Date eamDate) {
-        this.eamDate = eamDate;
-    }
-
-    public String getExamTime() {
-        return examTime;
-    }
-
-    public void setExamTime(String examTime) {
-        this.examTime = examTime == null ? null : examTime.trim();
+    public void setExamDate(Date examDate) {
+        this.examDate = examDate;
     }
 
     public Integer getTotalTime() {
@@ -111,5 +103,13 @@ public class Exammanage {
 
     public void setInstitute(String institute) {
         this.institute = institute == null ? null : institute.trim();
+    }
+
+    public Integer getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(Integer totalScore) {
+        this.totalScore = totalScore;
     }
 }

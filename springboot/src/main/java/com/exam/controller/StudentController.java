@@ -1,37 +1,40 @@
 package com.exam.controller;
 
+import com.exam.entity.ApiResult;
 import com.exam.entity.Student;
 import com.exam.serviceimpl.StudentServiceImpl;
+import com.exam.util.ApiResultHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class StudentController {
+
     @Autowired
     private StudentServiceImpl studentService;
 
     @GetMapping("/students")
-    public List<Student> findAll() {
-        return studentService.findAll();
+    public ApiResult findAll() {
+        return ApiResultHandler.success(studentService.findAll());
     }
 
     @GetMapping("/student/{studentId}")
-    public Student findById(@PathVariable("studentId") Integer studentId) {
-        return studentService.findById(studentId);
+    public ApiResult findById(@PathVariable("studentId") Integer studentId) {
+        return ApiResultHandler.success(studentService.findById(studentId));
     }
+
     @DeleteMapping("/student/{studentId}")
-    public int deleteById(@PathVariable("studentId") Integer studentId) {
-        return studentService.deleteById(studentId);
+    public ApiResult deleteById(@PathVariable("studentId") Integer studentId) {
+        return ApiResultHandler.success(studentService.deleteById(studentId));
     }
 
     @PutMapping("/student/{studentId}")
-    public int update(@PathVariable("studentId") Integer studentId, Student student) {
-        return studentService.update(student);
+    public ApiResult update(@PathVariable("studentId") Integer studentId, Student student) {
+        return ApiResultHandler.success(studentService.update(student));
     }
+
     @PostMapping("/student")
-    public int add(Student student) {
-        return studentService.add(student);
+    public ApiResult add(Student student) {
+        return ApiResultHandler.success(studentService.add(student));
     }
 }

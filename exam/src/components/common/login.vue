@@ -10,15 +10,9 @@
         <div class="bottom">
           <div class="container">
             <p class="title">账号登录</p>
-            <p>{{userInfo}}</p>
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-              <el-radio-group v-model="role" @change="clickTag">
-                <el-radio :label="2">学生</el-radio>
-                <el-radio :label="1">教师</el-radio>
-                <el-radio :label="0">管理员</el-radio>
-              </el-radio-group>
               <el-form-item label="用户名">
-                <el-input v-model="formLabelAlign.name" placeholder="请输入用户名"></el-input>
+                <el-input v-model.number="formLabelAlign.username" placeholder="请输入用户名"></el-input>
               </el-form-item>
               <el-form-item label="密码">
                 <el-input v-model="formLabelAlign.password" placeholder="请输入密码" type='password'></el-input>
@@ -58,67 +52,46 @@ export default {
       role: 2,
       labelPosition: 'left',
       formLabelAlign: {
-        name: '',
-        password: ''
+        username: '20154084',
+        password: '123456'
       }
     }
   },
   methods: {
-    //登录操作
+    //用户登录请求后台处理
     login() {
-      console.log("登录操作执行-------")
-      switch(this.role) {
-        case 0: //管理员登录
-          {
-            let url = '/api/admins'
-            let path = '/index'
-            this.getData(url, path) 
+      console.log("登录操作执行-------");
+      this.$axios({
+        url: `/api/login`,
+        method: 'post',
+        data: {
+          ...this.formLabelAlign
+        }
+      }).then(res=>{
+        let resData = res.data.data
+        this.$store.commit("changeUserInfo",resData)
+        if(resData == null) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '用户名或者密码错误'
+          })
+        }
+        switch(resData.role) {
+          case "0": 
+            this.$router.push({path: '/index' })
             break
-          } 
-        case 1: //教师用户登录
-          {
-            let url = '/api/teachers'
-            let path = '/index'
-            this.getData(url, path)
+          case "1":
+            this.$router.push({path: '/index' })
             break
-          } 
-        case 2: //学生用户登录
-          {
-            let url = '/api/students'
-            let path = '/student'
-            this.getData(url, path) 
-          } 
-      }
+          case "2":
+            this.$router.push({path: '/student'})
+            break
+        }
+      })
     },
     clickTag(key) {
       this.role = key
-    },
-    //获取后台api,跳转路由的公共方法
-    getData(url,path) {
-      this.$axios(url).then(res => {
-        let resData = res.data
-        let isFind = null
-        for(let i = 0; i<resData.length; i++) {
-          let id = resData[i].adminId || resData[i].studentId || resData[i].teacherId
-          if(this.formLabelAlign.name == id && this.formLabelAlign.password == resData[i].pwd) {
-            isFind = true
-            // userInfo = resData[i].pwd
-            break
-          }else {
-            isFind = false
-          }
-        }
-        if(isFind) {
-          this.$router.push({path: path}) //找到则跳转页面
-        }else {
-          //登录失败提示功能
-          this.$message({
-            showClose: true,
-            message: '用户名或者密码错误！',
-            type: 'error'
-          })
-        }
-      })
     }
   },
   computed: mapState(["userInfo"]),

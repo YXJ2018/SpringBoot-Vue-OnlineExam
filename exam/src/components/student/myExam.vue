@@ -10,40 +10,13 @@
         <li><el-button type="primary">新建试卷</el-button></li>
       </ul>
       <ul class="paper">
-        <li class="item">
-          <h4><router-link to="examMsg">试卷示例</router-link></h4>
-          <p class="name">考试样卷-公务员考试行测样题</p>
+        <li class="item" v-for="(item,index) in examData" :key="index">
+          <h4><router-link to="examMsg">{{item.source}}</router-link></h4>
+          <p class="name">{{item.source}}-{{item.description}}</p>
           <div class="info">
-            <i class="el-icon-loading"></i><span>更新于2019-01-04</span>
-            <i class="iconfont icon-icon-time"></i><span>限时60分钟</span>
-            <i class="iconfont icon-fenshu"></i><span>满分100分</span>
-          </div>
-        </li>
-        <li class="item">
-          <h4>试卷示例</h4>
-          <p class="name">考试样卷-公务员考试行测样题</p>
-          <div class="info">
-            <i class="el-icon-loading"></i><span>更新于2019-01-04</span>
-            <i class="iconfont icon-icon-time"></i><span>限时60分钟</span>
-            <i class="iconfont icon-fenshu"></i><span>满分100分</span>
-          </div>
-        </li>
-        <li class="item">
-          <h4>试卷示例</h4>
-          <p class="name">考试样卷-公务员考试行测样题</p>
-          <div class="info">
-            <i class="el-icon-loading"></i><span>更新于2019-01-04</span>
-            <i class="iconfont icon-icon-time"></i><span>限时60分钟</span>
-            <i class="iconfont icon-fenshu"></i><span>满分100分</span>
-          </div>
-        </li>
-        <li class="item">
-          <h4>试卷示例</h4>
-          <p class="name">考试样卷-公务员考试行测样题</p>
-          <div class="info">
-            <i class="el-icon-loading"></i><span>更新于2019-01-04</span>
-            <i class="iconfont icon-icon-time"></i><span>限时60分钟</span>
-            <i class="iconfont icon-fenshu"></i><span>满分100分</span>
+            <i class="el-icon-loading"></i><span>{{item.examDate}}</span>
+            <i class="iconfont icon-icon-time"></i><span>限时{{item.totalTime}}分钟</span>
+            <i class="iconfont icon-fenshu"></i><span>满分{{item.totalScore}}分</span>
           </div>
         </li>
       </ul>
@@ -54,6 +27,24 @@
 <script>
 export default {
   // name: 'myExam'
+  data() {
+    return {
+      examData: null
+    }
+  },
+  created() {
+    this.getExamInfo()
+  },
+  methods: {
+    //获取当前所有考试信息
+    getExamInfo() {
+      this.$axios('/api/exams').then(res => {
+        this.examData = res.data.data
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  }
 }
 </script>
 

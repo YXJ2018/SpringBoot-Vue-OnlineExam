@@ -1,11 +1,11 @@
 package com.exam.controller;
 
 import com.exam.entity.Admin;
+import com.exam.entity.ApiResult;
 import com.exam.serviceimpl.AdminServiceImpl;
+import com.exam.util.ApiResultHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class AdminController {
@@ -17,29 +17,30 @@ public class AdminController {
     }
 
     @GetMapping("/admins")
-    public List<Admin> findAll(){
+    public ApiResult findAll(){
         System.out.println("查询全部");
-        return adminService.findAll();
+        return ApiResultHandler.success(adminService.findAll());
     }
 
     @GetMapping("/admin/{adminId}")
-    public Admin findById(@PathVariable("adminId") Integer adminId){
+    public ApiResult findById(@PathVariable("adminId") Integer adminId){
         System.out.println("根据ID查找");
-        return adminService.findById(adminId);
+        return ApiResultHandler.success(adminService.findById(adminId));
     }
 
     @DeleteMapping("/admin/{adminId}")
-    public int deleteById(@PathVariable("adminId") Integer adminId){
-        return adminService.deleteById(adminId);
+    public ApiResult deleteById(@PathVariable("adminId") Integer adminId){
+        adminService.deleteById(adminId);
+        return ApiResultHandler.success();
     }
 
     @PutMapping("/admin/{adminId}")
-    public int update(@PathVariable("adminId") Integer adminId,Admin admin){
-        return adminService.update(admin);
+    public ApiResult update(@PathVariable("adminId") Integer adminId, Admin admin){
+        return ApiResultHandler.success(adminService.update(admin));
     }
 
     @PostMapping("/admin")
-    public int add(Admin admin){
-        return adminService.add(admin);
+    public ApiResult add(Admin admin){
+        return ApiResultHandler.success(adminService.add(admin));
     }
 }

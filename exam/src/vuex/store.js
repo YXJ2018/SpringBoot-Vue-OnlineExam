@@ -5,7 +5,7 @@ VUE.use(VUEX)
 
 const state = {
   flag: false,
-  userInfo: 111,
+  userInfo: null,
   menu: [{
       index: '1',
       title: '课程管理',
@@ -53,13 +53,22 @@ const state = {
 const mutations = {
   toggle(state) {
     state.flag = !state.flag
+  },
+  changeUserInfo(state,info) {
+    state.userInfo = info
   }
 }
 const getters = {
  
 }
+const actions = {
+  getUserInfo(context,info) {
+    context.commit('changeUserInfo',info)
+  }
+}
 export default new VUEX.Store({
   state,
   mutations,
-  getters
+  getters,
+  actions
 })
