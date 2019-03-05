@@ -1,5 +1,7 @@
 package com.exam.serviceimpl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.Exammanage;
 import com.exam.mapper.ExamManageMapper;
 import com.exam.service.ExamManageService;
@@ -12,9 +14,16 @@ import java.util.List;
 public class ExamManageServiceImpl implements ExamManageService {
     @Autowired
     private ExamManageMapper examManageMapper;
+
+
     @Override
     public List<Exammanage> findAll() {
         return examManageMapper.findAll();
+    }
+
+    @Override
+    public IPage<Exammanage> findAll(Page<Exammanage> page) {
+        return examManageMapper.findAll(page);
     }
 
     @Override

@@ -1,7 +1,12 @@
 import VUE from 'vue'
 import VUEX from 'vuex'
+import persistedstate from "vuex-persistedstate"
 
 VUE.use(VUEX)
+
+const store = {
+  plugins: [persistedstate()]
+}
 
 const state = {
   flag: false,
@@ -70,5 +75,6 @@ export default new VUEX.Store({
   state,
   mutations,
   getters,
-  actions
+  actions,
+  store
 })

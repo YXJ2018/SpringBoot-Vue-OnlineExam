@@ -1,5 +1,6 @@
 package com.exam.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.ApiResult;
 import com.exam.entity.Exammanage;
 import com.exam.serviceimpl.ExamManageServiceImpl;
@@ -15,8 +16,19 @@ public class ExamManageController {
 
     @GetMapping("/exams")
     public ApiResult findAll(){
-        System.out.println("查询全部");
-        return ApiResultHandler.buildApiResult(200,"请求成功！",examManageService.findAll());
+        System.out.println("不分页查询所有试卷");
+        ApiResult apiResult;
+        apiResult = ApiResultHandler.buildApiResult(200, "请求成功！", examManageService.findAll());
+        return apiResult;
+    }
+
+    @GetMapping("/exams/{page}/{size}")
+    public ApiResult findAll(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+        System.out.println("分页查询所有试卷");
+        ApiResult apiResult;
+        Page<Exammanage> exammanage = new Page<>(page,size);
+        apiResult = ApiResultHandler.buildApiResult(200, "请求成功！", examManageService.findAll(exammanage));
+        return apiResult;
     }
 
     @GetMapping("/exam/{examCode}")

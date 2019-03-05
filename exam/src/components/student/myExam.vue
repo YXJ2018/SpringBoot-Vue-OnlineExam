@@ -6,20 +6,31 @@
       <ul class="top">
         <li class="order">从新到旧</li>
         <li class="order">从旧到新</li>
-        <li class="search-li"><div class="icon"><input type="text" placeholder="试卷名称" class="search"><i class="el-icon-search"></i></div></li>
-        <li><el-button type="primary">新建试卷</el-button></li>
+        <li class="search-li"><div class="icon"><input type="text" placeholder="试卷名称" class="search" v-model="key"><i class="el-icon-search"></i></div></li>
+        <li><el-button type="primary" @click="search()">搜索试卷</el-button></li>
       </ul>
       <ul class="paper">
-        <li class="item" v-for="(item,index) in examData" :key="index">
+        <li class="item" v-for="(item,index) in pagination.records" :key="index">
           <h4><router-link to="examMsg">{{item.source}}</router-link></h4>
           <p class="name">{{item.source}}-{{item.description}}</p>
           <div class="info">
-            <i class="el-icon-loading"></i><span>{{item.examDate}}</span>
-            <i class="iconfont icon-icon-time"></i><span>限时{{item.totalTime}}分钟</span>
+            <i class="el-icon-loading"></i><span>{{item.examDate.substr(0,10)}}</span>
+            <i class="iconfont icon-icon-time"></i><span v-if="item.totalTime != null">限时{{item.totalTime}}分钟</span>
             <i class="iconfont icon-fenshu"></i><span>满分{{item.totalScore}}分</span>
           </div>
         </li>
       </ul>
+      <div class="pagination">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="pagination.current"
+          :page-sizes="[6, 10, 20, 40]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="pagination.total">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -29,26 +40,76 @@ export default {
   // name: 'myExam'
   data() {
     return {
-      examData: null
+      key: null, //搜索关键字
+      allExam: null, //所有考试信息
+      pagination: { //分页后的考试信息
+        current: 1, //当前页
+        total: null, //记录条数
+        size: 6 //每页条数
+      }
     }
   },
   created() {
     this.getExamInfo()
   },
+  // watch: {
+    
+  // },
   methods: {
     //获取当前所有考试信息
     getExamInfo() {
-      this.$axios('/api/exams').then(res => {
-        this.examData = res.data.data
+      this.$axios(`/api/exams/${this.pagination.current}/${this.pagination.size}`).then(res => {
+        this.pagination = res.data.data
+        console.log(this.pagination)
       }).catch(error => {
         console.log(error)
       })
+    },
+    //改变当前记录条数
+    handleSizeChange(val) {
+      this.pagination.size = val
+      this.getExamInfo()
+    },
+    //改变当前页码，重新发送请求
+    handleCurrentChange(val) {
+      this.pagination.current = val
+      this.getExamInfo()
+    },
+    //搜索试卷
+    search() {
+      this.$axios('/api/exams').then(res => {
+        if(res.data.code == 200) {
+          let allExam = res.data.data
+          // allExam = JSON.stringify(allExam)
+          // console.log(`allExam${allExam}`)
+          let newPage = allExam.filter(item => {
+            return item.source.includes(this.key)
+          })
+          this.pagination.records = newPage
+        }
+      })
+      // let source = this.pagination
+      // let newPage = source.records.filter(item => {
+      //   return item.source.includes(this.key)
+      // })
+      // source.records = newPage
+      // source.pagination.current = 1
+      // source.pagination.total = newPage.size
+
+      // console.log(newPage)
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.pagination {
+  padding: 20px 0px 30px 0px;
+  .el-pagination {
+    display: flex;
+    justify-content: center;
+  }
+}
 .paper .item a {
   color: #000;
 }
@@ -71,6 +132,7 @@ export default {
   margin-right: 14px;
 }
 .paper .item {
+  width: 380px;
   border-radius: 4px;
   padding: 20px 30px;
   border: 1px solid #eee;
@@ -107,6 +169,7 @@ export default {
 }
 .wrapper .top {
   border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
 }
 #myExam .search-li {
   margin-left: auto;

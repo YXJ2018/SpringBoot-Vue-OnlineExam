@@ -1,17 +1,24 @@
 package com.exam.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.Exammanage;
 
 import java.util.List;
 
 public interface ExamManageService {
-    public List<Exammanage> findAll();
 
-    public Exammanage findById(Integer examCode);
+    /**
+     * 不分页查询所有考试信息
+     */
+    List<Exammanage> findAll();
+    IPage<Exammanage> findAll(Page<Exammanage> page);
 
-    public int delete(Integer examCode);
+    Exammanage findById(Integer examCode);
 
-    public int update(Exammanage exammanage);
+    int delete(Integer examCode);
 
-    public int add(Exammanage exammanage);
+    int update(Exammanage exammanage);
+
+    int add(Exammanage exammanage);
 }
