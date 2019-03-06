@@ -2,12 +2,12 @@
 <template>
   <div id="msg">
     <div class="title">
-      <span>我的考试</span>
-      <span>/试卷示例</span>
+      <span>试卷列表</span>
+      <span>/  {{examData.source}}</span>
     </div>
     <div class="wrapper">
       <ul class="top">
-        <li class="example">试卷示例</li>
+        <li class="example">{{examData.source}}</li>
         <li><i class="iconfont icon-pen-"></i></li>
         <li><i class="iconfont icon-icon_font_add"></i></li>
         <li><i class="iconfont icon-share"></i></li>
@@ -15,15 +15,14 @@
         <li class="right">
           <div>
             <span class="count">总分</span>
-            <span class="score">100</span>
+            <span class="score">{{examData.totalScore}}</span>
           </div>
         </li>
       </ul>
       <ul class="bottom">
-        <li>更新于2019/01/07 14:40</li>
-        <li>来自 ATA研发中心的分享</li>
-        <li class="btn">试卷描述</li>
-        <li class="btn">应用考试</li>
+        <li>更新于{{examData.examDate}}</li>
+        <li>来自 {{examData.institute}} 的分享</li>
+        <li class="btn">{{examData.type}}</li>
         <li class="right"><router-link to="/answer"><el-button>开始答题</el-button></router-link></li>
       </ul>
       <ul class="info">
@@ -123,7 +122,7 @@
       title="考生须知"
       :visible.sync="dialogVisible"
       width="30%">
-      <span>欢迎参加本次考试</span>
+      <span>{{examData.tips}}</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">知道了</el-button>
       </span>
@@ -136,13 +135,39 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      activeName: '0'
+      activeName: '0',
+      examData: {
+        // source: null,
+        // totalScore: null,
+      }
     }
   },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    //初始化页面数据
+    init() {
+      let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
+      this.$axios(`/api/exam/${examCode}`).then(res => {  //通过ID请求试卷详细信息
+        res.data.data.examDate = res.data.data.examDate.substr(0,10)
+        this.examData = { ...res.data.data}
+      })
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.bottom {
+  .right{
+    .el-button{
+      color: #409EFF;
+      border-color: #c6e2ff;
+      background-color: #ecf5ff;
+    }
+  }
+}
 .right {
   margin-left: auto;
 }

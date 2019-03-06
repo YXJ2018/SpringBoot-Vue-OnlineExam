@@ -4,14 +4,13 @@
     <div class="title">我的试卷</div>
     <div class="wrapper">
       <ul class="top">
-        <li class="order">从新到旧</li>
-        <li class="order">从旧到新</li>
+        <li class="order">试卷列表</li>
         <li class="search-li"><div class="icon"><input type="text" placeholder="试卷名称" class="search" v-model="key"><i class="el-icon-search"></i></div></li>
         <li><el-button type="primary" @click="search()">搜索试卷</el-button></li>
       </ul>
       <ul class="paper">
         <li class="item" v-for="(item,index) in pagination.records" :key="index">
-          <h4><router-link to="examMsg">{{item.source}}</router-link></h4>
+          <h4 @click="toExamMsg(item.examCode)">{{item.source}}</h4>
           <p class="name">{{item.source}}-{{item.description}}</p>
           <div class="info">
             <i class="el-icon-loading"></i><span>{{item.examDate.substr(0,10)}}</span>
@@ -80,23 +79,17 @@ export default {
       this.$axios('/api/exams').then(res => {
         if(res.data.code == 200) {
           let allExam = res.data.data
-          // allExam = JSON.stringify(allExam)
-          // console.log(`allExam${allExam}`)
           let newPage = allExam.filter(item => {
             return item.source.includes(this.key)
           })
           this.pagination.records = newPage
         }
       })
-      // let source = this.pagination
-      // let newPage = source.records.filter(item => {
-      //   return item.source.includes(this.key)
-      // })
-      // source.records = newPage
-      // source.pagination.current = 1
-      // source.pagination.total = newPage.size
-
-      // console.log(newPage)
+    },
+    //跳转到试卷详情页
+    toExamMsg(examCode) {
+      this.$router.push({path: '/examMsg', query: {examCode: examCode}})
+      console.log(examCode)
     }
   }
 }
@@ -108,6 +101,11 @@ export default {
   .el-pagination {
     display: flex;
     justify-content: center;
+  }
+}
+.paper {
+  h4 {
+    cursor: pointer;
   }
 }
 .paper .item a {

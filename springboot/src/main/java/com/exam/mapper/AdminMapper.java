@@ -8,10 +8,10 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
 
-    @Select("select * from admin")
+    @Select("select adminName,sex,tel,email,cardId,role from admin")
     public List<Admin> findAll();
 
-    @Select("select * from admin where adminId = #{adminId}")
+    @Select("select adminName,sex,tel,email,cardId,role from admin where adminId = #{adminId}")
     public Admin findById(Integer adminId);
 
     @Delete("delete from admin where adminId = #{adminId}")
