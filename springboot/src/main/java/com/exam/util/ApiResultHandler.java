@@ -3,7 +3,7 @@ package com.exam.util;
 import com.exam.entity.ApiResult;
 
 public class ApiResultHandler {
-    //请求成功处理
+
     public static ApiResult success(Object object) {
         ApiResult apiResult = new ApiResult();
         apiResult.setData(object);
@@ -15,7 +15,7 @@ public class ApiResultHandler {
     public static ApiResult success() {
         return success(null);
     }
-    //异常处理
+
     public static <T> ApiResult buildApiResult(Integer code, String message, T data) {
         ApiResult apiResult = new ApiResult();
 

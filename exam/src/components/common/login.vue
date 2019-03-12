@@ -85,7 +85,11 @@ export default {
             this.$router.push({path: '/index' })
             break
           case "2":
-            this.$router.push({path: '/student'})
+            this.$router.push({path: '/student', query: {
+              userName: resData.studentName,
+              studentId: resData.studentId,
+              }
+            })
             break
         }
       })

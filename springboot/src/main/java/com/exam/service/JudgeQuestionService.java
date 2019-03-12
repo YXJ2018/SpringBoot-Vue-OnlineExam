@@ -1,10 +1,10 @@
 package com.exam.service;
 
-import com.exam.entity.JudgeQuestions;
+import com.exam.entity.JudgeQuestion;
 
 import java.util.List;
 
-public interface JudgeQuestionsService {
+public interface JudgeQuestionService {
 
-    List<JudgeQuestions> findByIdAndType(Integer paperId);
+    List<JudgeQuestion> findByIdAndType(Integer paperId);
 }

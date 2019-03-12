@@ -1,6 +1,6 @@
 package com.exam.entity;
 
-public class Subjectinfo {
+public class SubjectInfo {
     private Integer subjectId;
 
     private String subjectName;

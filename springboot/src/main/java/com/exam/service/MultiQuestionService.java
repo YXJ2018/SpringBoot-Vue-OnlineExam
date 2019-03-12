@@ -1,10 +1,10 @@
 package com.exam.service;
 
-import com.exam.entity.MultiQuestions;
+import com.exam.entity.MultiQuestion;
 
 import java.util.List;
 
-public interface MultiQuestionsService {
+public interface MultiQuestionService {
 
-    List<MultiQuestions> findByIdAndType(Integer PaperId);
+    List<MultiQuestion> findByIdAndType(Integer PaperId);
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class Exammanage {
+public class ExamManage {
     private Integer examCode;
 
     private String description;

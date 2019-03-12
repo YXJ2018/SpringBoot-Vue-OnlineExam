@@ -12,7 +12,7 @@
           <li><a href="javascript:;">题库</a></li>
           <li><a href="javascript:;">组卷</a></li>
           <li class="right" @click="flag = !flag">
-            <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i></a>
+            <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{user.userName}}</a>
             <div class="msg" v-if="flag" @click="manage">
               <p>管理中心</p>
               <p class="exit">退出</p>
@@ -31,17 +31,21 @@
 
 <script>
 import myFooter from "@/components/student/myFooter"
-import store from '@/vuex/store'
-import {mapState} from 'vuex'
+// import store from '@/vuex/store'
+// import {mapState} from 'vuex'
 export default {
-  store,
+  // store,
   components: {
     "v-footer": myFooter
   },
   data() {
     return {
-      flag: false
+      flag: false,
+      user: {}
     }
+  },
+  created() {
+    this.userInfo()
   },
   methods: {
     //退出区域
@@ -51,9 +55,16 @@ export default {
     },
     manage() {
       this.$router.push({path: '/manager'})
+    },
+    userInfo() {
+      let userName = this.$route.query.userName
+      let studentId = this.$route.query.studentId
+      this.user.userName = userName
+      this.user.studentId = studentId
+      console.log(this.user)
     }
   },
-  computed:mapState(["userInfo"])
+  // computed:mapState(["userInfo"])
 }
 </script>
 

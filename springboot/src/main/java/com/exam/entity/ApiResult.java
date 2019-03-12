@@ -1,6 +1,5 @@
 package com.exam.entity;
 
-import java.util.List;
 
 public class ApiResult<T> {
     /**

@@ -34,81 +34,39 @@
         <el-collapse-item class="header" name="0">
           <template slot="title" class="stitle" >
             <div class="title">
-              <span>公务员考试行测</span><i class="header-icon el-icon-info"></i>
-              <span class="time">100分 / 60分钟</span>
+              <span>{{examData.source}}</span><i class="header-icon el-icon-info"></i>
+              <span class="time">{{examData.totalScore}}分 / {{examData.totalTime}}分钟</span>
               <el-button type="primary" size="small">点击查看试题详情</el-button>
             </div>
           </template>
           <el-collapse class="inner">
             <el-collapse-item>
               <template slot="title" name="1">
-                <div class="titlei">常识判断 (共5题 共计10分)</div>
+                <div class="titlei">选择题 (共{{topicCount[0]}}题 共计{{score[0]}}分)</div>
               </template>
               <div class="contenti">
-                <ul class="question">
-                  <li>1. 【单选题】下列雕塑作品表现唐太宗李世民生平战功的是： 2分</li>
-                  <li>2. 【单选题】目前我国正在大力推进文化体制改革，特别是对国... 2分</li>
-                  <li>3. 【单选题】和平共处五项原则周年，下列其发表时间相同的历... 2分</li>
-                  <li>4. 【单选题】下列关于社会主义核心价值观内容有误的是： 2分</li>
-                  <li>5. 【单选题】江西参与“丝绸之路经济带”和“21世纪海上丝... 2分</li>
+                <ul class="question" v-for="(list, index) in topic[1]" :key="index">
+                  <li>{{index+1}}. {{list.question}} {{list.score}}分</li>
                 </ul>
               </div>
             </el-collapse-item>
             <el-collapse-item>
               <template slot="title" name="2">
-                <div class="titlei">言语理解与表达 (共5题  共计10分)</div>
+                <div class="titlei">填空题 (共{{topicCount[1]}}题  共计{{score[1]}}分)</div>
               </template>
               <div class="contenti">
-                <ul class="question">
-                  <li>6. 【单选题】学者如果孜孜于衣食居住的安适，一定谈不上好学... 2分</li>
-                  <li>7. 【单选题】一个国家的文学能在世界范围内引起关注，必然是... 2分</li>
-                  <li>8. 【单选题】在如今浅阅读盛行的时代，一边是快餐式、碎片式... 2分</li>
-                  <li>9. 【单选题】2013年5月，微博上_______着一份百... 2分</li>
-                  <li>10. 【单选题】英国车，汽车工艺的代表，处处出_______... 2分</li>
+                <ul class="question" v-for="(list, index) in topic[2]" :key="index">
+                  <li>{{topicCount[0]+index+1}}.{{list.question}}  {{list.score}}分</li>
                 </ul>
               </div>
             </el-collapse-item>
             <el-collapse-item>
               <template slot="title" name="3">
-                <div class="titlei">数量关系 (共5题 共计10分)</div>
+                <div class="titlei">判断题 (共{{topicCount[2]}}题 共计{{score[2]}}分)</div>
               </template>
               <div class="contenti">
-                <ul class="question">
-                  <li>11. 【单选题】某单位共有四个科室，第一科室20人，第二科室... 2分</li>
-                  <li>12. 【单选题】某超市销售“双层锅”和“三层锅”两种蒸锅套装... 2分</li>
-                  <li>13. 【单选题】设有编号为1、2、3、……、10的10张背面... 2分</li>
-                  <li>14. 【单选题】如图，某三角形展览馆由36个小三角形展室组成... 2分</li>
-                  <li>15. 【单选题】野生动物保护机构考察某圈养动物的状态，在n（... 2分</li>
-                </ul>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item>
-              <template slot="title" name="4">
-                <div class="titlei">判断推理 (共10题 共计20分)</div>
-              </template>
-              <div class="contenti">
-                <ul class="question">
-                  <li>16. 【单选题】把下面的六个图形分为两类，使每一类图形都有各... 2分</li>
-                  <li>17. 【单选题】左边给定的是纸盒的外表面，下列哪一项能由它折... 2分</li>
-                  <li>18. 【单选题】从所给四个选项中，选择最合适的一个填入问号处... 2分</li>
-                  <li>19. 【单选题】行政不作为是行政机关对于公民、法人和其他组织... 2分</li>
-                  <li>20. 【单选题】碳信用又称碳权，指在经过联合国或联合国认可的... 2分</li>
-                  <li>21. 【单选题】“公众参与”是一种有计划的行动。它通过政府部... 2分</li>
-                  <li>22. 【单选题】沉锚效应，指的是人们在对某事物做出判断时，易... 2分</li>
-                  <li>23. 【单选题】隐形课程是指学校课程计划中未明确规定的、非正... 2分</li>
-                  <li>24. 【单选题】符号是人们共同约定来指称一定对象的标志物，它... 2分</li>
-                  <li>25. 【单选题】环境标志也称绿色标志、生态标志，是指由政府部... 2分</li>
-                </ul>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item>
-              <template slot="title" name="5">
-                <div class="titlei">资料分析 (共10题  共计50分)</div>
-              </template>
-              <div class="contenti">
-                <ul class="question">
-                  <li>26-30. 【复合题】2013年二季度，我国税收月收入同比增速逐步... 25分</li>
-                  <li>31-35. 【复合题】下列说法与资料相符合的有几个： ①2013年... 25分</li>
+                <ul class="question" v-for="(list, index) in topic[3]" :key="index">
+                  <li>{{topicCount[0]+topicCount[1]+index+1}}. {{list.question}} {{list.score}}分</li>
                 </ul>
               </div>
             </el-collapse-item>
@@ -134,12 +92,17 @@
 export default {
   data() {
     return {
-      dialogVisible: false,
-      activeName: '0',
-      examData: {
+      dialogVisible: false, //对话框属性
+      activeName: '0',  //默认打开序号
+      topicCount: [],//每种类型题目的总数
+      score: [],  //每种类型分数的总数
+      examData: { //考试信息
         // source: null,
         // totalScore: null,
-      }
+      },
+      topic: {  //试卷信息
+
+      },
     }
   },
   mounted() {
@@ -149,9 +112,23 @@ export default {
     //初始化页面数据
     init() {
       let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
-      this.$axios(`/api/exam/${examCode}`).then(res => {  //通过ID请求试卷详细信息
+      this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
         res.data.data.examDate = res.data.data.examDate.substr(0,10)
         this.examData = { ...res.data.data}
+        let paperId = this.examData.paperId
+        this.$axios(`/api/paper/${paperId}`).then(res => {  //通过paperId获取试题题目信息
+          this.topic = {...res.data}
+          let keys = Object.keys(this.topic) //对象转数组
+          keys.forEach(e => {
+            let data = this.topic[e]
+            this.topicCount.push(data.length)
+            let currentScore = 0
+            for(let i = 0; i< data.length; i++) { //循环每种题型,计算出总分
+              currentScore += data[i].score
+            }
+            this.score.push(currentScore) //把每种题型总分存入score
+          })
+        })
       })
     }
   }

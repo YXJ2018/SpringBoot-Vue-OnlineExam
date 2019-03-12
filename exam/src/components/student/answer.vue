@@ -150,7 +150,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #6bb851;
+  background-color: rgb(39, 118, 223);
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -170,7 +170,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #6bb851;
+  color: rgb(39, 118, 223);
 }
 .content .number {
   display: inline-flex;
@@ -178,7 +178,7 @@
   align-items: center;
   width: 20px;
   height: 20px;
-  background-color: #6bb851;
+  background-color: rgb(39, 118, 223);
   border-radius: 4px;
   margin-right: 4px;
 }
@@ -233,7 +233,7 @@
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  background-color: #6bb851;
+ background-color: rgb(39, 118, 223);
   width: 240px;
   margin: 20px 0px 20px 10px;
   border-radius: 4px;
@@ -333,7 +333,7 @@
   border: 1px solid #6bb851;
 }
 #answer .top {
-  background-color: #6bb851;
+  background-color: rgb(39, 118, 223);
 }
 #answer .item {
   color: #fff;

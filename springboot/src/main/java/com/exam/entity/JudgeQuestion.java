@@ -4,7 +4,7 @@ import lombok.Data;
 
 //判断题实体类
 @Data
-public class JudgeQuestions {
+public class JudgeQuestion {
     private Integer questionId;
 
     private String subject;

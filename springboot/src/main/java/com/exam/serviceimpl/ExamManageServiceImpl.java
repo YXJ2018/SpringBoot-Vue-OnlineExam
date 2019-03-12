@@ -2,7 +2,7 @@ package com.exam.serviceimpl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.exam.entity.Exammanage;
+import com.exam.entity.ExamManage;
 import com.exam.mapper.ExamManageMapper;
 import com.exam.service.ExamManageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +17,17 @@ public class ExamManageServiceImpl implements ExamManageService {
 
 
     @Override
-    public List<Exammanage> findAll() {
+    public List<ExamManage> findAll() {
         return examManageMapper.findAll();
     }
 
     @Override
-    public IPage<Exammanage> findAll(Page<Exammanage> page) {
+    public IPage<ExamManage> findAll(Page<ExamManage> page) {
         return examManageMapper.findAll(page);
     }
 
     @Override
-    public Exammanage findById(Integer examCode) {
+    public ExamManage findById(Integer examCode) {
         return examManageMapper.findById(examCode);
     }
 
@@ -37,12 +37,12 @@ public class ExamManageServiceImpl implements ExamManageService {
     }
 
     @Override
-    public int update(Exammanage exammanage) {
+    public int update(ExamManage exammanage) {
         return examManageMapper.update(exammanage);
     }
 
     @Override
-    public int add(Exammanage exammanage) {
+    public int add(ExamManage exammanage) {
         return examManageMapper.add(exammanage);
     }
 }

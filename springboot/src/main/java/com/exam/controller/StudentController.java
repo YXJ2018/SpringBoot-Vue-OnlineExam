@@ -20,7 +20,12 @@ public class StudentController {
 
     @GetMapping("/student/{studentId}")
     public ApiResult findById(@PathVariable("studentId") Integer studentId) {
-        return ApiResultHandler.success(studentService.findById(studentId));
+        Student res = studentService.findById(studentId);
+        if (res != null) {
+        return ApiResultHandler.buildApiResult(200,"请求成功",res);
+        } else {
+            return ApiResultHandler.buildApiResult(404,"查询的用户不存在",null);
+        }
     }
 
     @DeleteMapping("/student/{studentId}")

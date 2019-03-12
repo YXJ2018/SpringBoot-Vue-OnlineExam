@@ -1,21 +1,21 @@
 package com.exam.serviceimpl;
 
-import com.exam.entity.JudgeQuestions;
-import com.exam.mapper.JudgeQuestionsMapper;
-import com.exam.service.JudgeQuestionsService;
+import com.exam.entity.JudgeQuestion;
+import com.exam.mapper.JudgeQuestionMapper;
+import com.exam.service.JudgeQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class JudgeQuestionsServiceImpl implements JudgeQuestionsService {
+public class JudgeQuestionServiceImpl implements JudgeQuestionService {
 
     @Autowired
-    private JudgeQuestionsMapper judgeQuestionsMapper;
+    private JudgeQuestionMapper judgeQuestionMapper;
 
     @Override
-    public List<JudgeQuestions> findByIdAndType(Integer paperId) {
-        return judgeQuestionsMapper.findByIdAndType(paperId);
+    public List<JudgeQuestion> findByIdAndType(Integer paperId) {
+        return judgeQuestionMapper.findByIdAndType(paperId);
     }
 }

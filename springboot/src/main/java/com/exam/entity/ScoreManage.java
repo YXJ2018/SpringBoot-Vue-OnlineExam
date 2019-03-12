@@ -1,6 +1,6 @@
 package com.exam.entity;
 
-public class Scoremanage {
+public class ScoreManage {
     private Integer examCode;
 
     private Integer studentId;

@@ -1,6 +1,6 @@
 package com.exam.mapper;
 
-import com.exam.entity.JudgeQuestions;
+import com.exam.entity.JudgeQuestion;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -9,8 +9,8 @@ import java.util.List;
 //判断题
 
 @Mapper
-public interface JudgeQuestionsMapper {
+public interface JudgeQuestionMapper {
 
-    @Select("select * from JudgeQuestions where questionId in (select questionId from PaperManage where questionType = 3 and paperId = #{paperId})")
-    List<JudgeQuestions> findByIdAndType(Integer paperId);
+    @Select("select * from JudgeQuestion where questionId in (select questionId from PaperManage where questionType = 3 and paperId = #{paperId})")
+    List<JudgeQuestion> findByIdAndType(Integer paperId);
 }
