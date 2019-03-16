@@ -11,7 +11,7 @@
           <li><a href="javascript:;">报名</a></li>
           <li><a href="javascript:;">题库</a></li>
           <li><a href="javascript:;">组卷</a></li>
-          <li class="right" @click="flag = !flag">
+          <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag">
             <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{user.userName}}</a>
             <div class="msg" v-if="flag" @click="manage">
               <p>管理中心</p>

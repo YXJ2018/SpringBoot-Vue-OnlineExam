@@ -5,7 +5,7 @@
     <el-row class="main-container">
       <el-col :lg="8" :xs="16" :md="10" :span="10">
         <div class="top">
-          <i class="iconfont icon-kaoshi"></i><span class="title">性感教师，在线发题</span>
+          <i class="iconfont icon-kaoshi"></i><span class="title">一触即达，在线发题</span>
         </div>
         <div class="bottom">
           <div class="container">
@@ -34,7 +34,6 @@
     </el-row>
     <el-row class="footer">
       <el-col>
-        <p class="msg1">明日之星，你值得拥有</p>
         <p class="msg2">版权所有 ©2019 <!--重庆文理学院计科2班余晓江--> 保留所有权利 渝ICP备19001371号</p>
       </el-col>
     </el-row>
@@ -70,7 +69,7 @@ export default {
       }).then(res=>{
         let resData = res.data.data
         this.$store.commit("changeUserInfo",resData)
-        if(resData == null) {
+        if(resData == null) { //错误提示
           this.$message({
             showClose: true,
             type: 'error',
@@ -79,13 +78,13 @@ export default {
         }
         switch(resData.role) {
           case "0": 
-            this.$router.push({path: '/index' })
+            this.$router.push({path: '/index' }) //跳转到首页
             break
           case "1":
             this.$router.push({path: '/index' })
             break
           case "2":
-            this.$router.push({path: '/student', query: {
+            this.$router.push({path: '/student', query: { //带参跳转到学生答题页
               userName: resData.studentName,
               studentId: resData.studentId,
               }
