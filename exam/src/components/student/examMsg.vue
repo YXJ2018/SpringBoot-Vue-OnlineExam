@@ -9,9 +9,7 @@
       <ul class="top">
         <li class="example">{{examData.source}}</li>
         <li><i class="iconfont icon-pen-"></i></li>
-        <li><i class="iconfont icon-icon_font_add"></i></li>
         <li><i class="iconfont icon-share"></i></li>
-        <li><i class="iconfont icon-el-icon-delete"></i></li>
         <li class="right">
           <div>
             <span class="count">总分</span>
@@ -21,7 +19,7 @@
       </ul>
       <ul class="bottom">
         <li>更新于{{examData.examDate}}</li>
-        <li>来自 {{examData.institute}} 的分享</li>
+        <li>来自 {{examData.institute}}</li>
         <li class="btn">{{examData.type}}</li>
         <li class="right"><router-link to="/answer"><el-button>开始答题</el-button></router-link></li>
       </ul>

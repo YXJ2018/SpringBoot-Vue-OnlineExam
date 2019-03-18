@@ -15,7 +15,7 @@ public class StudentController {
 
     @GetMapping("/students")
     public ApiResult findAll() {
-        return ApiResultHandler.success(studentService.findAll());
+        return ApiResultHandler.buildApiResult(200,"请求成功",studentService.findAll());
     }
 
     @GetMapping("/student/{studentId}")
@@ -30,16 +30,32 @@ public class StudentController {
 
     @DeleteMapping("/student/{studentId}")
     public ApiResult deleteById(@PathVariable("studentId") Integer studentId) {
-        return ApiResultHandler.success(studentService.deleteById(studentId));
+        return ApiResultHandler.buildApiResult(200,"删除成功",studentService.deleteById(studentId));
     }
 
-    @PutMapping("/student/{studentId}")
-    public ApiResult update(@PathVariable("studentId") Integer studentId, Student student) {
-        return ApiResultHandler.success(studentService.update(student));
+    @PutMapping("/studentPWD")
+    public ApiResult updatePwd(@RequestBody Student student) {
+        studentService.updatePwd(student);
+        return ApiResultHandler.buildApiResult(200,"密码更新成功",null);
+    }
+    @PutMapping("/student")
+    public int update(@RequestBody Student student) {
+        int res = studentService.update(student);
+//        if (res != 0) {
+//            return ApiResultHandler.buildApiResult(200,"更新成功",res);
+//        }else {
+//            return ApiResultHandler.buildApiResult(400,"更新失败",null);
+//        }
+        return res;
     }
 
     @PostMapping("/student")
-    public ApiResult add(Student student) {
-        return ApiResultHandler.success(studentService.add(student));
+    public ApiResult add(@RequestBody Student student) {
+        int res = studentService.add(student);
+        if (res == 1) {
+            return ApiResultHandler.buildApiResult(200,"添加成功",null);
+        }else {
+            return ApiResultHandler.buildApiResult(400,"添加失败",null);
+        }
     }
 }

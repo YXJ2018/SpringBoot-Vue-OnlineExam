@@ -20,22 +20,6 @@
 <script>
   export default {
     data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('年龄不能为空'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
-          } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
@@ -59,8 +43,7 @@
         ispass: true,
         ruleForm2: {
           pass: '',
-          checkPass: '',
-          age: ''
+          checkPass: ''
         },
         rules2: {
           pass: [
@@ -68,9 +51,6 @@
           ],
           checkPass: [
             { validator: validatePass2, trigger: 'blur' }
-          ],
-          age: [
-            { validator: checkAge, trigger: 'blur' }
           ]
         }
       };
@@ -79,7 +59,22 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            let studentId = this.$cookies.get("cid")
+            this.$axios({ //修改密码
+              url: '/api/studentPWD',
+              method: 'put',
+              data: {
+                pwd: this.ruleForm2.pass,
+                studentId
+              }
+            }).then(res => {
+              if(res.data != null ) { //修改成功提示
+                this.$message({
+                  message: '密码修改成功...',
+                  type: 'success'
+                })
+              }
+            })
           } else {
             console.log('error submit!!');
             return false;

@@ -5,7 +5,7 @@
     <el-row class="main-container">
       <el-col :lg="8" :xs="16" :md="10" :span="10">
         <div class="top">
-          <i class="iconfont icon-kaoshi"></i><span class="title">一触即达，在线发题</span>
+          <i class="iconfont icon-kaoshi"></i><span class="title">美女老师，在线发题</span>
         </div>
         <div class="bottom">
           <div class="container">
@@ -68,7 +68,7 @@ export default {
         }
       }).then(res=>{
         let resData = res.data.data
-        this.$store.commit("changeUserInfo",resData)
+        // this.$store.commit("changeUserInfo",resData)
         if(resData == null) { //错误提示
           this.$message({
             showClose: true,
@@ -84,11 +84,9 @@ export default {
             this.$router.push({path: '/index' })
             break
           case "2":
-            this.$router.push({path: '/student', query: { //带参跳转到学生答题页
-              userName: resData.studentName,
-              studentId: resData.studentId,
-              }
-            })
+            this.$cookies.set("cname", resData.studentName)
+            this.$cookies.set("cid", resData.studentId)
+            this.$router.push({path: '/student'})
             break
         }
       })

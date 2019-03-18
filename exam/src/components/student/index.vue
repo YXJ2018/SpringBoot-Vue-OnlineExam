@@ -5,17 +5,16 @@
       <el-col :span="24">
         <ul class="list">
           <li class="logo"><i class="iconfont icon-kaoshi"></i><span>Exam-Online</span></li>
-          <li><a href="javascript:;">控制台</a></li>
-          <li><router-link to="student">试卷</router-link></li>
-          <li><router-link to="startExam">考试</router-link></li>
-          <li><a href="javascript:;">报名</a></li>
-          <li><a href="javascript:;">题库</a></li>
-          <li><a href="javascript:;">组卷</a></li>
+          <li><router-link to="student">我的试卷</router-link></li>
+          <li><router-link to="startExam">我的考试</router-link></li>
+          <li><a href="javascript:;">考试管理</a></li>
+          <li><a href="javascript:;">待定</a></li>
+          <li><a href="javascript:;">待定</a></li>
           <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag">
             <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{user.userName}}</a>
-            <div class="msg" v-if="flag" @click="manage">
-              <p>管理中心</p>
-              <p class="exit">退出</p>
+            <div class="msg" v-if="flag">
+              <p @click="manage()">管理中心</p>
+              <p class="exit" @click="exit()">退出</p>
             </div>
           </li>
         </ul>
@@ -48,20 +47,21 @@ export default {
     this.userInfo()
   },
   methods: {
-    //退出区域
-    toggle() {
-      console.log("退出区域")
-      // this.flag = !this.flag
+    exit() {  //退出登录
+      this.$router.push({path:"/"}) //跳转到登录页面
+      this.$cookies.remove("cname") //清除cookie
+      this.$cookies.remove("cid")
     },
-    manage() {
+    manage() {  //跳转到修改密码页面
       this.$router.push({path: '/manager'})
     },
     userInfo() {
-      let userName = this.$route.query.userName
-      let studentId = this.$route.query.studentId
-      this.user.userName = userName
+      let studentName = this.$cookies.get("cname")
+      let studentId = this.$cookies.get("cid")
+      console.log(`studentId${studentId}`)
+      console.log(`studentName ${studentName}`)
+      this.user.userName = studentName
       this.user.studentId = studentId
-      console.log(this.user)
     }
   },
   // computed:mapState(["userInfo"])

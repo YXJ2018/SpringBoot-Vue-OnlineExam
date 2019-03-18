@@ -33,6 +33,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int updatePwd(Student student) {
+        return studentMapper.updatePwd(student);
+    }
+
+    @Override
     public int add(Student student) {
         return studentMapper.add(student);
     }

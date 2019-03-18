@@ -9,21 +9,35 @@ import java.util.List;
 public interface StudentMapper {
 
     @Select("select * from student")
-    public List<Student> findAll();
+    List<Student> findAll();
 
     @Select("select * from student where studentId = #{studentId}")
-    public Student findById(Integer studentId);
+    Student findById(Integer studentId);
 
     @Delete("delete from student where studentId = #{studentId}")
-    public int deleteById(Integer studentId);
+    int deleteById(Integer studentId);
 
+    /**
+     *更新所有学生信息
+     * @param student 传递一个对象
+     * @return 受影响的记录条数
+     */
     @Update("update student set studentName = #{studentName},grade = #{grade},major = #{major},clazz = #{clazz}," +
             "institute = #{institute},tel = #{tel},email = #{email},pwd = #{pwd},cardId = #{cardId},sex = #{sex},role = #{role} " +
             "where studentId = #{studentId}")
-    public int update(Student student);
+    int update(Student student);
+
+    /**
+     * 更新密码
+     * @param student
+     * @return 受影响的记录条数
+     */
+    @Update("update student set pwd = #{pwd} where studentId = #{studentId}")
+    int updatePwd(Student student);
+
 
     @Options(useGeneratedKeys = true,keyProperty = "studentId")
     @Insert("insert into student(studentName,grade,major,clazz,institute,tel,email,pwd,cardId,sex,role) values " +
             "(#{studentName},#{grade},#{major},#{clazz},#{institute},#{tel},#{email},#{pwd},#{cardId},#{sex},#{role})")
-    public int add(Student student);
+    int add(Student student);
 }
