@@ -24,10 +24,11 @@ export default new Router({
       component: ()=> import('@/components/student/index'),
       children: [
         {path:"/",component: ()=> import('@/components/student/myExam')},
-        {path:'/startExam',component: ()=> import('@/components/student/startExam')},
-        {path: '/manager',component: ()=> import('@/components/student/manager')},
-        {path: '/examMsg',component: ()=> import('@/components/student/examMsg')}
-      ] 
+        {path:'/startExam', component: ()=> import('@/components/student/startExam')},
+        {path: '/manager', component: ()=> import('@/components/student/manager')},
+        {path: '/examMsg', component: ()=> import('@/components/student/examMsg')},
+        {path: '/message', component: ()=> import('@/components/student/message')}
+      ]
     },
     {path: '/answer',component: ()=> import('@/components/student/answer')}
   ]

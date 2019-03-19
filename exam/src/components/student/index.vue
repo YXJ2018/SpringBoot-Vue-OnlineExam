@@ -8,7 +8,7 @@
           <li><router-link to="student">我的试卷</router-link></li>
           <li><router-link to="startExam">我的考试</router-link></li>
           <li><a href="javascript:;">考试管理</a></li>
-          <li><a href="javascript:;">待定</a></li>
+          <li><router-link to="/message">给我留言</router-link></li>
           <li><a href="javascript:;">待定</a></li>
           <li class="right" @mouseenter="flag = !flag" @mouseleave="flag = !flag">
             <a href="javascript:;"><i class="iconfont icon-Userselect icon"></i>{{user.userName}}</a>

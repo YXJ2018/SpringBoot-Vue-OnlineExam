@@ -21,7 +21,7 @@
         <li>更新于{{examData.examDate}}</li>
         <li>来自 {{examData.institute}}</li>
         <li class="btn">{{examData.type}}</li>
-        <li class="right"><router-link to="/answer"><el-button>开始答题</el-button></router-link></li>
+        <li class="right"><el-button @click="toAnswer(examData.examCode)">开始答题</el-button></li>
       </ul>
       <ul class="info">
         <li @click="dialogVisible = true"><a href="javascript:;"><i class="iconfont icon-info"></i>考生须知</a></li>
@@ -128,7 +128,10 @@ export default {
           })
         })
       })
-    }
+    },
+    toAnswer(id) {
+      this.$router.push({path:"/answer",query:{examCode: id}})
+    },
   }
 }
 </script>

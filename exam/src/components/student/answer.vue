@@ -8,9 +8,9 @@
          <li>测试-公务员考试行测</li>
          <li @click="flag = !flag">
            <i class="iconfont icon-user icon20"></i>
-           <div class="msg" v-show="flag">
-             <p>姓名：小鱼</p>
-             <p>准考证号:201558274084</p>
+           <div class="msg"  v-if="flag" @click="flag = !flag">
+             <p>姓名：{{userInfo.name}}</p>
+             <p>准考证号:  {{userInfo.id}}</p>
            </div>
          </li>
          <li><i class="iconfont icon-arrLeft icon20"></i></li>
@@ -40,63 +40,27 @@
             </ul>
             <div class="l-bottom">
               <div class="item">
-                <p>常识判断</p>
+                <p>选择题部分</p>
                 <ul>
-                  <li><a href="javascript:;">1</a></li>
-                  <li><a href="javascript:;">2</a></li>
-                  <li><a href="javascript:;">3</a></li>
-                  <li><a href="javascript:;">4</a></li>
-                  <li><a href="javascript:;">5</a></li>
+                  <li v-for="(list, index) in topic[1]" :key="index">
+                    <a href="javascript:;">{{index+1}}</a>
+                  </li>
                 </ul>
               </div>
               <div class="item">
-                <p>言语理解与表达</p>
+                <p>填空题部分</p>
                 <ul>
-                  <li><a href="javascript:;">6</a></li>
-                  <li><a href="javascript:;">7</a></li>
-                  <li><a href="javascript:;">8</a></li>
-                  <li><a href="javascript:;">9</a></li>
-                  <li><a href="javascript:;">10</a></li>
+                  <li v-for="(list, index) in topic[2]" :key="index">
+                    <a href="javascript:;">{{topicCount[0]+index+1}}</a>
+                  </li>
                 </ul>
               </div>
               <div class="item">
-                <p>数量关系</p>
+                <p>判断题部分</p>
                 <ul>
-                  <li><a href="javascript:;">11</a></li>
-                  <li><a href="javascript:;">12</a></li>
-                  <li><a href="javascript:;">13</a></li>
-                  <li><a href="javascript:;">14</a></li>
-                  <li><a href="javascript:;">15</a></li>
-                </ul>
-              </div>
-              <div class="item">
-                <p>判断推理</p>
-                <ul>
-                  <li><a href="javascript:;">16</a></li>
-                  <li><a href="javascript:;">17</a></li>
-                  <li><a href="javascript:;">18</a></li>
-                  <li><a href="javascript:;">19</a></li>
-                  <li><a href="javascript:;">20</a></li>
-                  <li><a href="javascript:;">21</a></li>
-                  <li><a href="javascript:;">22</a></li>
-                  <li><a href="javascript:;">23</a></li>
-                  <li><a href="javascript:;">24</a></li>
-                  <li><a href="javascript:;">25</a></li>
-                </ul>
-              </div>
-              <div class="item">
-                <p>资料分析</p>
-                <ul>
-                  <li><a href="javascript:;">26</a></li>
-                  <li><a href="javascript:;">27</a></li>
-                  <li><a href="javascript:;">28</a></li>
-                  <li><a href="javascript:;">29</a></li>
-                  <li><a href="javascript:;">30</a></li>
-                  <li><a href="javascript:;">31</a></li>
-                  <li><a href="javascript:;">32</a></li>
-                  <li><a href="javascript:;">33</a></li>
-                  <li><a href="javascript:;">34</a></li>
-                  <li><a href="javascript:;">35</a></li>
+                  <li v-for="(list, index) in topic[3]" :key="index">
+                    <a href="javascript:;">{{topicCount[0]+topicCount[1]+index+1}}</a>
+                  </li>
                 </ul>
               </div>
               <div class="final">结束考试</div>
@@ -109,11 +73,11 @@
           <div class="title">
             <p>常识判断</p>
             <i class="iconfont icon-right auto-right"></i>
-            <span>全卷 已答0题/共35题  倒计时：<b>59:48</b></span>
+            <span>全卷 已答0题/共35题  倒计时：<b>{{examData.totalScore}}</b></span>
           </div>
           <div class="content">
             <p class="topic"><span class="number">1</span>下列雕塑作品表现唐太宗生平战功的是：</p>
-            <el-radio-group v-model="radio2">
+            <el-radio-group v-model="radio">
               <el-radio :label="1">马踏匈奴</el-radio>
               <el-radio :label="2">击鼓说唱俑</el-radio>
               <el-radio :label="3">昭陵六骏</el-radio>
@@ -132,6 +96,62 @@
      </div> 
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      slider_flag: true,
+      flag: false,
+      radio: 3, //选中按钮
+      userInfo: { //用户信息
+        name: null,
+        id: null
+      },
+      topicCount: [],//每种类型题目的总数
+      score: [],  //每种类型分数的总数
+      examData: { //考试信息
+        // source: null,
+        // totalScore: null,
+      },
+      topic: {  //试卷信息
+
+      },
+    }
+  },
+  created() {
+    this.getCookies(),
+    this.getExamData()
+  },
+  methods: {
+    getCookies() {  //获取cookie
+      this.userInfo.name = this.$cookies.get("cname")
+      this.userInfo.id = this.$cookies.get("cid")
+    },
+    getExamData() {
+      let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
+      this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
+        this.examData = { ...res.data.data}
+        let paperId = this.examData.paperId
+        this.$axios(`/api/paper/${paperId}`).then(res => {  //通过paperId获取试题题目信息
+          this.topic = {...res.data}
+          let keys = Object.keys(this.topic) //对象转数组
+          keys.forEach(e => {
+            let data = this.topic[e]
+            this.topicCount.push(data.length)
+            let currentScore = 0
+            for(let i = 0; i< data.length; i++) { //循环每种题型,计算出总分
+              currentScore += data[i].score
+            }
+            this.score.push(currentScore) //把每种题型总分存入score
+          })
+        })
+      })
+    }
+  },
+}
+</script>
+
 <style scoped>
 /* slider过渡效果 */
 .slider-fade-enter-active {
@@ -240,7 +260,7 @@
   height: 30px;
   line-height: 30px;
   color: #fff;
-  margin-top: 40px;
+  margin-top: 22px;
 }
 #answer .left .item {
   padding: 0px;
@@ -251,10 +271,11 @@
   background-color: #fff;
 }
 .l-bottom .item p {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   margin-top: 10px;
   color: #000;
   margin-left: 10px;
+  letter-spacing: 2px;
 }
 .l-bottom .item li {
   width: 15%;
@@ -371,17 +392,3 @@
   text-align: left;
 }
 </style>
-<script>
-export default {
-  data() {
-    return {
-      slider_flag: true,
-      flag: false,
-      radio2: 3
-    }
-  },
-  methods: {
-    
-  },
-}
-</script>
