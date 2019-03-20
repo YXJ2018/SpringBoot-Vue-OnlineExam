@@ -1,5 +1,6 @@
 package com.exam.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.ApiResult;
 import com.exam.entity.ExamManage;
@@ -27,7 +28,8 @@ public class ExamManageController {
         System.out.println("分页查询所有试卷");
         ApiResult apiResult;
         Page<ExamManage> exammanage = new Page<>(page,size);
-        apiResult = ApiResultHandler.buildApiResult(200, "请求成功！", examManageService.findAll(exammanage));
+        IPage<ExamManage> all = examManageService.findAll(exammanage);
+        apiResult = ApiResultHandler.buildApiResult(200, "请求成功！", all);
         return apiResult;
     }
 

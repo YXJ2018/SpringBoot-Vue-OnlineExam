@@ -1,45 +1,19 @@
 package com.exam.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Replay {
+    private Integer messageId;
+
     private Integer replayId;
 
-    private String title;
+    private String replay;
 
-    private String content;
-
-    private Date time;
-
-    public Integer getReplayId() {
-        return replayId;
-    }
-
-    public void setReplayId(Integer replayId) {
-        this.replayId = replayId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    private Date replayTime;
 }

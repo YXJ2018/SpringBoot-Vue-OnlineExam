@@ -20,34 +20,34 @@
         </el-input>
       </div>
       <div class="btn">
-        <el-button type="primary">提交留言</el-button>
+        <el-button type="primary" @click="submit()">提交留言</el-button>
       </div>
       <div class="all">
         <ul class="msglist">
-          <li class="list">
-            <p class="title"> <i class="iconfont icon-untitled33"></i>晚上加班,这感觉非常的nice</p>
-            <p class="content">今天是星期一的晚上,下班后回到宿舍继续写我的毕业设计,看着项目功能日渐丰满好开心哦,你们也要元气满满哦！</p>
-            <p class="date"><i class="iconfont icon-date"></i>2019-3-18</p>
-          </li>
-          <li class="list">
-            <p class="title"> <i class="iconfont icon-untitled33"></i>晚上加班,这感觉非常的nice</p>
-            <p class="content">今天是星期一的晚上,下班后回到宿舍继续写我的毕业设计,看着项目功能日渐丰满好开心哦,你们也要元气满满哦！</p>
-            <p class="date"><i class="iconfont icon-date"></i>2019-3-18</p>
-          </li>
-          <li class="list">
-            <p class="title"> <i class="iconfont icon-untitled33"></i>晚上加班,这感觉非常的nice</p>
-            <p class="content">今天是星期一的晚上,下班后回到宿舍继续写我的毕业设计,看着项目功能日渐丰满好开心哦,你们也要元气满满哦！</p>
-            <p class="date"><i class="iconfont icon-date"></i>2019-3-18</p>
+          <li class="list" 
+          @mouseenter="enter(index)" 
+          @mouseleave="leave(index)"
+          v-for="(data,index) in msg" :key="index"
+          >
+            <p class="title"> <i class="iconfont icon-untitled33"></i>{{data.title}}</p>
+            <p class="content">{{data.content}}</p>
+            <p class="date"><i class="iconfont icon-date"></i>{{data.time}}</p>
+            <div v-for="(replayData,index2) in data.replays" :key="index2">
+              <p class="comment"><i class="iconfont icon-huifuxiaoxi"></i>{{replayData.replay}}</p>
+            </div>
+            <span class="replay" @click="replay(data.id)" v-if="flag && index == current">Comment</span>
           </li>
         </ul>
       </div>
       <div class="pagination">
         <el-pagination
-          :current-page="currentPage"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="pagination.current"
           :page-sizes="[4,6,8,10]"
-          :page-size="100"
+          :page-size="pagination.size"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="40">
+          :total="pagination.total">
         </el-pagination>
       </div>
     </div>
@@ -59,19 +59,116 @@ export default {
   // name: 'message'
   data() {
     return {
-      title: null,
-      content: null,
-      currentPage: 2
+      flag: false,
+      current: 0,
+      title: "",
+      content: "",
+      pagination: { //分页后的留言列表
+        current: 1, //当前页
+        total: null, //记录条数
+        size: 4 //每页条数
+      },
+      msg: []
     }
   },
   created() {
-    
+    this.getMsg()
   },
   // watch: {
     
   // },
   methods: {
-    
+    getMsg() {
+      this.$axios(`/api/messages/${this.pagination.current}/${this.pagination.size}`).then(res => {
+        let status = res.data.code
+        if(status == 200) {
+          this.msg = res.data.data.records
+          this.pagination = res.data.data
+        }
+      })
+    },
+    //改变当前记录条数
+    handleSizeChange(val) {
+      this.pagination.size = val
+      this.getMsg()
+    },
+    //改变当前页码，重新发送请求
+    handleCurrentChange(val) {
+      this.pagination.current = val
+      this.getMsg()
+    },
+    submit() {
+      let date = new Date()
+      if(this.title.length == 0 || this.content.length == 0) { //非空判断
+        this.$message({
+          type: 'error',
+          message: '留言标题或内容不能为空',
+        })
+       } else {
+      this.$axios({
+        url: "/api/message",
+        method: "post",
+        data: {
+          title: this.title,
+          content: this.content,
+          time: date
+        }
+      }).then(res => {
+        let code = res.data.code
+        if(code == 200) {
+          this.$message({
+            type: "success",
+            message: "留言成功"
+          })
+        }
+      })
+    }
+      this.title = ""
+      this.content = ""
+      this.getMsg()
+    },
+    replay(messageId) { //回复留言功能
+      this.$prompt('回复留言', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: /^[\s\S]*.*[^\s][\s\S]*$/,
+        inputErrorMessage: '回复不能为空'
+      }).then(({ value }) => {
+        let date = new Date()
+        console.log(messageId)
+        this.$axios({
+          url: '/api/replay',
+          method: 'post',
+          data: {
+            replay: value,
+            replayTime: date,
+            messageId: messageId
+          }
+        }).then(res => {
+          console.log(res)
+          this.getMsg()
+        })
+        this.$message({
+          type: 'success',
+          message: '回复成功'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });       
+      });
+    },
+    enter(index) {
+      this.flag = true
+      this.current = index
+      console.log(this.flag,index)
+    },
+    leave(index) {
+      this.flag = false;
+      this.current = index;
+      console.log(this.flag,index)
+    }
   }
 }
 </script>
@@ -106,11 +203,13 @@ export default {
       padding:10px;
       border-radius: 4px;
       margin: 10px 0px;
+      position: relative;
+      transition: all .3s ease;
       .title {
         color: #5f5f5f;
         margin: 0px;
         font-size: 13px;
-        line-height: 45px;
+        line-height: 30px;
       }
       .content {
         padding: 0px;
@@ -123,6 +222,23 @@ export default {
         font-size: 13px;
         margin-right: 4px;
         color: rgb(80, 157, 202);
+      }
+      .replay {
+        position: absolute;
+        right: 30px;
+        bottom: 15px;
+        color: tomato;
+        cursor: pointer;
+        transition: all .3s ease;
+      }
+      .comment {
+        margin:-7px 0px; 
+        padding-bottom: 12px;
+        font-size: 13px;
+        color: #28b2b4;
+        i {
+          margin-right: 4px;
+        }
       }
     }
   }
