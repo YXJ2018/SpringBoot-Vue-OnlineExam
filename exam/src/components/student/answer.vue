@@ -5,7 +5,7 @@
      <div class="top">
        <ul class="item">
          <li><i class="iconfont icon-menufold icon20" ref="toggle" @click="slider_flag = !slider_flag"></i></li>
-         <li>测试-公务员考试行测</li>
+         <li>{{examData.type}}-{{examData.source}}</li>
          <li @click="flag = !flag">
            <i class="iconfont icon-user icon20"></i>
            <div class="msg"  v-if="flag" @click="flag = !flag">
@@ -43,7 +43,7 @@
                 <p>选择题部分</p>
                 <ul>
                   <li v-for="(list, index) in topic[1]" :key="index">
-                    <a href="javascript:;">{{index+1}}</a>
+                    <a href="javascript:;" @click="change(index)">{{index+1}}</a>
                   </li>
                 </ul>
               </div>
@@ -51,7 +51,7 @@
                 <p>填空题部分</p>
                 <ul>
                   <li v-for="(list, index) in topic[2]" :key="index">
-                    <a href="javascript:;">{{topicCount[0]+index+1}}</a>
+                    <a href="javascript:;" @click="fill(index)">{{topicCount[0]+index+1}}</a>
                   </li>
                 </ul>
               </div>
@@ -59,7 +59,7 @@
                 <p>判断题部分</p>
                 <ul>
                   <li v-for="(list, index) in topic[3]" :key="index">
-                    <a href="javascript:;">{{topicCount[0]+topicCount[1]+index+1}}</a>
+                    <a href="javascript:;" @click="judge(index)">{{topicCount[0]+topicCount[1]+index+1}}</a>
                   </li>
                 </ul>
               </div>
@@ -71,18 +71,24 @@
         <transition name="slider-fade">
         <div class="right">
           <div class="title">
-            <p>常识判断</p>
+            <p>{{title}}</p>
             <i class="iconfont icon-right auto-right"></i>
-            <span>全卷 已答0题/共35题  倒计时：<b>{{examData.totalScore}}</b></span>
+            <span>全卷 已答0题/共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  倒计时：<b>{{examData.totalScore}}</b></span>
           </div>
           <div class="content">
-            <p class="topic"><span class="number">1</span>下列雕塑作品表现唐太宗生平战功的是：</p>
-            <el-radio-group v-model="radio">
-              <el-radio :label="1">马踏匈奴</el-radio>
-              <el-radio :label="2">击鼓说唱俑</el-radio>
-              <el-radio :label="3">昭陵六骏</el-radio>
-              <el-radio :label="4">乾陵石雕</el-radio>
+            <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
+            <el-radio-group v-model="radio" @change="getLabel" v-if="currentType == 1">
+              <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
+              <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
+              <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
+              <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
             </el-radio-group>
+            <div class="fill" v-if="currentType == 2">
+              选择题部分
+            </div>
+            <div class="judge" v-if="currentType == 3">
+              判断题部分
+            </div>
           </div>
           <div class="operation">
             <ul class="end">
@@ -103,7 +109,9 @@ export default {
     return {
       slider_flag: true,
       flag: false,
+      currentType: 1, //当前题型类型  1--选择题  2--填空题  3--判断题
       radio: 3, //选中按钮
+      title: "请选择正确的选项",
       userInfo: { //用户信息
         name: null,
         id: null
@@ -117,6 +125,9 @@ export default {
       topic: {  //试卷信息
 
       },
+      showQuestion: [], //当前显示题目信息
+      showAnswer: {}, //当前题目对应的答案选项
+      number: 1
     }
   },
   created() {
@@ -143,12 +154,45 @@ export default {
             for(let i = 0; i< data.length; i++) { //循环每种题型,计算出总分
               currentScore += data[i].score
             }
+            let dataInit = this.topic[1]
+            this.number = 1
+            this.showQuestion = dataInit[0].question
+            this.showAnswer = dataInit[0]
             this.score.push(currentScore) //把每种题型总分存入score
           })
         })
       })
+    },
+    change(index) { //选择题
+      this.currentType = 1
+      this.title = "请选择正确的选项"
+      console.log(this.topic[1])
+      let Data = this.topic[1]
+      this.showQuestion = Data[index].question //获取题目信息
+      this.showAnswer = Data[index]
+      this.number = index + 1
+    },
+    fill(index) { //填空题
+      this.currentType = 2
+      this.title = "请在空白处填写答案"
+      console.log(this.topic[2])
+      let Data = this.topic[2]
+      this.showQuestion = Data[index].question //获取题目信息
+      this.number = this.topicCount[0] + index + 1
+    },
+    judge(index) { //判断题
+      this.currentType = 3
+      this.title = "请作出正确判断"
+      console.log(this.topic[3])
+      let Data = this.topic[3]
+      this.showQuestion = Data[index].question //获取题目信息
+      this.number = this.topicCount[0] + this.topicCount[1] + index + 1
+    },
+    getLabel(val) {
+      this.radio = val
+      console.log(this.radio)
     }
-  },
+  }
 }
 </script>
 

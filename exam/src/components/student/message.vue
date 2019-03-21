@@ -145,7 +145,6 @@ export default {
             messageId: messageId
           }
         }).then(res => {
-          console.log(res)
           this.getMsg()
         })
         this.$message({
@@ -162,12 +161,10 @@ export default {
     enter(index) {
       this.flag = true
       this.current = index
-      console.log(this.flag,index)
     },
     leave(index) {
       this.flag = false;
       this.current = index;
-      console.log(this.flag,index)
     }
   }
 }
