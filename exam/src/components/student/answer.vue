@@ -84,7 +84,7 @@
               <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
             </el-radio-group>
             <div class="fill" v-if="currentType == 2">
-              选择题部分
+              填空题部分
             </div>
             <div class="judge" v-if="currentType == 3">
               判断题部分
@@ -92,9 +92,9 @@
           </div>
           <div class="operation">
             <ul class="end">
-              <li><i class="iconfont icon-previous"></i><span>上一题</span></li>
+              <li @click="previous()"><i class="iconfont icon-previous"></i><span>上一题</span></li>
               <li><i class="iconfont icon-mark-o"></i><span>标记</span></li>
-              <li><span>下一题</span><i class="iconfont icon-next"></i></li>
+              <li @click="next()"><span>下一题</span><i class="iconfont icon-next"></i></li>
             </ul>
           </div>
         </div>
@@ -112,6 +112,7 @@ export default {
       currentType: 1, //当前题型类型  1--选择题  2--填空题  3--判断题
       radio: 3, //选中按钮
       title: "请选择正确的选项",
+      index: 0,
       userInfo: { //用户信息
         name: null,
         id: null
@@ -164,33 +165,108 @@ export default {
       })
     },
     change(index) { //选择题
+      this.index = index
       this.currentType = 1
-      this.title = "请选择正确的选项"
-      console.log(this.topic[1])
-      let Data = this.topic[1]
-      this.showQuestion = Data[index].question //获取题目信息
-      this.showAnswer = Data[index]
-      this.number = index + 1
+      let len = this.topic[1].length
+      if(this.index < len) {
+        if(this.index < 0){
+          this.index = 0
+        }
+        console.log(`总长度${len}`)
+        console.log(`当前index:${this.index}`)
+        this.title = "请选择正确的选项"
+        let Data = this.topic[1]
+        this.showQuestion = Data[this.index].question //获取题目信息
+        this.showAnswer = Data[this.index]
+        this.number = this.index + 1
+      }else if(this.index >= len) {
+        this.index = 0
+        this.fill(this.index)
+      }
     },
     fill(index) { //填空题
+      let len = this.topic[2].length
       this.currentType = 2
-      this.title = "请在空白处填写答案"
-      console.log(this.topic[2])
-      let Data = this.topic[2]
-      this.showQuestion = Data[index].question //获取题目信息
-      this.number = this.topicCount[0] + index + 1
+      this.index = index
+      if(this.index < len) {
+        if(this.index < 0) {
+          this.index = this.topic[1].length -1
+          this.change(this.index)
+        }else {
+          console.log(`总长度${len}`)
+          console.log(`当前index:${this.index}`)
+          this.title = "请在空白处填写答案"
+          let Data = this.topic[2]
+          this.showQuestion = Data[index].question //获取题目信息
+          this.number = this.topicCount[0] + index + 1
+        }
+        
+      }else if(this.index >= len) {
+        this.index = 0
+        this.judge(this.index)
+      }
     },
     judge(index) { //判断题
+      let len = this.topic[3].length
       this.currentType = 3
-      this.title = "请作出正确判断"
-      console.log(this.topic[3])
-      let Data = this.topic[3]
-      this.showQuestion = Data[index].question //获取题目信息
-      this.number = this.topicCount[0] + this.topicCount[1] + index + 1
+      this.index = index
+      if(this.index < len) {
+        if(this.index < 0){
+          this.index = this.topic[2].length -1
+          this.fill(this.index)
+        }else {
+          console.log(`总长度${len}`)
+          console.log(`当前index:${this.index}`)
+          this.title = "请作出正确判断"
+          console.log(this.topic[3])
+          let Data = this.topic[3]
+          this.showQuestion = Data[index].question //获取题目信息
+          this.number = this.topicCount[0] + this.topicCount[1] + index + 1
+        }
+      }else if (this.index >= len) {
+        this.index = 0
+        this.change(this.index)
+      }
     },
-    getLabel(val) {
+    getLabel(val) { //获取学生作答选项
       this.radio = val
       console.log(this.radio)
+    },
+    previous() { //上一题
+      this.index --
+      switch(this.currentType) {
+        case 1: 
+          console.log("选择题")
+          this.change(this.index)
+          break
+        case 2: 
+          console.log("填空题")
+          this.fill(this.index)
+          break
+        case 3:
+          console.log("判断题")
+          this.judge(this.index)
+          break
+      }
+      console.log(`index--以后的值${this.index}`)
+    },
+    next() { //下一题
+      this.index ++
+      switch(this.currentType) {
+        case 1: 
+          console.log("选择题")
+          this.change(this.index)
+          break
+        case 2: 
+          console.log("填空题")
+          this.fill(this.index)
+          break
+        case 3:
+          console.log("判断题")
+          this.judge(this.index)
+          break
+      }
+      console.log(`index++以后的值${this.index}`)
     }
   }
 }
