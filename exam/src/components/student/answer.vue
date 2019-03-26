@@ -77,20 +77,22 @@
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
-            <el-radio-group v-model="radio[index]" @change="getLabel" v-if="currentType == 1">
+            <el-radio-group v-model="radio[index]" @change="getFillLabel" v-if="currentType == 1">
               <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
               <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
               <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
               <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
             </el-radio-group>
             <div class="fill" v-if="currentType == 2">
-              <div v-for="(item,index) in (0,part)" :key="index">
-                <el-input placeholder="请填在此处" v-model="fillAnswer[index]"></el-input>
+              <div v-for="(item,currentIndex) in part" :key="currentIndex">
+                <el-input placeholder="请填在此处"
+                  v-model="fillAnswer[index][currentIndex]"
+                  clearable>
+                </el-input>
               </div>
-              <button @click="answer()">获取答案</button>
             </div>
             <div class="judge" v-if="currentType == 3">
-              <el-radio-group v-model="radio" @change="getLabel" v-if="currentType == 3">
+              <el-radio-group v-model="judgeAnswer[index]" @change="getJudgeLabel" v-if="currentType == 3">
                 <el-radio :label="1">正确</el-radio>
                 <el-radio :label="2">错误</el-radio>
               </el-radio-group>
@@ -135,23 +137,21 @@ export default {
       showQuestion: [], //当前显示题目信息
       showAnswer: {}, //当前题目对应的答案选项
       number: 1,
-      part: null, //填空题的空余数量
-      fillAnswer: [], //填空题答案
+      part: null, //填空题的空格数量
+      fillAnswer: [[]], //二维数组保存所有填空题答案
+      judgeAnswer: [], //保存所有判断题答案
     }
   },
   created() {
-    this.getCookies(),
+    this.getCookies()
     this.getExamData()
   },
   methods: {
-    answer() {
-      console.log(this.fillAnswer)
-    },
     getCookies() {  //获取cookie
       this.userInfo.name = this.$cookies.get("cname")
       this.userInfo.id = this.$cookies.get("cid")
     },
-    getExamData() {
+    getExamData() { //获取当前试卷所有信息
       let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
       this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
         this.examData = { ...res.data.data}
@@ -166,12 +166,19 @@ export default {
             for(let i = 0; i< data.length; i++) { //循环每种题型,计算出总分
               currentScore += data[i].score
             }
-            let dataInit = this.topic[1]
-            this.number = 1
-            this.showQuestion = dataInit[0].question
-            this.showAnswer = dataInit[0]
             this.score.push(currentScore) //把每种题型总分存入score
           })
+          let len = this.topicCount[1]
+          let father = []
+          for(let i = 0; i < len; i++) { //根据填空题数量创建二维空数组存放每道题答案
+            let children = [null,null,null]
+            father.push(children)
+          }
+          this.fillAnswer = father
+          let dataInit = this.topic[1]
+          this.number = 1
+          this.showQuestion = dataInit[0].question
+          this.showAnswer = dataInit[0]
         })
       })
     },
@@ -223,7 +230,6 @@ export default {
       }
     },
     judge(index) { //判断题
-      // this.radio = null
       let len = this.topic[3].length
       this.currentType = 3
       this.index = index
@@ -245,8 +251,11 @@ export default {
         this.change(this.index)
       }
     },
-    getLabel(val) { //获取学生作答选项
-     this.radio[this.index] = val
+    getFillLabel(val) { //获取选择题作答选项
+      this.radio[this.index] = val
+    },
+    getJudgeLabel(val) {  //获取判断题作答选项
+      this.judgeAnswer[this.index] = val
     },
     previous() { //上一题
       this.index --
