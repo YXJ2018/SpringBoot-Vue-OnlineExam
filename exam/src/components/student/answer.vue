@@ -77,17 +77,23 @@
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
-            <el-radio-group v-model="radio" @change="getLabel" v-if="currentType == 1">
+            <el-radio-group v-model="radio[index]" @change="getLabel" v-if="currentType == 1">
               <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
               <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
               <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
               <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
             </el-radio-group>
             <div class="fill" v-if="currentType == 2">
-              填空题部分
+              <div v-for="(item,index) in (0,part)" :key="index">
+                <el-input placeholder="请填在此处" v-model="fillAnswer[index]"></el-input>
+              </div>
+              <button @click="answer()">获取答案</button>
             </div>
             <div class="judge" v-if="currentType == 3">
-              判断题部分
+              <el-radio-group v-model="radio" @change="getLabel" v-if="currentType == 3">
+                <el-radio :label="1">正确</el-radio>
+                <el-radio :label="2">错误</el-radio>
+              </el-radio-group>
             </div>
           </div>
           <div class="operation">
@@ -110,7 +116,7 @@ export default {
       slider_flag: true,
       flag: false,
       currentType: 1, //当前题型类型  1--选择题  2--填空题  3--判断题
-      radio: 3, //选中按钮
+      radio: [], //保存考生所有选择题的选项
       title: "请选择正确的选项",
       index: 0,
       userInfo: { //用户信息
@@ -128,7 +134,9 @@ export default {
       },
       showQuestion: [], //当前显示题目信息
       showAnswer: {}, //当前题目对应的答案选项
-      number: 1
+      number: 1,
+      part: null, //填空题的空余数量
+      fillAnswer: [], //填空题答案
     }
   },
   created() {
@@ -136,6 +144,9 @@ export default {
     this.getExamData()
   },
   methods: {
+    answer() {
+      console.log(this.fillAnswer)
+    },
     getCookies() {  //获取cookie
       this.userInfo.name = this.$cookies.get("cname")
       this.userInfo.id = this.$cookies.get("cid")
@@ -176,6 +187,7 @@ export default {
         console.log(`当前index:${this.index}`)
         this.title = "请选择正确的选项"
         let Data = this.topic[1]
+        // console.log(Data)
         this.showQuestion = Data[this.index].question //获取题目信息
         this.showAnswer = Data[this.index]
         this.number = this.index + 1
@@ -197,7 +209,11 @@ export default {
           console.log(`当前index:${this.index}`)
           this.title = "请在空白处填写答案"
           let Data = this.topic[2]
+          console.log(Data)
           this.showQuestion = Data[index].question //获取题目信息
+          // this.radio = this.changeAnswer[index]
+          let part= this.showQuestion.split("()").length -1
+          this.part = part
           this.number = this.topicCount[0] + index + 1
         }
         
@@ -207,19 +223,20 @@ export default {
       }
     },
     judge(index) { //判断题
+      // this.radio = null
       let len = this.topic[3].length
       this.currentType = 3
       this.index = index
       if(this.index < len) {
         if(this.index < 0){
-          this.index = this.topic[2].length -1
+          this.index = this.topic[2].length - 1
           this.fill(this.index)
         }else {
           console.log(`总长度${len}`)
           console.log(`当前index:${this.index}`)
           this.title = "请作出正确判断"
-          console.log(this.topic[3])
           let Data = this.topic[3]
+          console.log(Data)
           this.showQuestion = Data[index].question //获取题目信息
           this.number = this.topicCount[0] + this.topicCount[1] + index + 1
         }
@@ -229,8 +246,7 @@ export default {
       }
     },
     getLabel(val) { //获取学生作答选项
-      this.radio = val
-      console.log(this.radio)
+     this.radio[this.index] = val
     },
     previous() { //上一题
       this.index --
@@ -272,7 +288,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.fill .el-input {
+  display: inline-flex;
+  width: 150px;
+  margin-left: 20px;
+  .el-input__inner {
+    border: 1px solid transparent;
+    border-bottom: 1px solid #eee;
+    padding-left: 20px;
+  }
+}
 /* slider过渡效果 */
 .slider-fade-enter-active {
   transition: all .3s ease;
@@ -333,7 +359,7 @@ export default {
   background-color: #fff;
   margin: 10px;
   margin-left: 0px;
-  padding-bottom: 294px;
+  height: 470px;
 }
 .content .el-radio-group label {
   color: #000;
