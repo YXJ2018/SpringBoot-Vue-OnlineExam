@@ -42,24 +42,24 @@
               <div class="item">
                 <p>选择题部分</p>
                 <ul>
-                  <li v-for="(list, index) in topic[1]" :key="index">
-                    <a href="javascript:;" @click="change(index)">{{index+1}}</a>
+                  <li v-for="(list, index1) in topic[1]" :key="index1">
+                    <a href="javascript:;" @click="change(index1)" :class="{'border': index == index1 && currentType == 1,'bg': bg_flag && topic[1][index1].isClick == true}"><span :class="{'mark': topic[1][index1].isMark == true}"></span>{{index1+1}}</a>
                   </li>
                 </ul>
               </div>
               <div class="item">
                 <p>填空题部分</p>
                 <ul>
-                  <li v-for="(list, index) in topic[2]" :key="index">
-                    <a href="javascript:;" @click="fill(index)">{{topicCount[0]+index+1}}</a>
+                  <li v-for="(list, index2) in topic[2]" :key="index2">
+                    <a href="javascript:;" @click="fill(index2)" :class="{'border': index == index2 && currentType == 2,'bg': fillAnswer[index2][3] == true}"><span :class="{'mark': topic[2][index2].isMark == true}"></span>{{topicCount[0]+index2+1}}</a>
                   </li>
                 </ul>
               </div>
               <div class="item">
                 <p>判断题部分</p>
                 <ul>
-                  <li v-for="(list, index) in topic[3]" :key="index">
-                    <a href="javascript:;" @click="judge(index)">{{topicCount[0]+topicCount[1]+index+1}}</a>
+                  <li v-for="(list, index3) in topic[3]" :key="index3">
+                    <a href="javascript:;" @click="judge(index3)" :class="{'border': index == index3 && currentType == 3,'bg': bg_flag && topic[3][index3].isClick == true}"><span :class="{'mark': topic[3][index3].isMark == true}"></span>{{topicCount[0]+topicCount[1]+index3+1}}</a>
                   </li>
                 </ul>
               </div>
@@ -77,7 +77,7 @@
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
-            <el-radio-group v-model="radio[index]" @change="getFillLabel" v-if="currentType == 1">
+            <el-radio-group v-model="radio[index]" @change="getChangeLabel" v-if="currentType == 1">
               <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
               <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
               <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
@@ -87,7 +87,8 @@
               <div v-for="(item,currentIndex) in part" :key="currentIndex">
                 <el-input placeholder="请填在此处"
                   v-model="fillAnswer[index][currentIndex]"
-                  clearable>
+                  clearable
+                  @blur="fillBG">
                 </el-input>
               </div>
             </div>
@@ -101,7 +102,7 @@
           <div class="operation">
             <ul class="end">
               <li @click="previous()"><i class="iconfont icon-previous"></i><span>上一题</span></li>
-              <li><i class="iconfont icon-mark-o"></i><span>标记</span></li>
+              <li @click="mark()"><i class="iconfont icon-mark-o"></i><span>标记</span></li>
               <li @click="next()"><span>下一题</span><i class="iconfont icon-next"></i></li>
             </ul>
           </div>
@@ -115,8 +116,10 @@
 export default {
   data() {
     return {
-      slider_flag: true,
-      flag: false,
+      bg_flag: false, //已答标识符,已答改变背景色
+      isFillClick: false, //选择题是否点击标识符
+      slider_flag: true, //左侧显示隐藏标识符
+      flag: false, //个人信息显示隐藏标识符
       currentType: 1, //当前题型类型  1--选择题  2--填空题  3--判断题
       radio: [], //保存考生所有选择题的选项
       title: "请选择正确的选项",
@@ -171,7 +174,7 @@ export default {
           let len = this.topicCount[1]
           let father = []
           for(let i = 0; i < len; i++) { //根据填空题数量创建二维空数组存放每道题答案
-            let children = [null,null,null]
+            let children = [null,null,null,null]
             father.push(children)
           }
           this.fillAnswer = father
@@ -183,6 +186,7 @@ export default {
       })
     },
     change(index) { //选择题
+      this.isFillClick = true
       this.index = index
       this.currentType = 1
       let len = this.topic[1].length
@@ -198,9 +202,15 @@ export default {
         this.showQuestion = Data[this.index].question //获取题目信息
         this.showAnswer = Data[this.index]
         this.number = this.index + 1
+        
       }else if(this.index >= len) {
         this.index = 0
         this.fill(this.index)
+      }
+    },
+    fillBG() {
+      if(this.fillAnswer[this.index][0] != null) {
+        this.fillAnswer[this.index][3] = true
       }
     },
     fill(index) { //填空题
@@ -222,6 +232,8 @@ export default {
           let part= this.showQuestion.split("()").length -1
           this.part = part
           this.number = this.topicCount[0] + index + 1
+          
+          // console.log(this.fillAnswer+"=======")
         }
         
       }else if(this.index >= len) {
@@ -251,11 +263,21 @@ export default {
         this.change(this.index)
       }
     },
-    getFillLabel(val) { //获取选择题作答选项
+    getChangeLabel(val) { //获取选择题作答选项
       this.radio[this.index] = val
+      if(val) {
+        let data = this.topic[1]
+        this.bg_flag = true
+        data[this.index]["isClick"] = true
+      }
     },
     getJudgeLabel(val) {  //获取判断题作答选项
       this.judgeAnswer[this.index] = val
+      if(val) {
+        let data = this.topic[3]
+        this.bg_flag = true
+        data[this.index]["isClick"] = true
+      }
     },
     previous() { //上一题
       this.index --
@@ -292,12 +314,47 @@ export default {
           break
       }
       console.log(`index++以后的值${this.index}`)
+    },
+    mark() {
+      switch(this.currentType) {
+        case 1:
+          console.log("点击了选择题")
+          this.topic[1][this.index]["isMark"] = true
+          break
+        case 2:
+          console.log("点击了填空题")
+          this.topic[2][this.index]["isMark"] = true
+          break
+        case 3:
+          console.log("点击了判断题")
+          this.topic[3][this.index]["isMark"] = true
+      }
+      // console.log(`mark部分当前元素下标${this.index}`)
+      // console.log(`mark部分当前内容标识${this.currentType}`)
+      // console.log("点击了mark")
     }
   }
 }
 </script>
 
 <style lang="scss">
+.mark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  top: 0px;
+  left: 22px;
+}
+.border {
+  position: relative;
+  border: 1px solid #6bb851 !important;
+}
+.bg {
+  background-color: #2776df !important;
+}
 .fill .el-input {
   display: inline-flex;
   width: 150px;
@@ -449,6 +506,7 @@ export default {
   flex-wrap: wrap;
 }
 .l-bottom .item ul li a { 
+  position: relative;
   justify-content: center;
   display: inline-flex;
   align-items: center;
