@@ -43,7 +43,12 @@
                 <p>选择题部分</p>
                 <ul>
                   <li v-for="(list, index1) in topic[1]" :key="index1">
-                    <a href="javascript:;" @click="change(index1)" :class="{'border': index == index1 && currentType == 1,'bg': bg_flag && topic[1][index1].isClick == true}"><span :class="{'mark': topic[1][index1].isMark == true}"></span>{{index1+1}}</a>
+                    <a href="javascript:;" 
+                      @click="change(index1)"
+                      :class="{'border': index == index1 && currentType == 1,'bg': bg_flag && topic[1][index1].isClick == true}">
+                      <span :class="{'mark': topic[1][index1].isMark == true}"></span>
+                      {{index1+1}}
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -63,7 +68,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="final">结束考试</div>
+              <div class="final" @click="commit()">结束考试</div>
             </div>
           </div>
         </transition>  
@@ -73,7 +78,7 @@
           <div class="title">
             <p>{{title}}</p>
             <i class="iconfont icon-right auto-right"></i>
-            <span>全卷 已答0题/共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  倒计时：<b>{{examData.totalScore}}</b></span>
+            <span>全卷共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  倒计时：<b>{{examData.totalScore}}</b></span>
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
@@ -116,6 +121,7 @@
 export default {
   data() {
     return {
+      answerScore: 0, //答题总分数
       bg_flag: false, //已答标识符,已答改变背景色
       isFillClick: false, //选择题是否点击标识符
       slider_flag: true, //左侧显示隐藏标识符
@@ -143,6 +149,7 @@ export default {
       part: null, //填空题的空格数量
       fillAnswer: [[]], //二维数组保存所有填空题答案
       judgeAnswer: [], //保存所有判断题答案
+      topic1Answer: []  //学生选择题作答编号
     }
   },
   created() {
@@ -153,6 +160,9 @@ export default {
     getCookies() {  //获取cookie
       this.userInfo.name = this.$cookies.get("cname")
       this.userInfo.id = this.$cookies.get("cid")
+    },
+    calcuScore() { //计算答题分数
+      
     },
     getExamData() { //获取当前试卷所有信息
       let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
@@ -202,7 +212,6 @@ export default {
         this.showQuestion = Data[this.index].question //获取题目信息
         this.showAnswer = Data[this.index]
         this.number = this.index + 1
-        
       }else if(this.index >= len) {
         this.index = 0
         this.fill(this.index)
@@ -228,14 +237,10 @@ export default {
           let Data = this.topic[2]
           console.log(Data)
           this.showQuestion = Data[index].question //获取题目信息
-          // this.radio = this.changeAnswer[index]
           let part= this.showQuestion.split("()").length -1
           this.part = part
           this.number = this.topicCount[0] + index + 1
-          
-          // console.log(this.fillAnswer+"=======")
-        }
-        
+        } 
       }else if(this.index >= len) {
         this.index = 0
         this.judge(this.index)
@@ -264,12 +269,14 @@ export default {
       }
     },
     getChangeLabel(val) { //获取选择题作答选项
-      this.radio[this.index] = val
+      this.radio[this.index] = val //当前选择的序号
       if(val) {
         let data = this.topic[1]
         this.bg_flag = true
         data[this.index]["isClick"] = true
       }
+      /* 保存学生答题选项 */
+      this.topic1Answer[this.index] = val
     },
     getJudgeLabel(val) {  //获取判断题作答选项
       this.judgeAnswer[this.index] = val
@@ -315,23 +322,49 @@ export default {
       }
       console.log(`index++以后的值${this.index}`)
     },
-    mark() {
+    mark() { //标记功能
       switch(this.currentType) {
         case 1:
-          console.log("点击了选择题")
           this.topic[1][this.index]["isMark"] = true
           break
         case 2:
-          console.log("点击了填空题")
           this.topic[2][this.index]["isMark"] = true
           break
         case 3:
-          console.log("点击了判断题")
           this.topic[3][this.index]["isMark"] = true
       }
-      // console.log(`mark部分当前元素下标${this.index}`)
-      // console.log(`mark部分当前内容标识${this.currentType}`)
-      // console.log("点击了mark")
+    },
+    commit() { //答案提交计算分数
+      let topic1Answer = this.topic1Answer
+      let finalScore = 0
+      topic1Answer.forEach((element,index) => { //循环每道选择题根据选项计算分数
+        let right = null
+        if(element != null) {
+          switch(element) { //选项1,2,3,4 转换为 "A","B","C","D"
+            case 1:
+              right = "A"
+              break
+            case 2:
+              right = "B"
+              break
+            case 3:
+              right = "C"
+              break
+            case 4:
+              right = "D"
+          }
+          if(right == this.topic[1][index].right) {
+            finalScore += this.topic[1][index].score
+          }
+          console.log(right,this.topic[1][index].right)
+        }
+        console.log(`目前总分${finalScore}`)
+      });
+    }
+  },
+  watch: {
+    radio(val,newVal) {
+      // console.log(val,newVal)
     }
   }
 }
@@ -446,7 +479,7 @@ export default {
 }
 .auto-right {
   margin-left: auto;
-  color: #6bb851;
+  color: #2776df;
   margin-right: 10px;
 }
 .right .title {
