@@ -82,12 +82,18 @@
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
-            <el-radio-group v-model="radio[index]" @change="getChangeLabel" v-if="currentType == 1">
-              <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
-              <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
-              <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
-              <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
-            </el-radio-group>
+            <div v-if="currentType == 1">
+              <el-radio-group v-model="radio[index]" @change="getChangeLabel" >
+                <el-radio :label="1">{{showAnswer.answerA}}</el-radio>
+                <el-radio :label="2">{{showAnswer.answerB}}</el-radio>
+                <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
+                <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
+              </el-radio-group>
+              <div class="analysis" v-if="index != null && index != undefined">
+              <!-- <div class="analysis" v-if="topic['1'][index] != null &&topic['1'][index] !=undefined "> -->
+                <span>正确姿势：</span><span class="right">{{reduceAnswer.right}}</span>
+              </div>
+            </div>
             <div class="fill" v-if="currentType == 2">
               <div v-for="(item,currentIndex) in part" :key="currentIndex">
                 <el-input placeholder="请填在此处"
@@ -121,6 +127,7 @@
 export default {
   data() {
     return {
+      reduceAnswer:[],  //vue官方不支持3层以上数据嵌套,如嵌套则会数据渲染出现问题,此变量直接接收3层嵌套时的数据。
       answerScore: 0, //答题总分数
       bg_flag: false, //已答标识符,已答改变背景色
       isFillClick: false, //选择题是否点击标识符
@@ -167,10 +174,13 @@ export default {
     getExamData() { //获取当前试卷所有信息
       let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
       this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
-        this.examData = { ...res.data.data}
+        this.examData = { ...res.data.data} //获取考试详情
+        this.index = 0
         let paperId = this.examData.paperId
         this.$axios(`/api/paper/${paperId}`).then(res => {  //通过paperId获取试题题目信息
           this.topic = {...res.data}
+          let reduceAnswer = this.topic[1][this.index]
+          this.reduceAnswer = reduceAnswer
           let keys = Object.keys(this.topic) //对象转数组
           keys.forEach(e => {
             let data = this.topic[e]
@@ -196,25 +206,27 @@ export default {
       })
     },
     change(index) { //选择题
-      this.isFillClick = true
       this.index = index
+      let reduceAnswer = this.topic[1][this.index]
+      this.reduceAnswer = reduceAnswer
+      this.isFillClick = true
       this.currentType = 1
       let len = this.topic[1].length
-      if(this.index < len) {
-        if(this.index < 0){
-          this.index = 0
+      if(index < len) {
+        if(index < 0){
+          index = 0
         }
         console.log(`总长度${len}`)
-        console.log(`当前index:${this.index}`)
+        console.log(`当前index:${index}`)
         this.title = "请选择正确的选项"
         let Data = this.topic[1]
         // console.log(Data)
-        this.showQuestion = Data[this.index].question //获取题目信息
-        this.showAnswer = Data[this.index]
+        this.showQuestion = Data[index].question //获取题目信息
+        this.showAnswer = Data[index]
         this.number = this.index + 1
-      }else if(this.index >= len) {
-        this.index = 0
-        this.fill(this.index)
+      }else if(index >= len) {
+        index = 0
+        this.fill(index)
       }
     },
     fillBG() {
@@ -276,7 +288,7 @@ export default {
         data[this.index]["isClick"] = true
       }
       /* 保存学生答题选项 */
-      this.topic1Answer[this.index] = val
+      this.topic1Answer[this.index] = val 
     },
     getJudgeLabel(val) {  //获取判断题作答选项
       this.judgeAnswer[this.index] = val
@@ -325,13 +337,13 @@ export default {
     mark() { //标记功能
       switch(this.currentType) {
         case 1:
-          this.topic[1][this.index]["isMark"] = true
+          this.topic[1][this.index]["isMark"] = true //选择题标记
           break
         case 2:
-          this.topic[2][this.index]["isMark"] = true
+          this.topic[2][this.index]["isMark"] = true //填空题标记
           break
         case 3:
-          this.topic[3][this.index]["isMark"] = true
+          this.topic[3][this.index]["isMark"] = true //判断题标记
       }
     },
     commit() { //答案提交计算分数
@@ -353,13 +365,18 @@ export default {
             case 4:
               right = "D"
           }
-          if(right == this.topic[1][index].right) {
-            finalScore += this.topic[1][index].score
+          if(right == this.topic[1][index].right) { // 当前选项与正确答案对比
+            finalScore += this.topic[1][index].score // 计算总分数
           }
           console.log(right,this.topic[1][index].right)
         }
         console.log(`目前总分${finalScore}`)
+        console.log(topic1Answer)
       });
+    },
+    timer() { //倒计时
+      let time = this.examData.totalScore //获取分钟数
+
     }
   },
   watch: {
@@ -371,6 +388,19 @@ export default {
 </script>
 
 <style lang="scss">
+.analysis {
+  margin-top: 20px;
+  .right {
+    color: #2776df;
+    font-size: 18px;
+    border: 1px solid #2776df;
+    padding: 0px 6px;
+    border-radius: 4px;
+  }
+}
+.analysis span:nth-child(1) {
+  font-size: 18px;
+}
 .mark {
   position: absolute;
   width: 4px;
