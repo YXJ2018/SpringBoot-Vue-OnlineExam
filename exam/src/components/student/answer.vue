@@ -78,7 +78,7 @@
           <div class="title">
             <p>{{title}}</p>
             <i class="iconfont icon-right auto-right"></i>
-            <span>全卷共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  倒计时：<b>{{time}}</b>分钟</span>
+            <span>全卷共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  <i class="iconfont icon-time"></i>倒计时：<b>{{time}}</b>分钟</span>
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
@@ -401,20 +401,43 @@ export default {
           }
       })
       console.log(`目前总分${finalScore}`)
+      if(this.time != 0) {
+        this.$confirm("考试结束时间未到,是否提前交卷","友情提示",{
+          confirmButtonText: '立即交卷',
+          cancelButtonText: '再检查一下',
+          type: 'warning'
+        }).then(() => {
+          console.log("交卷")
+          this.$router.push({path:'/studentScore'})
+        }).catch(() => {
+          console.log("继续答题")
+        })
+      }
     },
     showTime() { //倒计时
       setInterval(() => {
         this.time -= 1
-        if(this.time == 0) {
-          console.log(`考试时间已到`)
+        if(this.time == 10) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '考生注意,考试时间还剩10分钟！！！'
+          })
+          if(this.time == 0) {
+            console.log("考试时间已到,强制交卷。")
+          }
         }
-      },1000)
+      },1000 * 60)
     }
   }
 }
 </script>
 
 <style lang="scss">
+.iconfont.icon-time {
+  color: #2776df;
+  margin: 0px 6px 0px 20px;
+}
 .analysis {
   margin-top: 20px;
   .right {
