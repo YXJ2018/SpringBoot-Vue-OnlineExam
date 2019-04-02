@@ -78,7 +78,7 @@
           <div class="title">
             <p>{{title}}</p>
             <i class="iconfont icon-right auto-right"></i>
-            <span>全卷共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  倒计时：<b>{{examData.totalScore}}</b></span>
+            <span>全卷共{{topicCount[0] + topicCount[1] + topicCount[2]}}题  倒计时：<b>{{time}}</b>分钟</span>
           </div>
           <div class="content">
             <p class="topic"><span class="number">{{number}}</span>{{showQuestion}}</p>
@@ -89,8 +89,7 @@
                 <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
                 <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
               </el-radio-group>
-              <div class="analysis" v-if="index != null && index != undefined">
-              <!-- <div class="analysis" v-if="topic['1'][index] != null &&topic['1'][index] !=undefined "> -->
+              <div class="analysis">
                 <span>正确姿势：</span><span class="right">{{reduceAnswer.right}}</span>
               </div>
             </div>
@@ -102,12 +101,18 @@
                   @blur="fillBG">
                 </el-input>
               </div>
+              <div class="analysis">
+                <span>正确姿势：</span><span class="right">{{topic[2][index].answer}}</span>
+              </div>
             </div>
             <div class="judge" v-if="currentType == 3">
               <el-radio-group v-model="judgeAnswer[index]" @change="getJudgeLabel" v-if="currentType == 3">
                 <el-radio :label="1">正确</el-radio>
                 <el-radio :label="2">错误</el-radio>
               </el-radio-group>
+              <div class="analysis">
+                <span>正确姿势：</span><span class="right">{{topic[3][index].answer}}</span>
+              </div>
             </div>
           </div>
           <div class="operation">
@@ -127,6 +132,7 @@
 export default {
   data() {
     return {
+      time: null,
       reduceAnswer:[],  //vue官方不支持3层以上数据嵌套,如嵌套则会数据渲染出现问题,此变量直接接收3层嵌套时的数据。
       answerScore: 0, //答题总分数
       bg_flag: false, //已答标识符,已答改变背景色
@@ -162,6 +168,7 @@ export default {
   created() {
     this.getCookies()
     this.getExamData()
+    this.showTime()
   },
   methods: {
     getCookies() {  //获取cookie
@@ -176,6 +183,7 @@ export default {
       this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
         this.examData = { ...res.data.data} //获取考试详情
         this.index = 0
+        this.time = this.examData.totalScore //获取分钟数
         let paperId = this.examData.paperId
         this.$axios(`/api/paper/${paperId}`).then(res => {  //通过paperId获取试题题目信息
           this.topic = {...res.data}
@@ -229,7 +237,7 @@ export default {
         this.fill(index)
       }
     },
-    fillBG() {
+    fillBG() { //填空题已答题目 如果已答该题目,设置第四个元素为true为标识符
       if(this.fillAnswer[this.index][0] != null) {
         this.fillAnswer[this.index][3] = true
       }
@@ -238,22 +246,22 @@ export default {
       let len = this.topic[2].length
       this.currentType = 2
       this.index = index
-      if(this.index < len) {
-        if(this.index < 0) {
-          this.index = this.topic[1].length -1
-          this.change(this.index)
+      if(index < len) {
+        if(index < 0) {
+          index = this.topic[1].length -1
+          this.change(index)
         }else {
           console.log(`总长度${len}`)
-          console.log(`当前index:${this.index}`)
-          this.title = "请在空白处填写答案"
+          console.log(`当前index:${index}`)
+          this.title = "请在横线处填写答案"
           let Data = this.topic[2]
           console.log(Data)
           this.showQuestion = Data[index].question //获取题目信息
-          let part= this.showQuestion.split("()").length -1
+          let part= this.showQuestion.split("()").length -1 //根据题目中括号的数量确定填空横线数量
           this.part = part
           this.number = this.topicCount[0] + index + 1
         } 
-      }else if(this.index >= len) {
+      }else if(index >= len) {
         this.index = 0
         this.judge(this.index)
       }
@@ -302,37 +310,29 @@ export default {
       this.index --
       switch(this.currentType) {
         case 1: 
-          console.log("选择题")
           this.change(this.index)
           break
         case 2: 
-          console.log("填空题")
           this.fill(this.index)
           break
         case 3:
-          console.log("判断题")
           this.judge(this.index)
           break
       }
-      console.log(`index--以后的值${this.index}`)
     },
     next() { //下一题
       this.index ++
       switch(this.currentType) {
         case 1: 
-          console.log("选择题")
           this.change(this.index)
           break
         case 2: 
-          console.log("填空题")
           this.fill(this.index)
           break
         case 3:
-          console.log("判断题")
           this.judge(this.index)
           break
       }
-      console.log(`index++以后的值${this.index}`)
     },
     mark() { //标记功能
       switch(this.currentType) {
@@ -347,6 +347,7 @@ export default {
       }
     },
     commit() { //答案提交计算分数
+      /* 计算选择题总分 */
       let topic1Answer = this.topic1Answer
       let finalScore = 0
       topic1Answer.forEach((element,index) => { //循环每道选择题根据选项计算分数
@@ -370,18 +371,44 @@ export default {
           }
           console.log(right,this.topic[1][index].right)
         }
-        console.log(`目前总分${finalScore}`)
-        console.log(topic1Answer)
+        // console.log(topic1Answer)
+      })
+      /**计算判断题总分 */
+      // console.log(`this.fillAnswer${this.fillAnswer}`)
+      // console.log(this.topic[2][this.index])
+      let fillAnswer = this.fillAnswer
+      fillAnswer.forEach((element,index) => { //此处index和 this.index数据不一致，注意
+        element.forEach((inner) => {
+          if(this.topic[2][index].answer.includes(inner)) { //判断填空答案是否与数据库一致
+            console.log("正确")
+            finalScore += this.topic[2][this.index].score
+          }
+        })
       });
+      /** 计算判断题总分 */
+      let topic3Answer = this.judgeAnswer
+      topic3Answer.forEach((element,index) => {
+        let right = null
+        switch(element) {
+          case 1:
+            right = "T"
+            break
+          case 2:
+            right = "F"
+        }
+        if(right == this.topic[3][index].answer) { // 当前选项与正确答案对比
+            finalScore += this.topic[3][index].score // 计算总分数
+          }
+      })
+      console.log(`目前总分${finalScore}`)
     },
-    timer() { //倒计时
-      let time = this.examData.totalScore //获取分钟数
-
-    }
-  },
-  watch: {
-    radio(val,newVal) {
-      // console.log(val,newVal)
+    showTime() { //倒计时
+      setInterval(() => {
+        this.time -= 1
+        if(this.time == 0) {
+          console.log(`考试时间已到`)
+        }
+      },1000)
     }
   }
 }

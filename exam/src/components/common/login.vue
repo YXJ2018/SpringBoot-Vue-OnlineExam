@@ -20,13 +20,13 @@
               <div class="submit">
                 <el-button type="primary" class="row-login" @click="login()">登录</el-button>
               </div>
-              <div class="options">
+              <!-- <div class="options">
                 <p class="find"><a href="javascript:;">找回密码</a></p>
                 <div class="register">
                   <span>没有账号?</span>
                   <span><a href="javascript:;">去注册</a></span>
                 </div>
-              </div>
+              </div> -->
             </el-form>
           </div>
         </div>
@@ -103,6 +103,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin-bottom: 32px;
+}
 .container .el-radio-group {
   margin: 30px 0px;
 }
@@ -180,6 +183,7 @@ a:link {
 .footer .msg2 {
   font-size: 14px;
   color: #e3e3e3;
+  margin-top: 70px;
 }
 .bottom .options {
   margin-bottom: 40px;

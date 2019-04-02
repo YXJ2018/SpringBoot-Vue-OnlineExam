@@ -11,7 +11,7 @@
  Target Server Version : 50716
  File Encoding         : 65001
 
- Date: 12/03/2019 08:41:36
+ Date: 28/03/2019 22:50:59
 */
 
 SET NAMES utf8mb4;
@@ -57,7 +57,7 @@ CREATE TABLE `answer`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `exammanage`;
 CREATE TABLE `exammanage`  (
-  `examCode` int(20) NOT NULL AUTO_INCREMENT COMMENT '考试编号',
+  `examCode` int(9) NOT NULL AUTO_INCREMENT COMMENT '考试编号',
   `description` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '该次考试介绍',
   `source` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '课程名称',
   `paperId` int(10) NULL DEFAULT NULL COMMENT '试卷编号',
@@ -109,29 +109,29 @@ INSERT INTO `fillquestion` VALUES ('计算机网络', 10002, '在TCP/IP层次模
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10003, '计算机网络中常用的三种有线媒体是 (),()和 ()', '同轴电缆.双绞线 光纤', 6, '1', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10004, '国内最早的四大网络包括原邮电部的ChinaNet. 原电子部的ChinaGBN. 教育部的()和中科院的CSTnet', 'CERnet (或中国教育科研网)', 2, '4', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10005, '复盖一个国家，地区或几个洲的计算机网络称为()，在同一建筑或复盖几公里内范围的网络称为()，而介于两者之间的是()', ' 广域网       局域网     城域网', 6, '1', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10006, 'Outlook等常用电子邮件软件接收邮件使用的协议是（），发送邮件时使用的协议是（）', 'POP3    SMTP    ', 4, '1', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10006, 'Outlook等常用电子邮件软件接收邮件使用的协议是(),发送邮件时使用的协议是()', 'POP3    SMTP    ', 4, '1', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10007, '通信系统中，称调制前的电信号为()信号，调制后的信号为调制信号', '基带', 2, '1', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10008, '按照IPV4标准,IP地址205.3.127.13属于()类地址', 'C', 2, '1', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10009, '计算机网络采用()技术，而传统电话网络则采用()技术', '分组交换电路交换', 4, '1', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10010, '计算机内传输的信号是（），而公用电话系统的传输系统只能传输（）', '数字信号模拟信号', 4, '1', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10011, '通信系统中，称调制前的电信号为（），调制后的信号叫（）。', '基带信号调制信号', 4, '1', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10012, 'IP地址分（）和（）两个部分', '网络号主机号', 4, '1', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10013, ' IP地址协议作网间网中（）层协议，提供无连接的数据报传输机制，IP数据报也分为（）和（）两个部分', '网络报头数据区', 6, '2', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10010, '计算机内传输的信号是()，而公用电话系统的传输系统只能传输()', '数字信号模拟信号', 4, '1', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10011, '通信系统中，称调制前的电信号为()，调制后的信号叫()。', '基带信号调制信号', 4, '1', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10012, 'IP地址分()和()两个部分', '网络号主机号', 4, '1', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10013, ' IP地址协议作网间网中()层协议，提供无连接的数据报传输机制，IP数据报也分为()和()两个部分', '网络报头数据区', 6, '2', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10014, '()是一个简单的远程终端协议。', 'TELNET', 2, '1', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10015, '在同一个系统内，相邻层之间交换信息的连接点称之为()，而低层模块向高层提供功能性的支持称之为()。', '接口服务', 2, '1', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10016, 'Internet广泛使用的电子邮件传送协议是（）', 'SMTP', 2, '1', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10016, 'Internet广泛使用的电子邮件传送协议是()', 'SMTP', 2, '1', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10017, '按交换方式来分类，计算机网络可以分为电路交换网，  报文交换网  和()三种', '分组交换网', 2, '3', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10018, 'Intranet分层结构包括网络、 () 、应用三个层次。', '服务', 2, '1', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10018, 'Intranet分层结构包括网络、(),应用三个层次。', '服务', 2, '1', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10019, 'WWW上的每一个网页都有一个独立的地址，这些地址称为  ()', '统一资源定位器/URL ', 2, '2', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10020, '分组交换网中，附加信息用来在网络中进行路由选择、() 和流量控制', '差错纠正  ', 2, '4', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10021, '根据IEEE802模型的标准将数据链路层划分为LLC子层和 ()子层。', ' MAC ', 2, '3', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10022, '据交换的路由信息的不同，路由算法可以分为两大类：  ()  和链路状态算法', '距离向量算法', 2, '3', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10023, '假定某信道受奈氏准则限制的最高码元速率为2000码元/秒。如果采用振幅调制，把码元的振幅划分为16个不同等级来传送，那么可以获得的数据率为 () b/s。', '80000 ', 2, '5', NULL);
 INSERT INTO `fillquestion` VALUES ('计算机网络', 10024, '交换型以太网系统中的 ()  ，以其为核心联接站点或者网段，端口之间帧的输入和输出已不再受到CSMA/CD媒体访问控制协议的约束。', '以太网交换器 ', 2, '5', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10025, '局域网络参考模型是以   ()   标准为基础的', 'IEEE802', 2, '5', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10026, '路由器的核心是  （）  。', ' 路由表', 2, '3', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10027, '若 HDLC 帧数据段中出现比特串“ 01011111110 ”，则比特填充后的输出为  （）', '10111110110', 2, '5', NULL);
-INSERT INTO `fillquestion` VALUES ('计算机网络', 10028, '数字调制的三种基本形式：移幅键控法ASK、 （）  、移相键控法PSK', '移频键控法FSK', 2, '5', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10025, '局域网络参考模型是以 ()标准为基础的', 'IEEE802', 2, '5', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10026, '路由器的核心是 () 。', ' 路由表', 2, '3', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10027, '若 HDLC 帧数据段中出现比特串“ 01011111110 ”，则比特填充后的输出为()', '10111110110', 2, '5', NULL);
+INSERT INTO `fillquestion` VALUES ('计算机网络', 10028, '数字调制的三种基本形式：移幅键控法ASK、 ()、移相键控法PSK', '移频键控法FSK', 2, '5', NULL);
 
 -- ----------------------------
 -- Table structure for judgequestion
@@ -169,12 +169,24 @@ INSERT INTO `judgequestion` VALUES ('计算机网络', 10012, 'INTERNET上向朋
 -- ----------------------------
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message`  (
-  `messageId` int(9) NOT NULL AUTO_INCREMENT COMMENT '留言编号',
+  `id` int(9) NOT NULL AUTO_INCREMENT COMMENT '留言编号',
   `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '标题',
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '留言内容',
-  `time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '留言时间',
-  PRIMARY KEY (`messageId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '留言表' ROW_FORMAT = Dynamic;
+  `time` date NULL DEFAULT NULL COMMENT '留言时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '留言表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of message
+-- ----------------------------
+INSERT INTO `message` VALUES (2, '晚上加班,这感觉非常的nice', '今天是星期一的晚上,下班后回到宿舍继续写我的毕业设计,看着项目功能日渐丰满好开心哦,你们也要元气满满哦！', '2019-03-18');
+INSERT INTO `message` VALUES (15, '咸鱼', '我是一条咸鱼', '2019-03-18');
+INSERT INTO `message` VALUES (16, '今天中午吃什么', '今天去吃莲藕排骨汤吧，虽然也不好吃，但这里真的没什么东西可以吃了', '2019-03-18');
+INSERT INTO `message` VALUES (20, '这个网站不错', '博主大大好厉害，网页看着很清新呢，喜欢这样嘞风格。', '2019-03-18');
+INSERT INTO `message` VALUES (21, '男孩子', '哇，这么可爱，那肯定是男孩子呀。', '2019-03-18');
+INSERT INTO `message` VALUES (22, '好人', '你是个好人，可是我们不合适。', '2019-03-18');
+INSERT INTO `message` VALUES (25, '小乔', '花会枯萎，爱永不凋零，小乔要努力变强。', '2019-03-18');
+INSERT INTO `message` VALUES (26, '妲己', '妲己会一直爱主人，因为被设定成这样，来和妲己玩耍吧。', '2019-03-18');
 
 -- ----------------------------
 -- Table structure for multiquestion
@@ -271,16 +283,16 @@ INSERT INTO `papermanage` VALUES (1001, 2, 10007);
 INSERT INTO `papermanage` VALUES (1001, 2, 10009);
 INSERT INTO `papermanage` VALUES (1001, 2, 10010);
 INSERT INTO `papermanage` VALUES (1001, 2, 10011);
-INSERT INTO `papermanage` VALUES (1001, 2, 10013);
-INSERT INTO `papermanage` VALUES (1001, 2, 10014);
-INSERT INTO `papermanage` VALUES (1001, 2, 10016);
-INSERT INTO `papermanage` VALUES (1001, 2, 10019);
-INSERT INTO `papermanage` VALUES (1001, 2, 10020);
-INSERT INTO `papermanage` VALUES (1001, 2, 10021);
-INSERT INTO `papermanage` VALUES (1001, 2, 10022);
-INSERT INTO `papermanage` VALUES (1001, 2, 10025);
-INSERT INTO `papermanage` VALUES (1001, 2, 10026);
-INSERT INTO `papermanage` VALUES (1001, 2, 10028);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10013);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10014);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10016);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10019);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10020);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10021);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10022);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10025);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10026);
+INSERT INTO `papermanage` VALUES (NULL, 2, 10028);
 INSERT INTO `papermanage` VALUES (1001, 3, 10001);
 INSERT INTO `papermanage` VALUES (1001, 3, 10002);
 INSERT INTO `papermanage` VALUES (1001, 3, 10003);
@@ -298,12 +310,26 @@ INSERT INTO `papermanage` VALUES (1001, 2, 10024);
 -- ----------------------------
 DROP TABLE IF EXISTS `replay`;
 CREATE TABLE `replay`  (
+  `messageId` int(255) NULL DEFAULT NULL COMMENT '留言编号',
   `replayId` int(9) NOT NULL AUTO_INCREMENT COMMENT '回复编号',
-  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '标题',
-  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '内容',
-  `time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '回复时间',
+  `replay` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '内容',
+  `replayTime` date NULL DEFAULT NULL COMMENT '回复时间',
   PRIMARY KEY (`replayId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '回复表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '回复表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of replay
+-- ----------------------------
+INSERT INTO `replay` VALUES (26, 3, '好呀，我来了，你别跑！', '2019-03-18');
+INSERT INTO `replay` VALUES (22, 4, '心疼你2秒钟', '2019-03-18');
+INSERT INTO `replay` VALUES (25, 5, '我也要变强', '2019-03-19');
+INSERT INTO `replay` VALUES (25, 6, '俺也一样', '2019-03-19');
+INSERT INTO `replay` VALUES (21, 7, '既然这样，那就迎男而上吧', '2019-03-19');
+INSERT INTO `replay` VALUES (16, 8, '那条街确实没什么东西可以吃了。。。', '2019-03-19');
+INSERT INTO `replay` VALUES (15, 9, '咸鱼其实还可以吃，而你,emmmm', '2019-03-19');
+INSERT INTO `replay` VALUES (21, 11, '我不怕人多', '2019-03-19');
+INSERT INTO `replay` VALUES (20, 12, '是嘞，还行。', '2019-03-19');
+INSERT INTO `replay` VALUES (26, 13, '我也爱你ε=(´ο｀*)))唉', '2019-03-19');
 
 -- ----------------------------
 -- Table structure for scoremanage
@@ -335,7 +361,7 @@ CREATE TABLE `student`  (
   `pwd` varchar(16) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '密码',
   `cardId` varchar(18) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '身份证号',
   `sex` varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
-  `role` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '角色(0管理员，1教师，2学生)',
+  `role` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '2' COMMENT '角色(0管理员，1教师，2学生)',
   PRIMARY KEY (`studentId`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20155008 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
 
@@ -343,7 +369,7 @@ CREATE TABLE `student`  (
 -- Records of student
 -- ----------------------------
 INSERT INTO `student` VALUES (20154001, '隔壁老王', '2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', '123456', '3412312', '男', '2');
-INSERT INTO `student` VALUES (20154084, '余晓江', '2015', '计算机科学与技术', '2', '软件工程学院', '13658377857', 'candy_fish@foxmail.com', '123456', '500234---701x', '男', '2');
+INSERT INTO `student` VALUES (20154084, '大咸鱼', '2015', '计算机科学与技术', '2', '软件工程学院', '13658377857', '13658377857@sina.cn', '123456', '124123124535', '男', '2');
 INSERT INTO `student` VALUES (20155003, '张宝', '2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', '123456', '3242342', '男', '2');
 INSERT INTO `student` VALUES (20155007, '李翠花', '2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', '123456', '2423423', '女', '2');
 
