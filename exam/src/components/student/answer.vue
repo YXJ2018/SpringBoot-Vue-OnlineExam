@@ -408,7 +408,7 @@ export default {
           type: 'warning'
         }).then(() => {
           console.log("交卷")
-          this.$router.push({path:'/studentScore'})
+          this.$router.push({path:'/studentScore',query: {score: finalScore}})
         }).catch(() => {
           console.log("继续答题")
         })

@@ -9,9 +9,19 @@
       <div class="look">
         本次考试成绩
       </div>
-      <div class="number" :class="{'border': isTransition}">
-        <span>86</span>
-        <span>分数</span>
+      <div class="show">
+        <div class="img1" :class="{'img1Transform': imgShow}">
+          <img :src="imgSrc.fail1" alt="哭了" v-if="score < 60">
+          <img :src="imgSrc.pass1" alt="过了" v-if="score >= 60">
+        </div>
+        <div class="number" :class="{'border': isTransition}">
+          <span>{{score}}</span>
+          <span>分数</span>
+        </div>
+        <div class="img2" :class="{'img2Transform': imgShow}">
+          <img :src="imgSrc.fail2" alt="哭了" v-if="score < 60">
+          <img :src="imgSrc.pass2" alt="过了" v-if="score >= 60">
+        </div>
       </div>
       <ul class="time">
         <li class="start"><span>开始时间</span> <span>2019-04-02 11:18:36</span></li>
@@ -26,22 +36,67 @@ export default {
   data() {
     return {
       isTransition: false, //是否渲染完成
+      score: 90, //总分
+      imgShow: false, //不及格图片显示
+      imgSrc: {
+        fail1: require("@/assets/img/cry1.gif"),
+        fail2: require('@/assets/img/cry2.jpg'),
+        pass1: require('@/assets/img/good1.jpg'),
+        pass2: require('@/assets/img/good2.gif')
+      }
     }
   },
   created() {
     this.transiton()
+    this.getScore()
   },
   methods: {
-    transiton() {
+    transiton() {  //一秒后过渡
       setTimeout(() => {
         this.isTransition = true
+        this.imgShow = true
       },1000)
+    },
+    getScore() {
+      let score = this.$route.query.score
+      // this.score = score
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 160px;
+    height: 160px;
+  }
+  .img1Transform {
+    opacity: 1 !important;
+    transform: translateX(30px) !important;  
+    transition: all 0.6s ease !important;
+  }
+  .img2Transform {
+    opacity: 1 !important;
+    transform: translateX(-30px) !important;  
+    transition: all 0.6s ease !important;
+  }
+  .img1 {
+    margin-top: 70px;
+    opacity: 0;
+    transform: translateX(0px);  
+    transition: all 0.6s ease;
+  }
+  .img2 {
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateX(0px);  
+    transition: all 0.6s ease;
+  }
+}
 .time {
   padding: 0px 70px;
   li {
