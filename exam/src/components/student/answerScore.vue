@@ -24,8 +24,8 @@
         </div>
       </div>
       <ul class="time">
-        <li class="start"><span>开始时间</span> <span>2019-04-02 11:18:36</span></li>
-        <li class="end"><span>结束时间</span> <span>2019-04-02 12:48:36</span></li>
+        <li class="start"><span>开始时间</span> <span>{{startTime}}</span></li>
+        <li class="end"><span>结束时间</span> <span>{{endTime}}</span></li>
       </ul>
     </div>
   </div>
@@ -36,14 +36,16 @@ export default {
   data() {
     return {
       isTransition: false, //是否渲染完成
-      score: 90, //总分
+      score: 0, //总分
       imgShow: false, //不及格图片显示
       imgSrc: {
         fail1: require("@/assets/img/cry1.gif"),
         fail2: require('@/assets/img/cry2.jpg'),
         pass1: require('@/assets/img/good1.jpg'),
         pass2: require('@/assets/img/good2.gif')
-      }
+      },
+      startTime: null, //考试开始时间
+      endTime: null, //考试结束时间
     }
   },
   created() {
@@ -59,7 +61,11 @@ export default {
     },
     getScore() {
       let score = this.$route.query.score
-      // this.score = score
+      let startTime = this.$route.query.startTime
+      let endTime = this.$route.query.endTime
+      this.score = score
+      this.startTime = startTime
+      this.endTime = endTime
     }
   }
 }

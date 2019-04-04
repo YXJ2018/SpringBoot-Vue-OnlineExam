@@ -3,16 +3,18 @@ package com.exam.entity;
 import lombok.Data;
 
 @Data
-public class Answer {
+public class Score {
     private Integer examCode;
 
     private Integer studentId;
 
     private String subject;
 
-    private Integer questionId;
+    private Integer ptScore;
 
-    private Integer questionType;
+    private Integer etScore;
 
-    private String answer;
+    private Integer score;
+
+    private Integer scoreId;
 }

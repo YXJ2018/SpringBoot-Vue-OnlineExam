@@ -1,15 +1,11 @@
 import VUE from 'vue'
 import VUEX from 'vuex'
-// import persistedstate from "vuex-persistedstate"
 
 VUE.use(VUEX)
 
-// const store = {
-//   plugins: [persistedstate()]
-// }
-
 const state = {
-  flag: false,
+  isPractice: false, //练习模式标志
+  flag: false, //菜单栏左右滑动标志
   userInfo: null,
   menu: [{
       index: '1',
@@ -56,6 +52,9 @@ const state = {
   ],
 }
 const mutations = {
+  practice(state,status) {
+    state.isPractice = status
+  },
   toggle(state) {
     state.flag = !state.flag
   },
@@ -69,6 +68,9 @@ const getters = {
 const actions = {
   getUserInfo(context,info) {
     context.commit('changeUserInfo',info)
+  },
+  getPractice(context,status) {
+    context.commit('practice',status)
   }
 }
 export default new VUEX.Store({
