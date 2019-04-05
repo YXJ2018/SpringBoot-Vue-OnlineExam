@@ -2,6 +2,8 @@ package com.exam.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Score {
     private Integer examCode;
@@ -17,4 +19,6 @@ public class Score {
     private Integer score;
 
     private Integer scoreId;
+
+    private String answerDate;
 }

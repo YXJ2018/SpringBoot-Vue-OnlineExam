@@ -6,6 +6,8 @@ import com.exam.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScoreServiceImpl implements ScoreService {
 
@@ -15,4 +17,16 @@ public class ScoreServiceImpl implements ScoreService {
     public int add(Score score) {
         return scoreMapper.add(score);
     }
+
+    @Override
+    public List<Score> findAll() {
+        return scoreMapper.findAll();
+    }
+
+    @Override
+    public List<Score> findById(Integer studentId) {
+        return scoreMapper.findById(studentId);
+    }
+
+
 }

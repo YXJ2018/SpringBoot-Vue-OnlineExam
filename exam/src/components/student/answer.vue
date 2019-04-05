@@ -427,6 +427,7 @@ export default {
           console.log("交卷")
           let date = new Date()
           this.endTime = this.getTime(date)
+          let answerDate = this.endTime.substr(0,10)
           //提交成绩信息
           this.$axios({
             url: '/api/score',
@@ -435,7 +436,8 @@ export default {
               examCode: this.examData.examCode, //考试编号
               studentId: this.userInfo.id, //学号
               subject: this.examData.source, //课程名称
-              etScore: finalScore //答题成绩
+              etScore: finalScore, //答题成绩
+              answerDate: answerDate, //答题日期
             }
           }).then(res => {
             if(res.data.code == 200) {
