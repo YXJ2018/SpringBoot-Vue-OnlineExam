@@ -32,6 +32,9 @@ export default {
   created() {
     this.getIndex()
   },
+  beforeDestroy() {
+    this.bus.$off('sendIndex') //销毁
+  },
   store
 }
 </script>

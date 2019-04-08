@@ -89,7 +89,7 @@
                 <el-radio :label="3">{{showAnswer.answerC}}</el-radio>
                 <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
               </el-radio-group>
-              <div class="analysis">
+              <div class="analysis" v-if="isPractice">
                 <span>正确姿势：</span><span class="right">{{reduceAnswer.right}}</span>
               </div>
             </div>
@@ -101,7 +101,7 @@
                   @blur="fillBG">
                 </el-input>
               </div>
-              <div class="analysis">
+              <div class="analysis" v-if="isPractice">
                 <span>正确姿势：</span><span class="right">{{topic[2][index].answer}}</span>
               </div>
             </div>
@@ -110,7 +110,7 @@
                 <el-radio :label="1">正确</el-radio>
                 <el-radio :label="2">错误</el-radio>
               </el-radio-group>
-              <div class="analysis">
+              <div class="analysis" v-if="isPractice">
                 <span>正确姿势：</span><span class="right">{{topic[3][index].answer}}</span>
               </div>
             </div>
@@ -129,10 +129,15 @@
 </template>
 
 <script>
+import store from '@/vuex/store'
+import {mapState} from 'vuex'
 export default {
+  store,
   data() {
     return {
-      time: null,
+      startTime: null, //考试开始时间
+      endTime: null, //考试结束时间
+      time: null, //考试持续时间
       reduceAnswer:[],  //vue官方不支持3层以上数据嵌套,如嵌套则会数据渲染出现问题,此变量直接接收3层嵌套时的数据。
       answerScore: 0, //答题总分数
       bg_flag: false, //已答标识符,已答改变背景色
@@ -142,7 +147,7 @@ export default {
       currentType: 1, //当前题型类型  1--选择题  2--填空题  3--判断题
       radio: [], //保存考生所有选择题的选项
       title: "请选择正确的选项",
-      index: 0,
+      index: 0, //全局index
       userInfo: { //用户信息
         name: null,
         id: null
@@ -158,7 +163,7 @@ export default {
       },
       showQuestion: [], //当前显示题目信息
       showAnswer: {}, //当前题目对应的答案选项
-      number: 1,
+      number: 1, //题号
       part: null, //填空题的空格数量
       fillAnswer: [[]], //二维数组保存所有填空题答案
       judgeAnswer: [], //保存所有判断题答案
@@ -171,6 +176,16 @@ export default {
     this.showTime()
   },
   methods: {
+    getTime(date) { //日期格式化
+      let year = date.getFullYear()
+      let month= date.getMonth()+ 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+      let day=date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+      let hours=date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+      let minutes=date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      let seconds=date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+      // 拼接
+      return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+    },
     getCookies() {  //获取cookie
       this.userInfo.name = this.$cookies.get("cname")
       this.userInfo.id = this.$cookies.get("cid")
@@ -179,6 +194,8 @@ export default {
       
     },
     getExamData() { //获取当前试卷所有信息
+      let date = new Date()
+      this.startTime = this.getTime(date)
       let examCode = this.$route.query.examCode //获取路由传递过来的试卷编号
       this.$axios(`/api/exam/${examCode}`).then(res => {  //通过examCode请求试卷详细信息
         this.examData = { ...res.data.data} //获取考试详情
@@ -408,7 +425,29 @@ export default {
           type: 'warning'
         }).then(() => {
           console.log("交卷")
-          this.$router.push({path:'/studentScore'})
+          let date = new Date()
+          this.endTime = this.getTime(date)
+          let answerDate = this.endTime.substr(0,10)
+          //提交成绩信息
+          this.$axios({
+            url: '/api/score',
+            method: 'post',
+            data: {
+              examCode: this.examData.examCode, //考试编号
+              studentId: this.userInfo.id, //学号
+              subject: this.examData.source, //课程名称
+              etScore: finalScore, //答题成绩
+              answerDate: answerDate, //答题日期
+            }
+          }).then(res => {
+            if(res.data.code == 200) {
+              this.$router.push({path:'/studentScore',query: {
+                score: finalScore, 
+                startTime: this.startTime,
+                endTime: this.endTime
+              }})
+            }  
+          })
         }).catch(() => {
           console.log("继续答题")
         })
@@ -429,7 +468,8 @@ export default {
         }
       },1000 * 60)
     }
-  }
+  },
+  computed:mapState(["isPractice"])
 }
 </script>
 

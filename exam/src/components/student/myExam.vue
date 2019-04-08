@@ -8,7 +8,7 @@
         <li class="search-li"><div class="icon"><input type="text" placeholder="试卷名称" class="search" v-model="key"><i class="el-icon-search"></i></div></li>
         <li><el-button type="primary" @click="search()">搜索试卷</el-button></li>
       </ul>
-      <ul class="paper">
+      <ul class="paper" v-loading="loading">
         <li class="item" v-for="(item,index) in pagination.records" :key="index">
           <h4 @click="toExamMsg(item.examCode)">{{item.source}}</h4>
           <p class="name">{{item.source}}-{{item.description}}</p>
@@ -39,6 +39,7 @@ export default {
   // name: 'myExam'
   data() {
     return {
+      loading: false,
       key: null, //搜索关键字
       allExam: null, //所有考试信息
       pagination: { //分页后的考试信息
@@ -50,6 +51,7 @@ export default {
   },
   created() {
     this.getExamInfo()
+    this.loading = true
   },
   // watch: {
     
@@ -59,6 +61,7 @@ export default {
     getExamInfo() {
       this.$axios(`/api/exams/${this.pagination.current}/${this.pagination.size}`).then(res => {
         this.pagination = res.data.data
+        this.loading = false
         console.log(this.pagination)
       }).catch(error => {
         console.log(error)
