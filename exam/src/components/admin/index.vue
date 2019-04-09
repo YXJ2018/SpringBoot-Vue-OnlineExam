@@ -24,13 +24,18 @@ export default {
     mainLeft: mainLeft,
     navigator:navigator
   },
+  data() {
+    return {
+      username: '许如梦'
+    }
+  },
   methods: {
     
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #index .nav {
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
@@ -40,6 +45,7 @@ export default {
   background-color: #fff;
 }
 .main_wrapper {
+  overflow: hidden;
   flex: 1;
   background-color: #fff;
 }

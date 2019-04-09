@@ -14,7 +14,7 @@ public class ExamManage {
 
     private Integer paperId;
 
-    private Date examDate;
+    private String examDate;
 
     private Integer totalTime;
 

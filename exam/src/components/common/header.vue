@@ -4,12 +4,12 @@
     <el-row>
       <el-col :span="4" class="topbar-left">
         <i class="iconfont icon-kaoshi"></i>
-        <span class="title">EXAM-SYSTEM</span>
+        <span class="title" @click="index()">EXAM-SYSTEM</span>
       </el-col>
       <el-col :span="20" class="topbar-right">
         <i class="el-icon-menu" @click="toggle()"></i>
         <div class="user">
-          <span>欢迎Snoopy</span>
+          <span>{{user.userName}}</span>
           <img src="@/assets/img/userimg.png" class="user-img" ref="img" @click="showSetting()" />
           <transition name="fade">
             <div class="out" ref="out" v-show="login_flag">
@@ -32,8 +32,15 @@ import {mapState,mapMutations} from 'vuex'
 export default {
   data() {
     return {
-      login_flag: false
+      login_flag: false,
+      user: { //用户信息
+        userName: null,
+        userId: null
+      } 
     }
+  },
+  created() {
+    this.getUserInfo()
   },
   computed: mapState(["flag"]),
   methods: {
@@ -43,6 +50,15 @@ export default {
     },
     //左侧栏放大缩小
     ...mapMutations(["toggle"]),
+    getUserInfo() { //获取用户信息
+      let userName = this.$cookies.get("cname")
+      let userId = this.$cookies.get("cid")
+      this.user.userName = userName
+      this.user.userId = userId
+    },
+    index() {
+      this.$router.push({path: '/index'})
+    }
   },
   store
 }
@@ -76,6 +92,7 @@ export default {
 }
 .topbar-left .title {
   font-size: 20px;
+  cursor: pointer;
 }
 .topbar-right {
   display: flex;

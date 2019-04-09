@@ -43,6 +43,8 @@
   min-height: 600px;
 }
 #left {
+  height: 800px;
+  background-color: #545c64;
   z-index: 0;
 }
 #left .el-menu-vertical-demo .title {

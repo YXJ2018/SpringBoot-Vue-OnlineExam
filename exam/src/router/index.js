@@ -6,16 +6,32 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'login',
+      name: 'login', //登录界面
       component: () => import('@/components/common/login')
     },
     {
-      path: '/index',
+      path: '/index', //教师主页
       component: () => import('@/components/admin/index'),
       children: [
         {
-          path:'/grade',
+          path: '/', //首页默认路由
+          component: () => import('@/components/common/hello')
+        },
+        {
+          path:'/grade', //学生成绩
           component: () => import('@/components/common/grade')
+        },
+        {
+          path: '/examDescription', //考试管理功能描述
+          component: () => import('@/components/teacher/examDescription')
+        },
+        {
+          path: '/selectExam', //查询所有考试
+          component: () => import('@/components/teacher/selectExam')
+        },
+        {
+          path: '/addExam', //添加考试
+          component: () => import('@/components/teacher/addExam')
         }
       ]
     },
