@@ -81,7 +81,9 @@ export default {
             this.$router.push({path: '/index' }) //跳转到首页
             break
           case "1":
-            this.$router.push({path: '/index' })
+            this.$cookies.set("cname", resData.teacherName)
+            this.$cookies.set("cid", resData.teacherId)
+            this.$router.push({path: '/index' }) //跳转到教师用户
             break
           case "2":
             this.$cookies.set("cname", resData.studentName)

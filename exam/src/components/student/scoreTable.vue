@@ -13,7 +13,6 @@
           :filters="filter"
           :filter-method="filterHandler">
         </el-table-column>
-        <el-table-column prop="etScore" label="考试分数" width="200"></el-table-column>
         <el-table-column
           prop="subject"
           label="课程名称"
@@ -23,6 +22,7 @@
             <el-tag>{{scope.row.subject}}</el-tag>
           </template>
         </el-table-column>
+        <el-table-column prop="etScore" label="考试分数" width="200"></el-table-column>
         <el-table-column label="是否及格" width="100">
           <template slot-scope="scope">
             <el-tag :type="scope.row.etScore>= 60 ? 'success' : 'danger'">{{scope.row.etScore >= 60 ? "及格" : "不及格"}}</el-tag>

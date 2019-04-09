@@ -9,9 +9,9 @@ const state = {
   userInfo: null,
   menu: [{
       index: '1',
-      title: '课程管理',
+      title: '考试管理',
       icon: 'icon-kechengbiao',
-      content:[{item1:'增加课程',path:'/addCourse'},{item2:'修改课程',path:'/updateCourse'},{item3:'删除课程',path:'delCourse'}],
+      content:[{item1:'功能介绍',path:'/examDescription'},{item2:'考试查询',path:'selectExam'},{item3:'添加考试',path:'/addExam'}],
     },
     {
       index: '2',
@@ -26,12 +26,6 @@ const state = {
       content:[{item1:'根据班级查询',path:'/classGrede'},{item2:'成绩统计',path:'/grade'}],
     },
     {
-      index: '4',
-      title: '评分阅卷',
-      icon: 'icon-pingfen',
-      content:[{item1:'开始阅卷',path:'/check'},{item2:'阅卷管理',path:'/checkManage'}],
-    },
-    {
       index: '5',
       title: '角色管理',
       icon: 'icon-role',
@@ -43,12 +37,12 @@ const state = {
       icon: 'icon-Userselect',
       content:[{item1:'用户操作',path:'/user'}],
     },
-    {
-      index: '7',
-      title: '模块管理',
-      icon: 'icon-module4mokuai',
-      content:[{item1:'模块操作',path:'/module'}],
-    }
+    // {
+    //   index: '7',
+    //   title: '模块管理',
+    //   icon: 'icon-module4mokuai',
+    //   content:[{item1:'模块操作',path:'/module'}],
+    // }
   ],
 }
 const mutations = {
