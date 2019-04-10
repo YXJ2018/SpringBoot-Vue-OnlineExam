@@ -1,5 +1,7 @@
 package com.exam.serviceimpl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.FillQuestion;
 import com.exam.mapper.FillQuestionMapper;
 import com.exam.service.FillQuestionService;
@@ -17,5 +19,10 @@ public class FillQuestionServiceImpl implements FillQuestionService {
     @Override
     public List<FillQuestion> findByIdAndType(Integer paperId) {
         return fillQuestionMapper.findByIdAndType(paperId);
+    }
+
+    @Override
+    public IPage<FillQuestion> findAll(Page<FillQuestion> page) {
+        return fillQuestionMapper.findAll(page);
     }
 }

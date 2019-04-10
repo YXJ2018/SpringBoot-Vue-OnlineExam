@@ -1,5 +1,7 @@
 package com.exam.serviceimpl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.MultiQuestion;
 import com.exam.mapper.MultiQuestionMapper;
 import com.exam.service.MultiQuestionService;
@@ -16,5 +18,10 @@ public class MultiQuestionServiceImpl implements MultiQuestionService {
     @Override
     public List<MultiQuestion> findByIdAndType(Integer PaperId) {
         return multiQuestionMapper.findByIdAndType(PaperId);
+    }
+
+    @Override
+    public IPage<MultiQuestion> findAll(Page<MultiQuestion> page) {
+        return multiQuestionMapper.findAll(page);
     }
 }

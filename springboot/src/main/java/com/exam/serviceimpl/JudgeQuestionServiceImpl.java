@@ -1,5 +1,7 @@
 package com.exam.serviceimpl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.JudgeQuestion;
 import com.exam.mapper.JudgeQuestionMapper;
 import com.exam.service.JudgeQuestionService;
@@ -17,5 +19,10 @@ public class JudgeQuestionServiceImpl implements JudgeQuestionService {
     @Override
     public List<JudgeQuestion> findByIdAndType(Integer paperId) {
         return judgeQuestionMapper.findByIdAndType(paperId);
+    }
+
+    @Override
+    public IPage<JudgeQuestion> findAll(Page<JudgeQuestion> page) {
+        return judgeQuestionMapper.findAll(page);
     }
 }
