@@ -32,6 +32,14 @@ export default new Router({
         {
           path: '/addExam', //添加考试
           component: () => import('@/components/teacher/addExam')
+        },
+        {
+          path: '/answerDescription', //题库管理功能介绍
+          component: ()=> import('@/components/teacher/answerDescription')
+        },
+        {
+          path: '/selectAnswer', //查询所有题库
+          component: () => import('@/components/teacher/selectAnswer')
         }
       ]
     },

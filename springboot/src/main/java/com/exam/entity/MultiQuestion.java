@@ -25,6 +25,8 @@ public class MultiQuestion {
 
     private String right;
 
+    private String analysis; //题目解析
+
     private Integer score;
 
 }

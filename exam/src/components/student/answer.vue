@@ -90,7 +90,11 @@
                 <el-radio :label="4">{{showAnswer.answerD}}</el-radio>
               </el-radio-group>
               <div class="analysis" v-if="isPractice">
-                <span>正确姿势：</span><span class="right">{{reduceAnswer.right}}</span>
+                <ul>
+                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{reduceAnswer.right}}</span></li>
+                  <li><el-tag>题目解析：</el-tag></li>
+                  <li>{{reduceAnswer.analysis == null ? '暂无解析': reduceAnswer.analysis}}</li>
+                </ul>
               </div>
             </div>
             <div class="fill" v-if="currentType == 2">
@@ -102,7 +106,11 @@
                 </el-input>
               </div>
               <div class="analysis" v-if="isPractice">
-                <span>正确姿势：</span><span class="right">{{topic[2][index].answer}}</span>
+                <ul>
+                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic[2][index].answer}}</span></li>
+                  <li><el-tag>题目解析：</el-tag></li>
+                  <li>{{topic[2][index].analysis == null ? '暂无解析': topic[2][index].analysis}}</li>
+                </ul>
               </div>
             </div>
             <div class="judge" v-if="currentType == 3">
@@ -111,7 +119,11 @@
                 <el-radio :label="2">错误</el-radio>
               </el-radio-group>
               <div class="analysis" v-if="isPractice">
-                <span>正确姿势：</span><span class="right">{{topic[3][index].answer}}</span>
+                <ul>
+                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic[2][index].answer}}</span></li>
+                  <li><el-tag>题目解析：</el-tag></li>
+                  <li>{{topic[3][index].analysis == null ? '暂无解析': topic[3][index].analysis}}</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -486,6 +498,15 @@ export default {
     border: 1px solid #2776df;
     padding: 0px 6px;
     border-radius: 4px;
+    margin-left: 20px;
+  }
+  ul li:nth-child(2) {
+    margin: 20px 0px;
+  }
+  ul li:nth-child(3) {
+    padding: 10px;
+    background-color: #d3c6c9;
+    border-radius: 4px;
   }
 }
 .analysis span:nth-child(1) {
@@ -503,10 +524,10 @@ export default {
 }
 .border {
   position: relative;
-  border: 1px solid #6bb851 !important;
+  border: 1px solid #FF90AA !important;
 }
 .bg {
-  background-color: #2776df !important;
+  background-color: #5188b8 !important;
 }
 .fill .el-input {
   display: inline-flex;
@@ -691,6 +712,7 @@ export default {
 }
 .left .l-top li:nth-child(3) a {
   background-color: #5188b8;
+  border: none;
 }
 .left .l-top li:nth-child(4) a {
   position: relative;
@@ -717,7 +739,7 @@ export default {
   padding: 10px;
   border-radius: 50%;
   background-color: #fff;
-  border: 1px solid #6bb851;
+  border: 1px solid #FF90AA;
 }
 #answer .top {
   background-color: rgb(39, 118, 223);
