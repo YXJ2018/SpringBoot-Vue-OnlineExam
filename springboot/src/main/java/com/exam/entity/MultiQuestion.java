@@ -23,7 +23,7 @@ public class MultiQuestion {
 
     private String level;
 
-    private String right;
+    private String rightAnswer;
 
     private String analysis; //题目解析
 

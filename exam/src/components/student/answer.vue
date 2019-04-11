@@ -91,7 +91,7 @@
               </el-radio-group>
               <div class="analysis" v-if="isPractice">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{reduceAnswer.right}}</span></li>
+                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{reduceAnswer.rightAnswer}}</span></li>
                   <li><el-tag>题目解析：</el-tag></li>
                   <li>{{reduceAnswer.analysis == null ? '暂无解析': reduceAnswer.analysis}}</li>
                 </ul>
@@ -179,7 +179,8 @@ export default {
       part: null, //填空题的空格数量
       fillAnswer: [[]], //二维数组保存所有填空题答案
       judgeAnswer: [], //保存所有判断题答案
-      topic1Answer: []  //学生选择题作答编号
+      topic1Answer: [],  //学生选择题作答编号,
+      rightAnswer: ''
     }
   },
   created() {
@@ -249,21 +250,21 @@ export default {
       this.isFillClick = true
       this.currentType = 1
       let len = this.topic[1].length
-      if(index < len) {
-        if(index < 0){
-          index = 0
+      if(this.index < len) {
+        if(this.index <= 0){
+          this.index = 0
         }
         console.log(`总长度${len}`)
         console.log(`当前index:${index}`)
         this.title = "请选择正确的选项"
         let Data = this.topic[1]
         // console.log(Data)
-        this.showQuestion = Data[index].question //获取题目信息
-        this.showAnswer = Data[index]
+        this.showQuestion = Data[this.index].question //获取题目信息
+        this.showAnswer = Data[this.index]
         this.number = this.index + 1
-      }else if(index >= len) {
-        index = 0
-        this.fill(index)
+      }else if(this.index >= len) {
+        this.index = 0
+        this.fill(this.index)
       }
     },
     fillBG() { //填空题已答题目 如果已答该题目,设置第四个元素为true为标识符
@@ -395,10 +396,10 @@ export default {
             case 4:
               right = "D"
           }
-          if(right == this.topic[1][index].right) { // 当前选项与正确答案对比
+          if(right == this.topic[1][index].rightAnswer) { // 当前选项与正确答案对比
             finalScore += this.topic[1][index].score // 计算总分数
           }
-          console.log(right,this.topic[1][index].right)
+          console.log(right,this.topic[1][index].rightAnswer)
         }
         // console.log(topic1Answer)
       })

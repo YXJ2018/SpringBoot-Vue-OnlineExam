@@ -17,7 +17,7 @@ const state = {
       index: '2',
       title: '题库管理',
       icon: 'icon-tiku',
-      content:[{item1:'功能介绍',path:'/answerDescription'},{item2:'所有题库',path:'/selectAnswer'},{item3:'增加题库',path:'/addAnswer'}],
+      content:[{item1:'功能介绍',path:'/answerDescription'},{item2:'所有题库',path:'/selectAnswer'},{item3:'增加题库',path:'/addAnswer'},{path: '/addAnswerChildren'}],
     },
     {
       index: '3',
@@ -26,17 +26,17 @@ const state = {
       content:[{item1:'根据班级查询',path:'/classGrede'},{item2:'成绩统计',path:'/grade'}],
     },
     {
-      index: '5',
-      title: '角色管理',
+      index: '4',
+      title: '学生管理',
       icon: 'icon-role',
       content:[{item1:'权限设置',path:'/role'}],
     },
-    {
-      index: '6',
-      title: '用户管理',
-      icon: 'icon-Userselect',
-      content:[{item1:'用户操作',path:'/user'}],
-    },
+    // {
+    //   index: '6',
+    //   title: '用户管理',
+    //   icon: 'icon-Userselect',
+    //   content:[{item1:'用户操作',path:'/user'}],
+    // },
     // {
     //   index: '7',
     //   title: '模块管理',

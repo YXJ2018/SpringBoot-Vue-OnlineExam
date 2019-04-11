@@ -11,4 +11,6 @@ public interface MultiQuestionService {
     List<MultiQuestion> findByIdAndType(Integer PaperId);
 
     IPage<MultiQuestion> findAll(Page<MultiQuestion> page);
+
+    int add(MultiQuestion multiQuestion);
 }
