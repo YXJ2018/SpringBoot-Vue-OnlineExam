@@ -3,8 +3,7 @@ package com.exam.mapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.FillQuestion;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,4 +16,9 @@ public interface FillQuestionMapper {
 
     @Select("select * from FillQuestion")
     IPage<FillQuestion> findAll(Page page);
+
+    @Options(useGeneratedKeys = true,keyProperty ="questionId" )
+    @Insert("insert into FillQuestion(subject,question,answer,analysis,level,section) values " +
+            "(#{subject,},#{question},#{answer},#{analysis},#{level},#{section})")
+    int add(FillQuestion fillQuestion);
 }

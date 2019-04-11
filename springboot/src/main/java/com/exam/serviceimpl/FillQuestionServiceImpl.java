@@ -25,4 +25,9 @@ public class FillQuestionServiceImpl implements FillQuestionService {
     public IPage<FillQuestion> findAll(Page<FillQuestion> page) {
         return fillQuestionMapper.findAll(page);
     }
+
+    @Override
+    public int add(FillQuestion fillQuestion) {
+        return fillQuestionMapper.add(fillQuestion);
+    }
 }

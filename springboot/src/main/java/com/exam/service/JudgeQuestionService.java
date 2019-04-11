@@ -11,4 +11,6 @@ public interface JudgeQuestionService {
     List<JudgeQuestion> findByIdAndType(Integer paperId);
 
     IPage<JudgeQuestion> findAll(Page<JudgeQuestion> page);
+
+    int add(JudgeQuestion judgeQuestion);
 }

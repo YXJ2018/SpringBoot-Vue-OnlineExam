@@ -11,4 +11,6 @@ public interface FillQuestionService {
     List<FillQuestion> findByIdAndType(Integer paperId);
 
     IPage<FillQuestion> findAll(Page<FillQuestion> page);
+
+    int add(FillQuestion fillQuestion);
 }

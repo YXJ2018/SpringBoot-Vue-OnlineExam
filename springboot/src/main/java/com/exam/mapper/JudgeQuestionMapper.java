@@ -3,6 +3,7 @@ package com.exam.mapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.JudgeQuestion;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,4 +19,8 @@ public interface JudgeQuestionMapper {
 
     @Select("select * from JudgeQuestion")
     IPage<JudgeQuestion> findAll(Page page);
+
+    @Insert("insert into JudgeQuestion(subject,question,answer,analysis,level,section) values " +
+            "(#{subject},#{question},#{answer},#{analysis},#{level},#{section})")
+    int add(JudgeQuestion judgeQuestion);
 }
