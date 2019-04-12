@@ -23,13 +23,13 @@ const state = {
       index: '3',
       title: '成绩查询',
       icon: 'icon-performance',
-      content:[{item1:'根据班级查询',path:'/classGrede'},{item2:'成绩统计',path:'/grade'}],
+      content:[{item1:'学生成绩查询',path:'/allStudentsGrade'},{path: '/grade'}],
     },
     {
       index: '4',
       title: '学生管理',
       icon: 'icon-role',
-      content:[{item1:'权限设置',path:'/role'}],
+      content:[{item1:'权限设置',path:''}],
     },
     // {
     //   index: '6',

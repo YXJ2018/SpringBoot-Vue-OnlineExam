@@ -19,7 +19,11 @@ export default new Router({
         },
         {
           path:'/grade', //学生成绩
-          component: () => import('@/components/common/grade')
+          component: () => import('@/components/charts/grade')
+        },
+        {
+          path: '/allStudentsGrade', //所有学生成绩统计
+          component: () => import('@/components/teacher/allStudentsGrade')
         },
         {
           path: '/examDescription', //考试管理功能描述

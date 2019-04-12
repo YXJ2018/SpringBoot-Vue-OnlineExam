@@ -17,6 +17,7 @@ public class AnswerController {
 
     @Autowired
     private AnswerServiceImpl answerService;
+
     @GetMapping("/answers/{page}/{size}")
     public ApiResult findAllQuestion(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
        Page<AnswerVO> answerVOPage = new Page<>(page,size);
