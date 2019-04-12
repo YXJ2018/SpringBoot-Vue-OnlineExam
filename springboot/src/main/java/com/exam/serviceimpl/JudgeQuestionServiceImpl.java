@@ -27,6 +27,11 @@ public class JudgeQuestionServiceImpl implements JudgeQuestionService {
     }
 
     @Override
+    public JudgeQuestion findOnlyQuestionId() {
+        return judgeQuestionMapper.findOnlyQuestionId();
+    }
+
+    @Override
     public int add(JudgeQuestion judgeQuestion) {
         return judgeQuestionMapper.add(judgeQuestion);
     }

@@ -26,6 +26,11 @@ public class MultiQuestionServiceImpl implements MultiQuestionService {
     }
 
     @Override
+    public MultiQuestion findOnlyQuestionId() {
+        return multiQuestionMapper.findOnlyQuestionId();
+    }
+
+    @Override
     public int add(MultiQuestion multiQuestion) {
         return multiQuestionMapper.add(multiQuestion);
     }

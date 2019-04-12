@@ -20,6 +20,13 @@ public interface JudgeQuestionMapper {
     @Select("select * from JudgeQuestion")
     IPage<JudgeQuestion> findAll(Page page);
 
+    /**
+     * 查询最后一条记录的questionId
+     * @return JudgeQuestion
+     */
+    @Select("select questionId from JudgeQuestion order by questionId desc limit 1")
+    JudgeQuestion findOnlyQuestionId();
+
     @Insert("insert into JudgeQuestion(subject,question,answer,analysis,level,section) values " +
             "(#{subject},#{question},#{answer},#{analysis},#{level},#{section})")
     int add(JudgeQuestion judgeQuestion);

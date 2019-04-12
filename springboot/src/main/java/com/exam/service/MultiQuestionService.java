@@ -12,5 +12,7 @@ public interface MultiQuestionService {
 
     IPage<MultiQuestion> findAll(Page<MultiQuestion> page);
 
+    MultiQuestion findOnlyQuestionId();
+
     int add(MultiQuestion multiQuestion);
 }

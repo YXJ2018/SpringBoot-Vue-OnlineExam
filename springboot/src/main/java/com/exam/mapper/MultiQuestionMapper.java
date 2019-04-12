@@ -24,6 +24,13 @@ public interface MultiQuestionMapper {
     @Select("select * from MultiQuestion")
     IPage<MultiQuestion> findAll(Page page);
 
+    /**
+     * 查询最后一条记录的questionId
+     * @return MultiQuestion
+     */
+    @Select("select questionId from MultiQuestion order by questionId desc limit 1")
+    MultiQuestion findOnlyQuestionId();
+
     @Options(useGeneratedKeys = true,keyProperty = "questionId")
     @Insert("insert into MultiQuestion(subject,question,answerA,answerB,answerC,answerD,rightAnswer,analysis,section,level) " +
             "values(#{subject},#{question},#{answerA},#{answerB},#{answerC},#{answerD},#{rightAnswer},#{analysis},#{section},#{level})")

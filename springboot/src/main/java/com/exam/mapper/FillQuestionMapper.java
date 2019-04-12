@@ -17,6 +17,13 @@ public interface FillQuestionMapper {
     @Select("select * from FillQuestion")
     IPage<FillQuestion> findAll(Page page);
 
+    /**
+     * 查询最后一条questionId
+     * @return FillQuestion
+     */
+    @Select("select questionId from FillQuestion order by questionId desc limit 1")
+    FillQuestion findOnlyQuestionId();
+
     @Options(useGeneratedKeys = true,keyProperty ="questionId" )
     @Insert("insert into FillQuestion(subject,question,answer,analysis,level,section) values " +
             "(#{subject,},#{question},#{answer},#{analysis},#{level},#{section})")

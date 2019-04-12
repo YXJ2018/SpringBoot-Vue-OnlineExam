@@ -12,5 +12,7 @@ public interface FillQuestionService {
 
     IPage<FillQuestion> findAll(Page<FillQuestion> page);
 
+    FillQuestion findOnlyQuestionId();
+
     int add(FillQuestion fillQuestion);
 }

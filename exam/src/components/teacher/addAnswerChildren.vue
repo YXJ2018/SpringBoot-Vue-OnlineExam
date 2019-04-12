@@ -290,7 +290,6 @@ export default {
       ],
       optionValue: '选择题', //题型选中值
       subject: '', //试卷名称用来接收路由参数
-      paperId: null, //试卷Id 用来接收路由参数
       postChange: { //选择题提交内容
         subject: '', //试卷名称
         level: '', //难度等级选中值 
@@ -319,6 +318,11 @@ export default {
         question: '', //题目
         analysis: '', //解析
       },
+      postPaper: { //考试管理表对应字段
+        paperId: null,
+        questionType: null, // 试卷类型 1--选择题  2--填空题   3--判断题
+        questionId: null,
+      }
     };
   },
   created() {
@@ -332,17 +336,17 @@ export default {
       let subject = this.$route.query.subject //获取试卷名称
       let paperId = this.$route.query.paperId //获取paperId
       this.subject = subject
-      this.paperId = paperId
+      this.postPaper.paperId = paperId
     },
     changeSubmit() { //选择题题库提交
       this.postChange.subject = this.subject
-      this.$axios({
+      this.$axios({ //提交数据到选择题题库表
         url: '/api/MultiQuestion',
         method: 'post',
         data: {
           ...this.postChange          
         }
-      }).then(res => {
+      }).then(res => { //添加成功显示提示
         let status = res.data.code
         if(status == 200) {
           this.$message({
@@ -351,6 +355,19 @@ export default {
           })
           this.postChange = {}
         }
+      }).then(() => {
+        this.$axios(`/api/multiQuestionId`).then(res => { //获取当前题目的questionId
+          let questionId = res.data.data.questionId
+          this.postPaper.questionId = questionId
+          this.postPaper.questionType = 1
+          this.$axios({
+            url: '/api/paperManage',
+            method: 'Post',
+            data: {
+              ...this.postPaper
+            }
+          })
+        })
       })
     },
     fillSubmit() { //填空题提交
@@ -370,6 +387,19 @@ export default {
           })
           this.postFill = {}
         }
+      }).then(() => {
+        this.$axios(`/api/fillQuestionId`).then(res => { //获取当前题目的questionId
+          let questionId = res.data.data.questionId
+          this.postPaper.questionId = questionId
+          this.postPaper.questionType = 2
+          this.$axios({
+            url: '/api/paperManage',
+            method: 'Post',
+            data: {
+              ...this.postPaper
+            }
+          })
+        })
       })
     },
     judgeSubmit() { //判断题提交
@@ -389,6 +419,19 @@ export default {
           })
           this.postJudge = {}
         }
+      }).then(() => {
+        this.$axios(`/api/judgeQuestionId`).then(res => { //获取当前题目的questionId
+          let questionId = res.data.data.questionId
+          this.postPaper.questionId = questionId
+          this.postPaper.questionType = 3
+          this.$axios({
+            url: '/api/paperManage',
+            method: 'Post',
+            data: {
+              ...this.postPaper
+            }
+          })
+        })
       })
     }
   },

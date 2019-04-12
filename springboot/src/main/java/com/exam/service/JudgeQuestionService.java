@@ -12,5 +12,7 @@ public interface JudgeQuestionService {
 
     IPage<JudgeQuestion> findAll(Page<JudgeQuestion> page);
 
+    JudgeQuestion findOnlyQuestionId();
+
     int add(JudgeQuestion judgeQuestion);
 }

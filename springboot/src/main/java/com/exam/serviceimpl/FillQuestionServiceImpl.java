@@ -27,6 +27,11 @@ public class FillQuestionServiceImpl implements FillQuestionService {
     }
 
     @Override
+    public FillQuestion findOnlyQuestionId() {
+        return fillQuestionMapper.findOnlyQuestionId();
+    }
+
+    @Override
     public int add(FillQuestion fillQuestion) {
         return fillQuestionMapper.add(fillQuestion);
     }
