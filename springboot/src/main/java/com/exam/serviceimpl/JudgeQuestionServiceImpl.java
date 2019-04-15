@@ -25,4 +25,14 @@ public class JudgeQuestionServiceImpl implements JudgeQuestionService {
     public IPage<JudgeQuestion> findAll(Page<JudgeQuestion> page) {
         return judgeQuestionMapper.findAll(page);
     }
+
+    @Override
+    public JudgeQuestion findOnlyQuestionId() {
+        return judgeQuestionMapper.findOnlyQuestionId();
+    }
+
+    @Override
+    public int add(JudgeQuestion judgeQuestion) {
+        return judgeQuestionMapper.add(judgeQuestion);
+    }
 }

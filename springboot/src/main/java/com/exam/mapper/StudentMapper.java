@@ -1,5 +1,7 @@
 package com.exam.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.Student;
 import org.apache.ibatis.annotations.*;
 
@@ -8,8 +10,13 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
+    /**
+     * 分页查询所有学生
+     * @param page
+     * @return List<Student>
+     */
     @Select("select * from student")
-    List<Student> findAll();
+    IPage<Student> findAll(Page page);
 
     @Select("select * from student where studentId = #{studentId}")
     Student findById(Integer studentId);

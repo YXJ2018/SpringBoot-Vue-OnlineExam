@@ -19,7 +19,11 @@ export default new Router({
         },
         {
           path:'/grade', //学生成绩
-          component: () => import('@/components/common/grade')
+          component: () => import('@/components/charts/grade')
+        },
+        {
+          path: '/allStudentsGrade', //所有学生成绩统计
+          component: () => import('@/components/teacher/allStudentsGrade')
         },
         {
           path: '/examDescription', //考试管理功能描述
@@ -40,7 +44,23 @@ export default new Router({
         {
           path: '/selectAnswer', //查询所有题库
           component: () => import('@/components/teacher/selectAnswer')
-        }
+        },
+        {
+          path: '/addAnswer', //增加题库主界面
+          component: () => import('@/components/teacher/addAnswer')
+        },
+        {
+          path: '/addAnswerChildren', //点击试卷跳转到添加题库页面
+          component: () => import('@/components/teacher/addAnswerChildren')
+        },
+        {
+          path: '/studentManage', //学生管理界面
+          component: () => import('@/components/teacher/studentManage')
+        },
+        {
+          path: '/addStudent', //添加学生
+          component: () => import('@/components/teacher/addStudent')
+        },
       ]
     },
     {

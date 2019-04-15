@@ -78,6 +78,8 @@ export default {
         }
         switch(resData.role) {
           case "0": 
+            this.$cookies.set("cname", resData.adminName)
+            this.$cookies.set("cid", resData.adminId)
             this.$router.push({path: '/index' }) //跳转到首页
             break
           case "1":

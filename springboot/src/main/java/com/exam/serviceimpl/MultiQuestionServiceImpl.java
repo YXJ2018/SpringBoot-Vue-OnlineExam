@@ -24,4 +24,14 @@ public class MultiQuestionServiceImpl implements MultiQuestionService {
     public IPage<MultiQuestion> findAll(Page<MultiQuestion> page) {
         return multiQuestionMapper.findAll(page);
     }
+
+    @Override
+    public MultiQuestion findOnlyQuestionId() {
+        return multiQuestionMapper.findOnlyQuestionId();
+    }
+
+    @Override
+    public int add(MultiQuestion multiQuestion) {
+        return multiQuestionMapper.add(multiQuestion);
+    }
 }

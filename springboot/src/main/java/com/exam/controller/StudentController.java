@@ -1,5 +1,7 @@
 package com.exam.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.ApiResult;
 import com.exam.entity.Student;
 import com.exam.serviceimpl.StudentServiceImpl;
@@ -13,9 +15,11 @@ public class StudentController {
     @Autowired
     private StudentServiceImpl studentService;
 
-    @GetMapping("/students")
-    public ApiResult findAll() {
-        return ApiResultHandler.buildApiResult(200,"请求成功",studentService.findAll());
+    @GetMapping("/students/{page}/{size}")
+    public ApiResult findAll(@PathVariable Integer page, @PathVariable Integer size) {
+        Page<Student> studentPage = new Page<>(page,size);
+        IPage<Student> res = studentService.findAll(studentPage);
+        return  ApiResultHandler.buildApiResult(200,"分页查询所有学生",res);
     }
 
     @GetMapping("/student/{studentId}")
@@ -39,14 +43,12 @@ public class StudentController {
         return ApiResultHandler.buildApiResult(200,"密码更新成功",null);
     }
     @PutMapping("/student")
-    public int update(@RequestBody Student student) {
+    public ApiResult update(@RequestBody Student student) {
         int res = studentService.update(student);
-//        if (res != 0) {
-//            return ApiResultHandler.buildApiResult(200,"更新成功",res);
-//        }else {
-//            return ApiResultHandler.buildApiResult(400,"更新失败",null);
-//        }
-        return res;
+        if (res != 0) {
+            return ApiResultHandler.buildApiResult(200,"更新成功",res);
+        }
+        return ApiResultHandler.buildApiResult(400,"更新失败",res);
     }
 
     @PostMapping("/student")

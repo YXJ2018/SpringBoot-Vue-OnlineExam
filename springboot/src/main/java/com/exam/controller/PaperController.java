@@ -7,9 +7,7 @@ import com.exam.serviceimpl.MultiQuestionServiceImpl;
 import com.exam.serviceimpl.PaperServiceImpl;
 import com.exam.util.ApiResultHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,4 +45,12 @@ public class PaperController {
         return  map;
     }
 
+    @PostMapping("/paperManage")
+    public ApiResult add(@RequestBody PaperManage paperManage) {
+        int res = paperService.add(paperManage);
+        if (res != 0) {
+            return ApiResultHandler.buildApiResult(200,"添加成功",res);
+        }
+        return ApiResultHandler.buildApiResult(400,"添加失败",res);
+    }
 }

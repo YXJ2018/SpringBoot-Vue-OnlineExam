@@ -21,4 +21,6 @@ public interface ExamManageService {
     int update(ExamManage exammanage);
 
     int add(ExamManage exammanage);
+
+    ExamManage findOnlyPaperId();
 }

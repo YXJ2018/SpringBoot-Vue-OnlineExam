@@ -25,4 +25,9 @@ public class PaperServiceImpl implements PaperService {
         return paperMapper.findById(paperId);
     }
 
+    @Override
+    public int add(PaperManage paperManage) {
+        return paperMapper.add(paperManage);
+    }
+
 }

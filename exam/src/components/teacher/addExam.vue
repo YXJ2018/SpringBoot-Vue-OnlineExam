@@ -28,7 +28,7 @@
       <el-form-item label="总分">
         <el-input v-model="form.totalScore"></el-input>
       </el-form-item>
-      <el-form-item label="试卷类型">
+      <el-form-item label="考试类型">
         <el-input v-model="form.type"></el-input>
       </el-form-item>
       <el-form-item label="考生提示">
@@ -57,6 +57,7 @@ export default {
         totalScore: null,
         type: null,
         tips: null,
+        paperId: null,
       }
     };
   },
@@ -74,21 +75,23 @@ export default {
     onSubmit() {
       let examDate = this.formatTime(this.form.examDate)
       this.form.examDate = examDate.substr(0,10)
-      console.log(examDate)
-      this.$axios({
-        url: '/api/exam',
-        method: 'post',
-        data: {
-          ...this.form
-        }
-      }).then(res => {
-        if(res.data.code == 200) {
-          this.$message({
-            message: '数据添加成功',
-            type: 'success'
-          })
-          this.$router.push({path: '/selectExam'})
-        }
+      this.$axios(`/api/examManagePaperId`).then(res => {
+        this.form.paperId = res.data.data.paperId + 1 //实现paperId自增1
+        this.$axios({
+          url: '/api/exam',
+          method: 'post',
+          data: {
+            ...this.form
+          }
+        }).then(res => {
+          if(res.data.code == 200) {
+            this.$message({
+              message: '数据添加成功',
+              type: 'success'
+            })
+            this.$router.push({path: '/selectExam'})
+          }
+        })
       })
     },
     cancel() { //取消按钮
