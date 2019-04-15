@@ -2,7 +2,9 @@
 <template>
   <div id="grade">
     <div ref="box" class="box"></div>
-    <div class="notFound" v-if="isNull">该考生未参加考试</div>
+    <div class="notFound" v-if="isNull">
+      <i class="iconfont icon-LC_icon_tips_fill"></i><span>该考生未参加考试</span>
+    </div>
   </div>
 </template>
 

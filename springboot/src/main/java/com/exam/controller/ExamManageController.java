@@ -27,8 +27,8 @@ public class ExamManageController {
     public ApiResult findAll(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
         System.out.println("分页查询所有试卷");
         ApiResult apiResult;
-        Page<ExamManage> exammanage = new Page<>(page,size);
-        IPage<ExamManage> all = examManageService.findAll(exammanage);
+        Page<ExamManage> examManage = new Page<>(page,size);
+        IPage<ExamManage> all = examManageService.findAll(examManage);
         apiResult = ApiResultHandler.buildApiResult(200, "请求成功！", all);
         return apiResult;
     }
@@ -67,5 +67,14 @@ public class ExamManageController {
         } else {
             return  ApiResultHandler.buildApiResult(400,"添加失败",res);
         }
+    }
+
+    @GetMapping("/examManagePaperId")
+    public ApiResult findOnlyPaperId() {
+        ExamManage res = examManageService.findOnlyPaperId();
+        if (res != null) {
+            return ApiResultHandler.buildApiResult(200,"请求成功",res);
+        }
+        return ApiResultHandler.buildApiResult(400,"请求失败",res);
     }
 }

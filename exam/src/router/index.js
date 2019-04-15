@@ -52,7 +52,15 @@ export default new Router({
         {
           path: '/addAnswerChildren', //点击试卷跳转到添加题库页面
           component: () => import('@/components/teacher/addAnswerChildren')
-        }
+        },
+        {
+          path: '/studentManage', //学生管理界面
+          component: () => import('@/components/teacher/studentManage')
+        },
+        {
+          path: '/addStudent', //添加学生
+          component: () => import('@/components/teacher/addStudent')
+        },
       ]
     },
     {

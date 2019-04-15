@@ -45,4 +45,9 @@ public class ExamManageServiceImpl implements ExamManageService {
     public int add(ExamManage exammanage) {
         return examManageMapper.add(exammanage);
     }
+
+    @Override
+    public ExamManage findOnlyPaperId() {
+        return examManageMapper.findOnlyPaperId();
+    }
 }

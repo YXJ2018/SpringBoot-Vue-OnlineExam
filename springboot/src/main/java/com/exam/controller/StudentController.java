@@ -43,14 +43,12 @@ public class StudentController {
         return ApiResultHandler.buildApiResult(200,"密码更新成功",null);
     }
     @PutMapping("/student")
-    public int update(@RequestBody Student student) {
+    public ApiResult update(@RequestBody Student student) {
         int res = studentService.update(student);
-//        if (res != 0) {
-//            return ApiResultHandler.buildApiResult(200,"更新成功",res);
-//        }else {
-//            return ApiResultHandler.buildApiResult(400,"更新失败",null);
-//        }
-        return res;
+        if (res != 0) {
+            return ApiResultHandler.buildApiResult(200,"更新成功",res);
+        }
+        return ApiResultHandler.buildApiResult(400,"更新失败",res);
     }
 
     @PostMapping("/student")

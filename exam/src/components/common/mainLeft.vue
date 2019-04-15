@@ -13,15 +13,15 @@
       menu-trigger="click" router>
       <el-submenu v-for="(item,index) in menu" :index='item.index' :key="index">
         <template slot="title">
-          <div @click="handleTitle(item.index)" class="left-width">
+          <div class="left-width">
             <i class="iconfont" :class="item.icon"></i>
             <span slot="title" class="title">{{item.title}}</span>
           </div>
         </template>
         <el-menu-item-group v-for="(list,index1) in item.content" :key="index1">
-          <el-menu-item :index="list.path" v-if="list.item1 != null">{{list.item1}}</el-menu-item>
-          <el-menu-item :index="list.path" v-if="list.item2 != null">{{list.item2}}</el-menu-item>
-          <el-menu-item :index="list.path" v-if="list.item3 != null">{{list.item3}}</el-menu-item>
+          <el-menu-item @click="handleTitle(item.index)" :index="list.path" v-if="list.item1 != null">{{list.item1}}</el-menu-item>
+          <el-menu-item @click="handleTitle(item.index)" :index="list.path" v-if="list.item2 != null">{{list.item2}}</el-menu-item>
+          <el-menu-item @click="handleTitle(item.index)" :index="list.path" v-if="list.item3 != null">{{list.item3}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

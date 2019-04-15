@@ -103,7 +103,7 @@ export default {
         }
       })
     },
-     handleClose(done) { //关闭提醒
+    handleClose(done) { //关闭提醒
       this.$confirm('确认关闭？')
         .then(_ => {
           done();

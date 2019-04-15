@@ -31,4 +31,11 @@ public interface ExamManageMapper {
     @Insert("insert into ExamManage(description,source,paperId,examDate,totalTime,grade,term,major,institute,totalScore,type,tips)" +
             " values(#{description},#{source},#{paperId},#{examDate},#{totalTime},#{grade},#{term},#{major},#{institute},#{totalScore},#{type},#{tips})")
     int add(ExamManage exammanage);
+
+    /**
+     * 查询最后一条记录的paperId,返回给前端达到自增效果
+     * @return paperId
+     */
+    @Select("select paperId from ExamManage order by paperId desc limit 1")
+    ExamManage findOnlyPaperId();
 }
