@@ -16,7 +16,7 @@
               <ul>
                 <li><a href="javascript:;">用户信息</a></li>
                 <li><a href="javascript:;">设置</a></li>
-                <li class="exit"><a href="javascript:;">退出登录</a></li>
+                <li class="exit" @click="exit()"><a href="javascript:;">退出登录</a></li>
               </ul>
             </div>
           </transition>
@@ -42,7 +42,7 @@ export default {
   created() {
     this.getUserInfo()
   },
-  computed: mapState(["flag"]),
+  computed: mapState(["flag","menu"]),
   methods: {
     //显示、隐藏退出按钮
     showSetting() {
@@ -58,6 +58,16 @@ export default {
     },
     index() {
       this.$router.push({path: '/index'})
+    },
+    exit() {
+      let role = this.$cookies.get("role")
+      this.$router.push({path:"/"}) //跳转到登录页面
+      this.$cookies.remove("cname") //清除cookie
+      this.$cookies.remove("cid")
+      this.$cookies.remove("role")
+      if(role == 0) {
+        this.menu.pop()
+      }
     }
   },
   store

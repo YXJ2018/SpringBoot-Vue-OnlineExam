@@ -61,6 +61,14 @@ export default new Router({
           path: '/addStudent', //添加学生
           component: () => import('@/components/teacher/addStudent')
         },
+        {
+          path: '/teacherManage',
+          component: () => import('@/components/admin/tacherManage')
+        },
+        {
+          path: '/addTeacher',
+          component: () => import ('@/components/admin/addTeacher')
+        }
       ]
     },
     {

@@ -28,6 +28,47 @@
   </div>
 </template>
 
+<script>
+import store from '@/vuex/store'
+import {mapState} from 'vuex'
+export default {
+  name: "mainLeft",
+  data() {
+    return {
+      
+    }
+  },
+  computed: mapState(["flag","menu"]),
+  created() {
+    this.addData()
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      // console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      // console.log(key, keyPath);
+    },
+    //点击标题传递参数给navigator组件
+    handleTitle(index) {
+      this.bus.$emit('sendIndex',index)
+    },
+    addData() {
+      let role = this.$cookies.get("role")
+      if(role == 0) {
+        this.menu.push({
+          index: '5',
+          title: '教师管理',
+          icon: 'icon-Userselect',
+          content:[{item1:'教师管理',path:'/teacherManage'},{item2: '添加教师',path: '/addTeacher'}],
+        })
+      }
+    }
+  },
+  store
+}
+</script>
+
 <style>
 .el-menu-vertical-demo .el-submenu__title {
   overflow: hidden;
@@ -57,30 +98,3 @@
   background-color: #1f5082;
 }
 </style>
-
-<script>
-import store from '@/vuex/store'
-import {mapState} from 'vuex'
-export default {
-  name: "mainLeft",
-  data() {
-    return {
-      
-    }
-  },
-  computed: mapState(["flag","menu"]),
-  methods: {
-    handleOpen(key, keyPath) {
-      // console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      // console.log(key, keyPath);
-    },
-    //点击标题传递参数给navigator组件
-    handleTitle(index) {
-      this.bus.$emit('sendIndex',index)
-    }
-  },
-  store
-}
-</script>

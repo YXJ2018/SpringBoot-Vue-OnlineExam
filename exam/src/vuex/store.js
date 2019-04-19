@@ -32,10 +32,10 @@ const state = {
       content:[{item1:'学生管理',path:'/studentManage'},{item2: '添加学生',path: '/addStudent'}],
     },
     // {
-    //   index: '6',
-    //   title: '用户管理',
+    //   index: '5',
+    //   title: '教师管理',
     //   icon: 'icon-Userselect',
-    //   content:[{item1:'用户操作',path:'/user'}],
+    //   content:[{item1:'教师管理',path:'/teacherManage'},{item2: '添加教师',path: '/addTeacher'}],
     // },
     // {
     //   index: '7',
