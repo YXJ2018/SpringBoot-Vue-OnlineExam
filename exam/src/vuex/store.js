@@ -23,7 +23,7 @@ const state = {
       index: '3',
       title: '成绩查询',
       icon: 'icon-performance',
-      content:[{item1:'学生成绩查询',path:'/allStudentsGrade'},{path: '/grade'}],
+      content:[{item1:'学生成绩查询',path:'/allStudentsGrade'},{path: '/grade'},{item2: '成绩分段查询',path: '/selectExamToPart'},{path: '/scorePart'}],
     },
     {
       index: '4',

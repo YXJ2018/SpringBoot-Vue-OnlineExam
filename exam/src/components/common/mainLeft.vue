@@ -2,14 +2,14 @@
 <template>
   <div id="left">
     <el-menu
-      active-text-color="#FAF2E5" 
+      active-text-color="#dd5862" 
       text-color="#000" 
       :default-active="this.$route.path"
       class="el-menu-vertical-demo" 
       @open="handleOpen" 
       @close="handleClose" 
       :collapse="flag"
-      background-color="#2D5A76"  
+      background-color="#124280"  
       menu-trigger="click" router>
       <el-submenu v-for="(item,index) in menu" :index='item.index' :key="index">
         <template slot="title">
@@ -75,7 +75,7 @@ export default {
 }
 .left-width .iconfont {
   font-size: 18px;
-  color: teal;
+  color: #fff;
 }
 .left-width {
   width: 213px;
@@ -85,16 +85,22 @@ export default {
 }
 #left {
   height: 900px;
-  background-color: #2d5a76;
+  background-color: #124280;
   z-index: 0;
 }
 #left .el-menu-vertical-demo .title {
-  color: #34a6c0;
+  color: #fff;
   font-size: 16px;
   font-weight: bold;
   margin-left: 14px;
 }
+.el-submenu {
+  border-bottom: 1px solid #eeeeee0f !important;
+}
 .el-submenu__title:hover {
-  background-color: #1f5082;
+  background-color: #fff;
+}
+.el-submenu__title i {
+    color: #fbfbfc !important;
 }
 </style>

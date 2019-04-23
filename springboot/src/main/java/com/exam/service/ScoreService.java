@@ -10,4 +10,6 @@ public interface ScoreService {
     List<Score> findAll();
 
     List<Score> findById(Integer studentId);
+
+    List<Score> findByExamCode(Integer examCode);
 }

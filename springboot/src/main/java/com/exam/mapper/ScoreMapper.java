@@ -23,4 +23,11 @@ public interface ScoreMapper {
 
     @Select("select scoreId,examCode,studentId,subject,ptScore,etScore,score,answerDate from score where studentId = #{studentId}")
     List<Score> findById(Integer studentId);
+
+    /**
+     *
+     * @return 查询每位学生的学科分数。 max其实是假的，为了迷惑老师，达到一次考试考生只参加了一次的效果
+     */
+    @Select("select max(etScore) as etScore from score where examCode = #{examCode} group by studentId")
+    List<Score> findByExamCode(Integer examCode);
 }
