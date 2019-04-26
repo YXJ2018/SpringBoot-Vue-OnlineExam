@@ -5,7 +5,7 @@
     <el-row class="main-container">
       <el-col :lg="8" :xs="16" :md="10" :span="10">
         <div class="top">
-          <i class="iconfont icon-kaoshi"></i><span class="title">美女老师，在线发题</span>
+          <i class="iconfont icon-kaoshi"></i><span class="title">在线考试系统</span>
         </div>
         <div class="bottom">
           <div class="container">

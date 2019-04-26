@@ -120,7 +120,7 @@
               </el-radio-group>
               <div class="analysis" v-if="isPractice">
                 <ul>
-                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic[2][index].answer}}</span></li>
+                  <li> <el-tag type="success">正确姿势：</el-tag><span class="right">{{topic[3][index].answer}}</span></li>
                   <li><el-tag>题目解析：</el-tag></li>
                   <li>{{topic[3][index].analysis == null ? '暂无解析': topic[3][index].analysis}}</li>
                 </ul>
