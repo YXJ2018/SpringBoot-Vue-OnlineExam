@@ -220,9 +220,9 @@
       </section>
     </el-tab-pane>
     <el-tab-pane name="second">
-      <span slot="label"><i class="iconfont icon-daoru-tianchong"></i>导入试题</span>
-      <div>
-        导入试题
+      <span slot="label"><i class="iconfont icon-daoru-tianchong"></i>在线组卷</span>
+      <div class="box">
+        在线组卷
       </div>
     </el-tab-pane>
   </el-tabs>
@@ -441,6 +441,9 @@ export default {
 <style lang="scss" scoped>
 .add {
   margin: 0px 40px;
+  .box {
+    padding: 0px 20px;
+  }
   .el-icon-circle-plus {
     margin-right: 10px;
   }
