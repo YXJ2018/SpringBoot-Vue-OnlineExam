@@ -36,7 +36,7 @@ public interface MultiQuestionMapper {
             "values(#{subject},#{question},#{answerA},#{answerB},#{answerC},#{answerD},#{rightAnswer},#{analysis},#{section},#{level})")
     int add(MultiQuestion multiQuestion);
 
-    @Select("select questionId from MultiQuestion  where subject =#{subject} order by questionId desc limit #{pageNo}")
+    @Select("select questionId from MultiQuestion  where subject =#{subject} order by rand() desc limit #{pageNo}")
     List<Integer> findBySubject(String subject,Integer pageNo);
 
 
