@@ -15,4 +15,6 @@ public interface JudgeQuestionService {
     JudgeQuestion findOnlyQuestionId();
 
     int add(JudgeQuestion judgeQuestion);
+
+    List<Integer> findBySubject(String subject,Integer pageNo);
 }

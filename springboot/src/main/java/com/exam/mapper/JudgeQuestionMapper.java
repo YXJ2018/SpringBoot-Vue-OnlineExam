@@ -30,4 +30,7 @@ public interface JudgeQuestionMapper {
     @Insert("insert into JudgeQuestion(subject,question,answer,analysis,level,section) values " +
             "(#{subject},#{question},#{answer},#{analysis},#{level},#{section})")
     int add(JudgeQuestion judgeQuestion);
+
+    @Select("select questionId from JudgeQuestion  where subject=#{subject}  order by questionId desc limit #{pageNo}")
+    List<Integer> findBySubject(String subject,Integer pageNo);
 }

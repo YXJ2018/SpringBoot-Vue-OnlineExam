@@ -34,4 +34,9 @@ public class MultiQuestionServiceImpl implements MultiQuestionService {
     public int add(MultiQuestion multiQuestion) {
         return multiQuestionMapper.add(multiQuestion);
     }
+
+    @Override
+    public List<Integer> findBySubject(String subject, Integer pageNo) {
+        return multiQuestionMapper.findBySubject(subject,pageNo);
+    }
 }

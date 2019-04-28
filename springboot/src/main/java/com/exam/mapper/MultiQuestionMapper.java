@@ -35,4 +35,9 @@ public interface MultiQuestionMapper {
     @Insert("insert into MultiQuestion(subject,question,answerA,answerB,answerC,answerD,rightAnswer,analysis,section,level) " +
             "values(#{subject},#{question},#{answerA},#{answerB},#{answerC},#{answerD},#{rightAnswer},#{analysis},#{section},#{level})")
     int add(MultiQuestion multiQuestion);
+
+    @Select("select questionId from MultiQuestion  where subject =#{subject} order by questionId desc limit #{pageNo}")
+    List<Integer> findBySubject(String subject,Integer pageNo);
+
+
 }
