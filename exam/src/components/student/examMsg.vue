@@ -13,7 +13,7 @@
         <li class="right">
           <div>
             <span class="count">总分</span>
-            <span class="score">{{examData.totalScore}}</span>
+            <span class="score">{{score[0]+score[1]+score[2]}}</span>
           </div>
         </li>
       </ul>
