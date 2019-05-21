@@ -6,37 +6,30 @@
 
 
 * ## 页面截图
-![删除试卷](img/%E5%88%A0%E9%99%A4%E8%AF%95%E5%8D%B7.png)
+  ![登录](.\img\登录.png)
 
-![后台管理](img/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86.png)
+  <center>登录</center>
 
-![回复留言模块](img/%E5%9B%9E%E5%A4%8D%E7%95%99%E8%A8%80%E6%A8%A1%E5%9D%97.png)
+![试卷列表](.\img\试卷列表.png)
 
-![学生分数查询](img/%E5%AD%A6%E7%94%9F%E5%88%86%E6%95%B0%E6%9F%A5%E8%AF%A2.png)
+<center>试卷列表</center>
 
-![学生成绩折线图](img/%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E6%8A%98%E7%BA%BF%E5%9B%BE.png)
+![答题模块](.\img\答题模块.png)
 
-![学生管理](img/%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86.png)
+<center>答题模块</center>
 
-![提交试卷显示分数](img/%E6%8F%90%E4%BA%A4%E8%AF%95%E5%8D%B7%E6%98%BE%E7%A4%BA%E5%88%86%E6%95%B0.png)
+![练习模式](.\img\练习模式.png)
 
-![提前交卷](img/%E6%8F%90%E5%89%8D%E4%BA%A4%E5%8D%B7.png)
+<center>练习模式</center>
 
-![添加考试](img/%E6%B7%BB%E5%8A%A0%E8%80%83%E8%AF%95.png)
+![留言模块](./img\留言模块.png)
 
-![添加试题](img/%E6%B7%BB%E5%8A%A0%E8%AF%95%E9%A2%98.png)
+<center>留言模块<center/>
 
-![留言模块](img/%E7%95%99%E8%A8%80%E6%A8%A1%E5%9D%97.png)
+![后台管理](.\img\后台管理.png)
 
-![登录](img/%E7%99%BB%E5%BD%95.png)
+<center>后台管理</center>
 
-![答题模块](img/%E7%AD%94%E9%A2%98%E6%A8%A1%E5%9D%97.png)
+![学生成绩](.\img\学生成绩折线图.png)
 
-![练习模式](img/%E7%BB%83%E4%B9%A0%E6%A8%A1%E5%BC%8F.png)
-
-![编辑试卷信息](img/%E7%BC%96%E8%BE%91%E8%AF%95%E5%8D%B7%E4%BF%A1%E6%81%AF.png)
-
-![考试查询](img/%E8%80%83%E8%AF%95%E6%9F%A5%E8%AF%A2.png)
-
-![试卷列表](img/%E8%AF%95%E5%8D%B7%E5%88%97%E8%A1%A8.png)
-
+<center>学生成绩</center>
