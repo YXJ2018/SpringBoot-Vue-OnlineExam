@@ -5,7 +5,7 @@
     <el-row class="main-container">
       <el-col :lg="8" :xs="16" :md="10" :span="10">
         <div class="top">
-          <i class="iconfont icon-kaoshi"></i><span class="title">性感教师,在线发题</span>
+          <i class="iconfont icon-kaoshi"></i><span class="title">在线考试系统</span>
         </div>
         <div class="bottom">
           <div class="container">
@@ -37,6 +37,11 @@
         <p class="msg2">版权所有 ©2019 <!--重庆文理学院计科2班余晓江--> 保留所有权利 渝ICP备19001371号</p>
       </el-col>
     </el-row>
+    <section class="remind">
+      <span>管理员账号：9527</span>
+      <span>教师账号：20081001</span>
+      <span>密码都是：123456</span>
+    </section>
   </div>
 </template>
 
@@ -109,7 +114,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.remind {
+  border-radius: 4px;
+  padding: 10px 20px;
+  display: flex;
+  position: fixed;
+  right: 20px;
+  bottom: 50%;
+  flex-direction: column;
+  color: #606266;
+  background-color: #fff;
+  border-left: 4px solid #409eff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
 .container {
   margin-bottom: 32px;
 }
@@ -157,7 +175,7 @@ a:link {
   display:flex;
   justify-content: center;
   background-color:#fff;
-  border-radius: 5px; 
+  border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #login .bottom .title {
@@ -200,7 +218,7 @@ a:link {
 }
 .bottom .options > a {
   color: #ff962a;
-} 
+}
 .bottom .options .register span:nth-child(1) {
   color: #8C8C8C;
 }
