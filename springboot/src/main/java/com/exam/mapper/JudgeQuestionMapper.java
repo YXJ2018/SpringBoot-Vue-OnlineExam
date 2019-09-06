@@ -14,23 +14,23 @@ import java.util.List;
 @Mapper
 public interface JudgeQuestionMapper {
 
-    @Select("select * from JudgeQuestion where questionId in (select questionId from PaperManage where questionType = 3 and paperId = #{paperId})")
+    @Select("select * from judge_question where questionId in (select questionId from paper_manage where questionType = 3 and paperId = #{paperId})")
     List<JudgeQuestion> findByIdAndType(Integer paperId);
 
-    @Select("select * from JudgeQuestion")
+    @Select("select * from judge_question")
     IPage<JudgeQuestion> findAll(Page page);
 
     /**
      * 查询最后一条记录的questionId
      * @return JudgeQuestion
      */
-    @Select("select questionId from JudgeQuestion order by questionId desc limit 1")
+    @Select("select questionId from judge_question order by questionId desc limit 1")
     JudgeQuestion findOnlyQuestionId();
 
-    @Insert("insert into JudgeQuestion(subject,question,answer,analysis,level,section) values " +
+    @Insert("insert into judge_question(subject,question,answer,analysis,level,section) values " +
             "(#{subject},#{question},#{answer},#{analysis},#{level},#{section})")
     int add(JudgeQuestion judgeQuestion);
 
-    @Select("select questionId from JudgeQuestion  where subject=#{subject}  order by rand() desc limit #{pageNo}")
+    @Select("select questionId from judge_question  where subject=#{subject}  order by rand() desc limit #{pageNo}")
     List<Integer> findBySubject(String subject,Integer pageNo);
 }
