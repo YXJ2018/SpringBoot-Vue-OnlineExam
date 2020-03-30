@@ -2,7 +2,7 @@
 <template>
   <div class="table">
     <p class="title">我的分数</p>
-    <section class="content">
+    <section class="content-el">
       <el-table ref="filterTable" :data="score" v-loading="loading">
         <el-table-column
           prop="answerDate"
@@ -119,7 +119,7 @@ export default {
   .title {
     margin: 20px;
   }
-  .content {
+  .content-el {
     background-color: #fff;
     padding: 20px;
   }
