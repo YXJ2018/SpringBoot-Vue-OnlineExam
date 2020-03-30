@@ -1,5 +1,7 @@
 package com.exam.serviceimpl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.exam.entity.Score;
 import com.exam.mapper.ScoreMapper;
 import com.exam.service.ScoreService;
@@ -24,8 +26,8 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public List<Score> findById(Integer studentId) {
-        return scoreMapper.findById(studentId);
+    public IPage<Score> findById(Page page, Integer studentId) {
+        return scoreMapper.findById(page, studentId);
     }
 
     @Override
