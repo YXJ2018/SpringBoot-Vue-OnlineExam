@@ -31,6 +31,11 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
+    public List<Score> findById(Integer studentId) {
+        return scoreMapper.findById(studentId);
+    }
+
+    @Override
     public List<Score> findByExamCode(Integer examCode) {
         return scoreMapper.findByExamCode(examCode);
     }

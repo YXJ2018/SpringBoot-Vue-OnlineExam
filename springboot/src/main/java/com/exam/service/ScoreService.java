@@ -13,5 +13,7 @@ public interface ScoreService {
 
     IPage<Score> findById(Page page, Integer studentId);
 
+    List<Score> findById(Integer studentId);
+
     List<Score> findByExamCode(Integer examCode);
 }

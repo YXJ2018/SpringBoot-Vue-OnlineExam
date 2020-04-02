@@ -23,8 +23,13 @@ public interface ScoreMapper {
     @Select("select scoreId,examCode,studentId,subject,ptScore,etScore,score,answerDate from score order by scoreId desc")
     List<Score> findAll();
 
+    // 分页
     @Select("select scoreId,examCode,studentId,subject,ptScore,etScore,score,answerDate from score where studentId = #{studentId} order by scoreId desc")
     IPage<Score> findById(Page<?> page, Integer studentId);
+
+    // 不分页
+    @Select("select scoreId,examCode,studentId,subject,ptScore,etScore,score,answerDate from score where studentId = #{studentId}")
+    List<Score> findById(Integer studentId);
 
     /**
      *

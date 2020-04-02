@@ -22,12 +22,23 @@ public class ScoreController {
         List<Score> res = scoreService.findAll();
         return ApiResultHandler.buildApiResult(200,"查询所有学生成绩",res);
     }
-
+//    分页
     @GetMapping("/score/{page}/{size}/{studentId}")
     public ApiResult findById(@PathVariable("page") Integer page, @PathVariable("size") Integer size, @PathVariable("studentId") Integer studentId) {
         Page<Score> scorePage = new Page<>(page, size);
         IPage<Score> res = scoreService.findById(scorePage, studentId);
         return ApiResultHandler.buildApiResult(200, "根据ID查询成绩", res);
+    }
+
+//    不分页
+    @GetMapping("/score/{studentId}")
+        public ApiResult findById(@PathVariable("studentId") Integer studentId) {
+        List<Score> res = scoreService.findById(studentId);
+        if (!res.isEmpty()) {
+            return ApiResultHandler.buildApiResult(200, "根据ID查询成绩", res);
+        } else {
+            return ApiResultHandler.buildApiResult(400, "ID不存在", res);
+        }
     }
 
     @PostMapping("/score")
