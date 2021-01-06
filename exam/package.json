@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@babel/preset-es2015": "^7.0.0-beta.53",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "echarts": "^4.2.0-rc.2",
     "element-ui": "^2.4.11",
     "global": "^4.4.0",
