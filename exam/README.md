@@ -1,21 +1,26 @@
-# vue-init
+# 项目介绍及启动说明
 
-> vue demo
+> 在线考试系统-前端项目文件。
 
-## Build Setup
+### 安装建议
+
+> 建议使用`yarn`来安装项目依赖，首先安装yarn，然后设置yarn源为淘宝镜像
 
 ``` bash
-# install dependencies
-npm install
+# 安装yarn
+npm install yarn -g
 
-# serve with hot reload at localhost:8080
-npm run dev
+# 查看是否安装成功
+yarn -v
 
-# build for production with minification
-npm run build
+# 设置yarn源为淘宝镜像源
+yarn config set registry https://registry.npm.taobao.org
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+# 安装依赖
+yarn install or npm install
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# 启动项目
+yarn dev or npm run dev
+
+# 打包构建
+yarn build or npm run build
