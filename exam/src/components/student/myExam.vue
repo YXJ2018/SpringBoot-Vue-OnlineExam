@@ -98,7 +98,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .pagination {
   padding: 20px 0px 30px 0px;
   .el-pagination {

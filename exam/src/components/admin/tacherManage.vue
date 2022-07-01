@@ -149,7 +149,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .all {
   padding: 0px 40px;
   .page {

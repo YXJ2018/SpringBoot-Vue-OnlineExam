@@ -103,7 +103,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .part {
   .box {
     width: 800px;

@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 #index .nav {
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;

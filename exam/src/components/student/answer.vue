@@ -486,7 +486,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="less">
 .iconfont.icon-time {
   color: #2776df;
   margin: 0px 6px 0px 20px;

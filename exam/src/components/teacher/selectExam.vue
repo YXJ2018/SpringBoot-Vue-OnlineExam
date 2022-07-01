@@ -162,7 +162,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .exam {
   padding: 0px 40px;
   .page {

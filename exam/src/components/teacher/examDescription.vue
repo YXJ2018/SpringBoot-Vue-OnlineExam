@@ -9,7 +9,7 @@
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .description {
   margin-left: 40px;
   .title {

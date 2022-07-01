@@ -84,7 +84,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .add {
   padding: 0px 40px;
   width: 400px;

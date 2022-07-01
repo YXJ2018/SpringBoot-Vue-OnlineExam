@@ -114,7 +114,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .remind {
   border-radius: 4px;
   padding: 10px 20px;

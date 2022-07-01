@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Editor directories and files
+yarn.lock
 .idea
 .vscode
 *.suo

@@ -513,7 +513,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .add {
   margin: 0px 40px;
   .box {

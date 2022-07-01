@@ -109,7 +109,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .pagination {
   padding-top: 20px;
 }
