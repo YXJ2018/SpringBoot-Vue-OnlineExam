@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import store from '@/vuex/store'
 import {mapState,mapMutations} from 'vuex'
 export default {
     data() {
@@ -21,6 +20,5 @@ export default {
     // }),
     computed: mapState(["count","msg","flag"]),
     methods: mapMutations(["add","reduce"]),
-    store
 }
 </script>

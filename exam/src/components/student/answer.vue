@@ -141,10 +141,8 @@
 </template>
 
 <script>
-import store from '@/vuex/store'
 import {mapState} from 'vuex'
 export default {
-  store,
   data() {
     return {
       startTime: null, //考试开始时间

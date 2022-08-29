@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import store from '@/vuex/store'
 import {mapState} from 'vuex'
 export default {
   data() {
@@ -35,7 +34,6 @@ export default {
   beforeDestroy() {
     // this.bus.$off('sendIndex') //销毁
   },
-  store
 }
 </script>
 
