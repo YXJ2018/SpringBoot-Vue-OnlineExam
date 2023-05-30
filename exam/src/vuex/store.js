@@ -11,7 +11,7 @@ const state = {
       index: '1',
       title: '考试管理',
       icon: 'icon-kechengbiao',
-      content:[{item1:'功能介绍',path:'/examDescription'},{item2:'考试查询',path:'selectExam'},{item3:'添加考试',path:'/addExam'}],
+      content:[{item1:'功能介绍',path:'/examDescription'},{item2:'考试查询',path:'/selectExam'},{item3:'添加考试',path:'/addExam'}],
     },
     {
       index: '2',

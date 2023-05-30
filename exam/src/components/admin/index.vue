@@ -4,7 +4,7 @@
     <header1 class="topbar"></header1>
     <section class="container">
       <div class="left_side">
-        <mainLeft></mainLeft>
+        <!-- <mainLeft></mainLeft> -->
       </div>
       <div class="main_wrapper">
         <navigator class="nav"></navigator>
@@ -36,6 +36,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#index {
+  display: flex;
+  flex-direction: column;
+}
 #index .nav {
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;

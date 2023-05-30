@@ -1,17 +1,17 @@
 // 学生管理页面
 <template>
   <div class="all">
-    <el-table :data="pagination.records" border>
-      <el-table-column fixed="left" prop="studentName" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="institute" label="学院" width="200"></el-table-column>
-      <el-table-column prop="major" label="专业" width="200"></el-table-column>
-      <el-table-column prop="grade" label="年级" width="200"></el-table-column>
-      <el-table-column prop="clazz" label="班级" width="100"></el-table-column>
-      <el-table-column prop="sex" label="性别" width="120"></el-table-column>
-      <el-table-column prop="tel" label="联系方式" width="120"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="150">
+    <el-table :data="pagination.records" border stripe>
+      <el-table-column fixed="left" prop="studentName" label="姓名"></el-table-column>
+      <el-table-column prop="institute" label="学院"></el-table-column>
+      <el-table-column prop="major" label="专业"></el-table-column>
+      <el-table-column prop="grade" label="年级"></el-table-column>
+      <el-table-column prop="clazz" label="班级"></el-table-column>
+      <el-table-column prop="sex" label="性别"></el-table-column>
+      <el-table-column prop="tel" label="联系方式"></el-table-column>
+      <el-table-column label="操作" width="150">
         <template slot-scope="scope">
-          <el-button @click="checkGrade(scope.row.studentId)" type="primary" size="small">编辑</el-button>
+          <el-button @click="checkGrade(scope.row.studentId)" type="text" size="small">编辑</el-button>
           <el-button @click="deleteById(scope.row.studentId)" type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>

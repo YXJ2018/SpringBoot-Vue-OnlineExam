@@ -7,7 +7,8 @@
         <span class="title" @click="index()">EXAM-SYSTEM</span>
       </el-col>
       <el-col :span="20" class="topbar-right">
-        <i class="el-icon-menu" @click="toggle()"></i>
+        <!-- <i class="el-icon-menu" @click="toggle()"></i> -->
+        <HeaderCom />
         <div class="user">
           <span>{{user.userName}}</span>
           <img src="@/assets/img/userimg.png" class="user-img" ref="img" @click="showSetting()" />
@@ -28,7 +29,9 @@
 
 <script>
 import {mapState,mapMutations} from 'vuex'
+import HeaderCom from '@/components/common/mainLeft'
 export default {
+  components: { HeaderCom },
   data() {
     return {
       login_flag: false,
@@ -82,7 +85,7 @@ export default {
 #topbar {
   position: relative;
   z-index: 10;
-  background-color: #124280;
+  background-color: #18a058;
   height: 80px;
   line-height: 80px;
   color: #fff;
@@ -105,7 +108,7 @@ export default {
 .topbar-right {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
 }
 .topbar-right .user-img {
   width: 50px;
