@@ -20,8 +20,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for admin
 -- ----------------------------
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE `admin`  (
+DROP TABLE IF EXISTS `adminuser`;
+CREATE TABLE `adminuser`  (
   `adminId` int(9) NOT NULL AUTO_INCREMENT COMMENT 'ID号',
   `adminName` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '姓名',
   `sex` varchar(2) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
@@ -37,7 +37,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (9527, '超级管理员', '男', '13658377857', '1253838283@qq.com', '123456', '3132', '0');
+INSERT INTO `adminuser` VALUES (9527, '超级管理员', '男', '13658377857', '1253838283@qq.com', '123456', '3132', '0');
 
 -- ----------------------------
 -- Table structure for exam_manage
